@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         tvPredictionResult = findViewById(R.id.tvPredictionResult);
 
         try {
-            soundClassifierModule = LiteModuleLoader.load(assetFilePath("basic_convnet.pt"));
+            soundClassifierModule = LiteModuleLoader.load(assetFilePath("classifier_20240213.pt"));
         } catch (IOException e) {
             Log.e(TAG, "Unable to load model", e);
         }
@@ -62,13 +62,13 @@ public class MainActivity extends AppCompatActivity {
                         .forward(IValue.from(inputTensor))
                         .toTensor()
                         .getDataAsFloatArray();
-
                 // TODO: model returns logits, not probabilities at the moment
-                
+
                 // Get the output as a string
                 String out = "";
                 for (float l : output) {
                     out += String.valueOf(l);
+                    out += "\n";
                 }
 
                 // Show the output
