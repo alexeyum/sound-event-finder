@@ -62,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
                         .forward(IValue.from(inputTensor))
                         .toTensor()
                         .getDataAsFloatArray();
-                // TODO: model returns logits, not probabilities at the moment
 
                 // Get the output as a string
                 String out = "";
