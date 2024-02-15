@@ -18,12 +18,20 @@ import org.pytorch.Module;
 import org.pytorch.Tensor;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Random;
 
+
+class WavReader {
+//    public float[] ReadAsFloatArray(String path) throws IOException {
+//        File file = new File(path);
+//        InputStream fileInputstream = new FileInputStream(file);
+//    }
+}
 
 public class MainActivity extends AppCompatActivity {
 
