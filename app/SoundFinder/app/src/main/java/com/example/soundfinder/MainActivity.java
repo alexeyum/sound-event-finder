@@ -1,5 +1,8 @@
 package com.example.soundfinder;
 
+import static java.nio.ByteOrder.BIG_ENDIAN;
+import static java.nio.ByteOrder.LITTLE_ENDIAN;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -23,14 +26,61 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.util.Random;
 
 
-class WavReader {
-//    public float[] ReadAsFloatArray(String path) throws IOException {
-//        File file = new File(path);
-//        InputStream fileInputstream = new FileInputStream(file);
-//    }
+final class WavReader {
+    public static float[] ReadAsFloatArray(String path) throws IOException {
+        File file = new File(path);
+        InputStream fileStream = new FileInputStream(file);
+
+        float[] result = new float[]{};
+
+        return result;
+    }
+
+    public static String readString(InputStream fs, int len) throws IOException {
+        byte[] byteArray = new byte[len];
+        int r = fs.read(byteArray, 0, len);
+        return new String(byteArray);
+    }
+
+    public static ByteBuffer byteArrayToNumber(byte[] bytes, int numOfBytes, ByteOrder order){
+        ByteBuffer buffer = ByteBuffer.allocate(numOfBytes);
+        buffer.order(order);
+        buffer.put(bytes);
+        buffer.rewind();
+        return buffer;
+    }
+
+    public static short readShort(InputStream fs) throws IOException {
+        final int LEN = 2;
+        byte[] byteArray = new byte[LEN];
+        int r = fs.read(byteArray, 0, LEN);
+        ByteBuffer buffer = byteArrayToNumber(byteArray, LEN, LITTLE_ENDIAN);
+        return buffer.getShort();
+    }
+
+    public static int readInt(InputStream fs) throws IOException {
+        final int LEN = 4;
+        byte[] byteArray = new byte[LEN];
+        int r = fs.read(byteArray, 0, LEN);
+        ByteBuffer buffer = byteArrayToNumber(byteArray, LEN, LITTLE_ENDIAN);
+        return buffer.getInt();
+    }
+
+    public static float readFloat(InputStream fs, int bytesPerSample) throws IOException {
+        byte[] byteArray = new byte[bytesPerSample];
+        int r = fs.read(byteArray, 0, bytesPerSample);
+        ByteBuffer buffer = byteArrayToNumber(byteArray, bytesPerSample, LITTLE_ENDIAN);
+        if (bytesPerSample == 2) {
+            return (float) buffer.getShort();
+        } else {
+            throw new UnsupportedOperationException("Only 16-bit rate is implemented for now.");
+        }
+    }
 }
 
 public class MainActivity extends AppCompatActivity {
