@@ -20,6 +20,7 @@ import org.pytorch.LiteModuleLoader;
 import org.pytorch.Module;
 import org.pytorch.Tensor;
 
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -28,22 +29,52 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.util.ArrayList;
 import java.util.Random;
 
 
 final class WavReader {
-    public static float[] ReadAsFloatArray(String path) throws IOException {
-        File file = new File(path);
-        InputStream fileStream = new FileInputStream(file);
+    public static ArrayList<Float> ReadAsFloatArray(InputStream fs) throws IOException {
 
-        float[] result = new float[]{};
+        String chunkID = readString(fs, 4);
+        fs.skip(4);
+        String format = readString(fs, 4);
+        fs.skip(10);
+        short numChannels = readShort(fs);
+        int sampleRate = readInt(fs);
+        fs.skip(6);
+        short bitsPerSample = readShort(fs);
+        String subChunk2ID = readString(fs, 4);
+
+        if (!chunkID.equals("RIFF") || !format.equals("WAVE")) {
+            throw new IOException("Incorrect file format");
+        }
+
+        if (bitsPerSample != 16 || !subChunk2ID.equals("data") || sampleRate != 44100) {
+            throw new UnsupportedOperationException("Unsupported file data.");
+        }
+
+        int bytesPerSample = bitsPerSample / 8;
+        ArrayList<Float> result = new ArrayList<>();
+
+        while (true) {
+            try {
+                float val = readFloat(fs, bytesPerSample);
+                result.add(val);
+            } catch (EOFException e) {
+                // file finished
+                break;
+            }
+        }
 
         return result;
     }
 
     public static String readString(InputStream fs, int len) throws IOException {
         byte[] byteArray = new byte[len];
-        int r = fs.read(byteArray, 0, len);
+        if (fs.read(byteArray, 0, len) == -1) {
+            throw new EOFException();
+        }
         return new String(byteArray);
     }
 
@@ -58,7 +89,9 @@ final class WavReader {
     public static short readShort(InputStream fs) throws IOException {
         final int LEN = 2;
         byte[] byteArray = new byte[LEN];
-        int r = fs.read(byteArray, 0, LEN);
+        if (fs.read(byteArray, 0, LEN) == -1) {
+            throw new EOFException();
+        }
         ByteBuffer buffer = byteArrayToNumber(byteArray, LEN, LITTLE_ENDIAN);
         return buffer.getShort();
     }
@@ -66,14 +99,18 @@ final class WavReader {
     public static int readInt(InputStream fs) throws IOException {
         final int LEN = 4;
         byte[] byteArray = new byte[LEN];
-        int r = fs.read(byteArray, 0, LEN);
+        if (fs.read(byteArray, 0, LEN) == -1) {
+            throw new EOFException();
+        }
         ByteBuffer buffer = byteArrayToNumber(byteArray, LEN, LITTLE_ENDIAN);
         return buffer.getInt();
     }
 
     public static float readFloat(InputStream fs, int bytesPerSample) throws IOException {
         byte[] byteArray = new byte[bytesPerSample];
-        int r = fs.read(byteArray, 0, bytesPerSample);
+        if (fs.read(byteArray, 0, bytesPerSample) == -1) {
+            throw new EOFException();
+        }
         ByteBuffer buffer = byteArrayToNumber(byteArray, bytesPerSample, LITTLE_ENDIAN);
         if (bytesPerSample == 2) {
             return (float) buffer.getShort();
