@@ -1,6 +1,6 @@
 package com.example.soundfinder;
 
-import static java.nio.ByteOrder.BIG_ENDIAN;
+import static java.lang.Math.min;
 import static java.nio.ByteOrder.LITTLE_ENDIAN;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.developer.filepicker.controller.DialogSelectionListener;
 import com.developer.filepicker.model.DialogConfigs;
 import com.developer.filepicker.model.DialogProperties;
 import com.developer.filepicker.view.FilePickerDialog;
@@ -26,7 +25,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InvalidObjectException;
 import java.io.OutputStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -73,20 +71,20 @@ final class WavReader {
         return result;
     }
 
-    public static ArrayList<Float> stereoToMono(ArrayList<Float> stereo) throws IllegalArgumentException {
+    public static ArrayList<Float> StereoToMono(ArrayList<Float> stereo) throws IllegalArgumentException {
         if (stereo.size() % 2 != 0) {
             throw new IllegalArgumentException("Stereo data contains odd number of samples");
         }
         int mono_size = stereo.size() / 2;
 
         ArrayList<Float> mono = new ArrayList<>();
-        for (int i : IntStream.range(0, mono_size).boxed().toList()) {
+        for (int i = 0; i < mono_size; i++) {
             mono.add((float) (0.5 * (stereo.get(2 * i) + stereo.get(2 * i + 1))));
         }
         return mono;
     }
 
-    public static ArrayList<Float> normalizeTo01(ArrayList<Float> values, short bitsPerSample)  throws IllegalArgumentException {
+    public static ArrayList<Float> NormalizeTo01(ArrayList<Float> values, short bitsPerSample)  throws IllegalArgumentException {
         float maxVal;
         if (bitsPerSample == 8) {
             maxVal = 255;
@@ -157,6 +155,7 @@ final class WavReader {
 public class MainActivity extends AppCompatActivity {
 
     TextView tvFilePath;
+    String filePath;
     TextView tvPredictionResult;
     FilePickerDialog fileDialog;
 
@@ -182,9 +181,15 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.buttonPredict).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Prepare the input tensor (N, 2)
-                long[] shape = new long[]{1, 1, 384000};
-                Tensor inputTensor = generateTensor(shape);
+                Tensor inputTensor;
+                try {
+                    inputTensor = loadAndPrepareWav(filePath);
+                } catch (IOException e) {
+                    System.out.println("Error reading file");
+                    System.out.println(e.getMessage());
+                    return;
+                }
+                
 
                 // Get the output from the model
                 float[] output = soundClassifierModule
@@ -225,6 +230,28 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public Tensor loadAndPrepareWav(String filePath) throws  IOException {
+        InputStream fs = new FileInputStream(filePath);
+        ArrayList<Float> rawData = WavReader.ReadAsFloatArray(fs);
+        // TODO: remove hard-coded data
+        ArrayList<Float> prepData = WavReader.NormalizeTo01(WavReader.StereoToMono(rawData), (short) 16);
+
+        int expectedSize = 384000;
+        int realSize = min(prepData.size(), 384000);
+
+        float[] blobData = new float[expectedSize];
+        for (int i = 0; i < expectedSize; i++) {
+            if (i < realSize) {
+                blobData[i] = prepData.get(i);
+            } else {
+                blobData[i] = 0;
+            }
+        }
+
+        long[] shape = new long[]{1, 1, expectedSize};
+        return Tensor.fromBlob(blobData, shape);
+    }
+
     // Generate a tensor of random numbers given the size of that tensor.
     public Tensor generateTensor(long[] Size) {
         // Create a random array of floats
@@ -249,17 +276,15 @@ public class MainActivity extends AppCompatActivity {
         //If you want to view files of all extensions then pass null to properties.extensions
         properties.extensions = null;
         //If you want to view files with specific type of extensions the pass string array to properties.extensions
-//        properties.extensions = new String[]{"zip","jpg","mp3","csv"};
+        properties.extensions = new String[]{"wav"};
         properties.show_hidden_files = false;
 
         fileDialog = new FilePickerDialog(MainActivity.this, properties);
         fileDialog.setTitle("Select a File");
 
-        fileDialog.setDialogSelectionListener(new DialogSelectionListener() {
-            @Override
-            public void onSelectedFilePaths(String[] files) {
-                tvFilePath.setText(files[0]);
-            }
+        fileDialog.setDialogSelectionListener(files -> {
+            filePath = files[0];
+            tvFilePath.setText(filePath);
         });
 
         findViewById(R.id.buttonOpen).setOnClickListener(new View.OnClickListener() {
