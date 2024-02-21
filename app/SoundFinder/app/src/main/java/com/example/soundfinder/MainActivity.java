@@ -26,11 +26,13 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InvalidObjectException;
 import java.io.OutputStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.stream.IntStream;
 
 
 final class WavReader {
@@ -45,6 +47,7 @@ final class WavReader {
         fs.skip(6);
         short bitsPerSample = readShort(fs);
         String subChunk2ID = readString(fs, 4);
+        fs.skip(4);
 
         if (!chunkID.equals("RIFF") || !format.equals("WAVE")) {
             throw new IOException("Incorrect file format");
@@ -68,6 +71,37 @@ final class WavReader {
         }
 
         return result;
+    }
+
+    public static ArrayList<Float> stereoToMono(ArrayList<Float> stereo) throws IllegalArgumentException {
+        if (stereo.size() % 2 != 0) {
+            throw new IllegalArgumentException("Stereo data contains odd number of samples");
+        }
+        int mono_size = stereo.size() / 2;
+
+        ArrayList<Float> mono = new ArrayList<>();
+        for (int i : IntStream.range(0, mono_size).boxed().toList()) {
+            mono.add((float) (0.5 * (stereo.get(2 * i) + stereo.get(2 * i + 1))));
+        }
+        return mono;
+    }
+
+    public static ArrayList<Float> normalizeTo01(ArrayList<Float> values, short bitsPerSample)  throws IllegalArgumentException {
+        float maxVal;
+        if (bitsPerSample == 8) {
+            maxVal = 255;
+        } else if (bitsPerSample == 16) {
+            maxVal = 32768;
+        } else {
+            throw new IllegalArgumentException("Only 8-bit and 16-bit sampling rates are implemented");
+        }
+
+        ArrayList<Float> newValues = new ArrayList<>();
+        for (float v : values) {
+            newValues.add(v / maxVal);
+        }
+
+        return newValues;
     }
 
     public static String readString(InputStream fs, int len) throws IOException {
