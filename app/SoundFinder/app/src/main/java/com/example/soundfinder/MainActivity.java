@@ -157,6 +157,7 @@ public class MainActivity extends AppCompatActivity {
     TextView tvFilePath;
     String filePath;
     TextView tvPredictionResult;
+    TextView tvPercentageBars;
     FilePickerDialog fileDialog;
 
     Module soundClassifierModule;
@@ -169,6 +170,7 @@ public class MainActivity extends AppCompatActivity {
 
         tvFilePath = findViewById(R.id.tvFilePath);
         tvPredictionResult = findViewById(R.id.tvPredictionResult);
+        tvPercentageBars = findViewById(R.id.tvPercentageBars);
 
         try {
             soundClassifierModule = LiteModuleLoader.load(assetFilePath("classifier_20240213.pt"));
@@ -197,17 +199,28 @@ public class MainActivity extends AppCompatActivity {
                         .toTensor()
                         .getDataAsFloatArray();
 
-                // Get the output as a string
-                String out = "";
-                for (float l : output) {
-                    out += String.valueOf(l);
-                    out += "\n";
+                String barsText = "";
+                for (float prob : output) {
+                    barsText += percentageBars(prob, 10);
+                    barsText += "\n";
                 }
+                tvPercentageBars.setText(barsText);
 
-                // Show the output
-                tvPredictionResult.setText(out);
+                String valuesText = "";
+                for (float prob : output) {
+                    valuesText += String.format("%.2f", prob * 100) + "%\n";
+                }
+                tvPredictionResult.setText(valuesText);
             }
         });
+    }
+
+    protected String percentageBars(float ratio, int max_bars) {
+        String bars = "";
+        for (int i = 0; i < (int)(ratio * max_bars); i++) {
+            bars += "|";
+        }
+        return bars;
     }
 
     // Given the name of the pytorch model, get the path for that model

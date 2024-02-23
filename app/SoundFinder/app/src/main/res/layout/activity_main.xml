@@ -30,33 +30,64 @@
         android:id="@+id/buttonPredict"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="64dp"
         android:text="Predict"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tvPredictionResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="32dp"
         android:lineSpacingExtra="10sp"
-        android:text="(result)"
-        app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="@+id/textView" />
+        android:text="(probs)"
+        app:layout_constraintStart_toEndOf="@+id/tvClassesNames"
+        app:layout_constraintTop_toTopOf="@+id/tvClassesNames" />
+
+    <TextView
+        android:id="@+id/tvClassesNames"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:lineSpacingExtra="10sp"
+        android:text="@string/classesNames"
+        android:textAlignment="textEnd"
+        app:layout_constraintBottom_toTopOf="@+id/buttonPredict"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonOpen" />
+
+    <TextView
+        android:id="@+id/tvPercentageBars"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:lineSpacingExtra="10sp"
+        android:text="(bars)"
+        app:layout_constraintStart_toEndOf="@+id/tvPredictionResult"
+        app:layout_constraintTop_toTopOf="@+id/tvClassesNames" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="64dp"
-        android:lineSpacingExtra="10sp"
-        android:text="@string/classesNames"
-        android:textAlignment="textEnd"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonOpen" />
+        android:layout_marginBottom="16dp"
+        android:text="Classes"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tvClassesNames"
+        app:layout_constraintEnd_toEndOf="@+id/tvClassesNames" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="Predictions"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tvPredictionResult"
+        app:layout_constraintStart_toStartOf="@+id/tvPredictionResult" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
