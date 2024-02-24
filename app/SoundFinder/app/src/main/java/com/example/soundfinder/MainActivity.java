@@ -191,7 +191,6 @@ public class MainActivity extends AppCompatActivity {
                     System.out.println(e.getMessage());
                     return;
                 }
-                
 
                 // Get the output from the model
                 float[] output = soundClassifierModule
@@ -263,20 +262,6 @@ public class MainActivity extends AppCompatActivity {
 
         long[] shape = new long[]{1, 1, expectedSize};
         return Tensor.fromBlob(blobData, shape);
-    }
-
-    // Generate a tensor of random numbers given the size of that tensor.
-    public Tensor generateTensor(long[] Size) {
-        // Create a random array of floats
-        Random rand = new Random();
-        int fullSize = (int)(Size[0]*Size[1]*Size[2]);
-        float[] arr = new float[fullSize];
-        for (int i = 0; i < fullSize; i++) {
-            arr[i] = -10000 + rand.nextFloat() * (20000);
-        }
-
-        // Create the tensor and return it
-        return Tensor.fromBlob(arr, Size);
     }
 
     protected void setUpFileOpener() {
