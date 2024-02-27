@@ -28,7 +28,12 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 import java.util.stream.IntStream;
 
@@ -158,6 +163,8 @@ public class MainActivity extends AppCompatActivity {
     String filePath;
     TextView tvPredictionResult;
     TextView tvPercentageBars;
+    TextView tvClassesNames;
+    TextView tvInfo;
     FilePickerDialog fileDialog;
 
     Module soundClassifierModule;
@@ -171,6 +178,8 @@ public class MainActivity extends AppCompatActivity {
         tvFilePath = findViewById(R.id.tvFilePath);
         tvPredictionResult = findViewById(R.id.tvPredictionResult);
         tvPercentageBars = findViewById(R.id.tvPercentageBars);
+        tvClassesNames = findViewById(R.id.tvClassesNames);
+        tvInfo = findViewById(R.id.tvInfo);
 
         try {
             soundClassifierModule = LiteModuleLoader.load(assetFilePath("classifier_20240213.pt"));
@@ -183,35 +192,88 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.buttonPredict).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                long start, elapsed;
+
                 Tensor inputTensor;
                 try {
+                    start = System.currentTimeMillis();
                     inputTensor = loadAndPrepareWav(filePath);
+                    elapsed = System.currentTimeMillis() - start;
                 } catch (IOException e) {
                     System.out.println("Error reading file");
                     System.out.println(e.getMessage());
                     return;
                 }
 
+                String infoText = "";
+                infoText += "Preprocessing time: " + elapsedTimeFormat(elapsed) + "\n";
+
                 // Get the output from the model
+                start = System.currentTimeMillis();
                 float[] output = soundClassifierModule
                         .forward(IValue.from(inputTensor))
                         .toTensor()
                         .getDataAsFloatArray();
+                elapsed = System.currentTimeMillis() - start;
 
-                String barsText = "";
-                for (float prob : output) {
-                    barsText += percentageBars(prob, 10);
-                    barsText += "\n";
-                }
-                tvPercentageBars.setText(barsText);
+                infoText += "Inference time: " + elapsedTimeFormat(elapsed) + "\n";
+                tvInfo.setText(infoText);
 
-                String valuesText = "";
-                for (float prob : output) {
-                    valuesText += String.format("%.2f", prob * 100) + "%\n";
-                }
-                tvPredictionResult.setText(valuesText);
+                makePrettyOutput(output);
             }
         });
+    }
+
+    protected String elapsedTimeFormat(long milliseconds) {
+        return String.format("%d.%d", milliseconds / 1000, milliseconds % 1000);
+    }
+
+    public static final String[] SOUND_CLASSES = {
+        "air_conditioner",
+        "car_horn",
+        "children_playing",
+        "dog_bark",
+        "drilling",
+        "engine_idling",
+        "gun_shot",
+        "jackhammer",
+        "siren",
+        "street_music"
+    };
+
+    protected void makePrettyOutput(float[] predictions) {
+        List<String> classesListCopy = Arrays.asList(SOUND_CLASSES);
+        ArrayList<String> sortedClasses = new ArrayList<>(classesListCopy);
+
+        // Note: comparator is in reverse
+        Collections.sort(sortedClasses, (left, right) ->
+                Float.compare(predictions[classesListCopy.indexOf(right)],
+                              predictions[classesListCopy.indexOf(left)]));
+
+        Float[] predsObject = new Float[predictions.length];
+        for (int i = 0; i < predictions.length; i++) {
+            predsObject[i] = predictions[i];
+        }
+        Arrays.sort(predsObject, Collections.reverseOrder());
+
+        String classesText = "";
+        for (String c : sortedClasses) {
+            classesText += c + "\n";
+        }
+        tvClassesNames.setText(classesText);
+
+        String barsText = "";
+        for (float prob : predsObject) {
+            barsText += percentageBars(prob, 10);
+            barsText += "\n";
+        }
+        tvPercentageBars.setText(barsText);
+
+        String valuesText = "";
+        for (float prob : predsObject) {
+            valuesText += String.format("%.2f", prob * 100) + "%\n";
+        }
+        tvPredictionResult.setText(valuesText);
     }
 
     protected String percentageBars(float ratio, int max_bars) {
