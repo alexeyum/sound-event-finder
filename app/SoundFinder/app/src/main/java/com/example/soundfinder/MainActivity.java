@@ -26,6 +26,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.text.Format;
@@ -39,7 +40,7 @@ import java.util.stream.IntStream;
 
 
 final class WavReader {
-    public static ArrayList<Float> ReadAsFloatArray(InputStream fs) throws IOException {
+    public static ArrayList<Float> ReadAsFloatArray(InputStream fs) throws IOException, RuntimeException {
 
         String chunkID = readString(fs, 4);
         fs.skip(4);
@@ -53,11 +54,17 @@ final class WavReader {
         fs.skip(4);
 
         if (!chunkID.equals("RIFF") || !format.equals("WAVE")) {
-            throw new IOException("Incorrect file format");
+            throw new IOException("File is not in WAV format");
         }
 
-        if (bitsPerSample != 16 || !subChunk2ID.equals("data") || sampleRate != 44100) {
-            throw new UnsupportedOperationException("Unsupported file data.");
+        if (bitsPerSample != 16) {
+            throw new UnsupportedOperationException("Only 16 bps is supported.");
+        }
+        if (!subChunk2ID.equals("data")) {
+            throw new UnsupportedOperationException("Only 'data' subchunk2 is supported.");
+        }
+        if (sampleRate < 24000 || sampleRate > 96000) {
+            throw new UnsupportedOperationException("Only sample rates between 24k and 96k are supported.");
         }
 
         int bytesPerSample = bitsPerSample / 8;
@@ -199,9 +206,19 @@ public class MainActivity extends AppCompatActivity {
                     start = System.currentTimeMillis();
                     inputTensor = loadAndPrepareWav(filePath);
                     elapsed = System.currentTimeMillis() - start;
+                } catch (NullPointerException e) {
+                    String infoText = "File not found";
+                    tvInfo.setText(infoText);
+                    return;
                 } catch (IOException e) {
-                    System.out.println("Error reading file");
-                    System.out.println(e.getMessage());
+                    String infoText = "Error reading file:\n";
+                    infoText += e.getMessage();
+                    tvInfo.setText(infoText);
+                    return;
+                } catch (UnsupportedOperationException e) {
+                    String infoText = "Unsupported sound file parameters:\n";
+                    infoText += e.getMessage();
+                    tvInfo.setText(infoText);
                     return;
                 }
 
@@ -304,7 +321,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public Tensor loadAndPrepareWav(String filePath) throws  IOException {
+    public Tensor loadAndPrepareWav(String filePath) throws  IOException, NullPointerException {
         InputStream fs = new FileInputStream(filePath);
         ArrayList<Float> rawData = WavReader.ReadAsFloatArray(fs);
         // TODO: remove hard-coded data
