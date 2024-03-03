@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.soundfinder"
+    namespace = "com.alexeyum.soundfinder"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.soundfinder"
+        applicationId = "com.alexeyum.soundfinder"
         minSdk = 21
         targetSdk = 34
         versionCode = 1

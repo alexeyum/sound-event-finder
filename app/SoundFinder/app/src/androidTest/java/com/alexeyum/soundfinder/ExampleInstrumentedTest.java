@@ -1,4 +1,4 @@
-package com.example.soundfinder;
+package com.alexeyum.soundfinder;
 
 import android.content.Context;
 

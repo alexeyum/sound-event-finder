@@ -1,4 +1,4 @@
-package com.example.soundfinder;
+package com.alexeyum.soundfinder;
 
 import static junit.framework.TestCase.assertEquals;
 
