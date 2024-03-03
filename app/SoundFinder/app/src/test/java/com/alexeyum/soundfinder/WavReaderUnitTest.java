@@ -44,7 +44,7 @@ public class WavReaderUnitTest {
     @Test
     public void testReadArray() throws IOException {
         InputStream fs = this.getClass().getClassLoader().getResourceAsStream("100795-3-1-2.wav");
-        ArrayList<Float> values = WavReader.ReadAsFloatArray(fs);
+        ArrayList<Float> values = WavReader.readAsFloatArray(fs);
 
         assertEquals(352800, values.size());
 
@@ -58,14 +58,14 @@ public class WavReaderUnitTest {
     public void testStereoToMono() throws IllegalArgumentException {
         ArrayList<Float> stereo1 = new ArrayList<>(Arrays.asList(10.0f, 20.0f, -5.0f, 15.0f));
         ArrayList<Float> mono1 = new ArrayList<>(Arrays.asList(15.0f, 5.0f));
-        ArrayList<Float> monoConverted1 = WavReader.StereoToMono(stereo1);
+        ArrayList<Float> monoConverted1 = WavReader.stereoToMono(stereo1);
         assertArrayListsEqual(mono1, monoConverted1, 1e-6);
 
         ArrayList<Float> stereo2 = new ArrayList<>(Arrays.asList(
                 0.5f, -0.5f, -0.1f, -0.1f, 0.99f, -0.98f, -1.0f, 0.2f));
         ArrayList<Float> mono2 = new ArrayList<>(Arrays.asList(
                 0.0f, -0.1f, 0.005f, -0.4f));
-        ArrayList<Float> monoConverted2 = WavReader.StereoToMono(stereo2);
+        ArrayList<Float> monoConverted2 = WavReader.stereoToMono(stereo2);
         assertArrayListsEqual(mono2, monoConverted2, 1e-6);
     }
 
@@ -75,7 +75,7 @@ public class WavReaderUnitTest {
                 0.0f, 6553.6f, -327.68f, -29491.2f));
         ArrayList<Float> expectedNormalized = new ArrayList<>(Arrays.asList(
                 0.0f, 0.2f,    -0.01f,     -0.9f));
-        ArrayList<Float> actualNormalized = WavReader.NormalizeTo01(raw, (short)16);
+        ArrayList<Float> actualNormalized = WavReader.normalizeTo01(raw, (short)16);
         assertArrayListsEqual(expectedNormalized, actualNormalized, 1e-6);
     }
 }

@@ -10,7 +10,7 @@ import java.nio.ByteOrder;
 import java.util.ArrayList;
 
 public final class WavReader {
-    public static ArrayList<Float> ReadAsFloatArray(InputStream fs) throws IOException, RuntimeException {
+    public static ArrayList<Float> readAsFloatArray(InputStream fs) throws IOException, RuntimeException {
 
         String chunkID = readString(fs, 4);
         fs.skip(4);
@@ -53,7 +53,7 @@ public final class WavReader {
         return result;
     }
 
-    public static ArrayList<Float> StereoToMono(ArrayList<Float> stereo) throws IllegalArgumentException {
+    public static ArrayList<Float> stereoToMono(ArrayList<Float> stereo) throws IllegalArgumentException {
         if (stereo.size() % 2 != 0) {
             throw new IllegalArgumentException("Stereo data contains odd number of samples");
         }
@@ -66,7 +66,7 @@ public final class WavReader {
         return mono;
     }
 
-    public static ArrayList<Float> NormalizeTo01(ArrayList<Float> values, short bitsPerSample) throws IllegalArgumentException {
+    public static ArrayList<Float> normalizeTo01(ArrayList<Float> values, short bitsPerSample) throws IllegalArgumentException {
         float maxVal;
         if (bitsPerSample == 8) {
             maxVal = 255;

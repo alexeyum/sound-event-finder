@@ -32,8 +32,9 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "MainActivity";
+
     TextView tvFilePath;
-    String filePath;
     TextView tvPredictionResult;
     TextView tvPercentageBars;
     TextView tvClassesNames;
@@ -41,7 +42,21 @@ public class MainActivity extends AppCompatActivity {
     FilePickerDialog fileDialog;
 
     Module soundClassifierModule;
-    private static final String TAG = "MainActivity";
+
+    String filePath;
+
+    public static final String[] SOUND_CLASSES = {
+        "air_conditioner",
+        "car_horn",
+        "children_playing",
+        "dog_bark",
+        "drilling",
+        "engine_idling",
+        "gun_shot",
+        "jackhammer",
+        "siren",
+        "street_music"
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,19 +126,6 @@ public class MainActivity extends AppCompatActivity {
         return String.format("%d.%d", milliseconds / 1000, milliseconds % 1000);
     }
 
-    public static final String[] SOUND_CLASSES = {
-        "air_conditioner",
-        "car_horn",
-        "children_playing",
-        "dog_bark",
-        "drilling",
-        "engine_idling",
-        "gun_shot",
-        "jackhammer",
-        "siren",
-        "street_music"
-    };
-
     protected void makePrettyOutput(float[] predictions) {
         List<String> classesListCopy = Arrays.asList(SOUND_CLASSES);
         ArrayList<String> sortedClasses = new ArrayList<>(classesListCopy);
@@ -189,9 +191,9 @@ public class MainActivity extends AppCompatActivity {
 
     public Tensor loadAndPrepareWav(String filePath) throws  IOException, NullPointerException {
         InputStream fs = new FileInputStream(filePath);
-        ArrayList<Float> rawData = WavReader.ReadAsFloatArray(fs);
+        ArrayList<Float> rawData = WavReader.readAsFloatArray(fs);
         // TODO: remove hard-coded data
-        ArrayList<Float> prepData = WavReader.NormalizeTo01(WavReader.StereoToMono(rawData), (short) 16);
+        ArrayList<Float> prepData = WavReader.normalizeTo01(WavReader.stereoToMono(rawData), (short) 16);
 
         int expectedSize = 384000;
         int realSize = min(prepData.size(), 384000);
