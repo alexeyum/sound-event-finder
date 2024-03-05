@@ -5,8 +5,6 @@ import static java.lang.Math.min;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
 
 import com.developer.filepicker.model.DialogConfigs;
@@ -20,10 +18,8 @@ import org.pytorch.Tensor;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -41,11 +37,16 @@ public class MainActivity extends AppCompatActivity {
     TextView tvInfo;
     FilePickerDialog fileDialog;
 
-    Module soundClassifierModule;
-
+    // file path for processing
     String filePath;
 
-    public static final String[] SOUND_CLASSES = {
+    // torch module
+    Module soundClassifierModule;
+
+    static final short BITS_PER_SAMPLE = 16;
+    static final int MODEL_AUDIO_LENGTH = 384000;
+
+    static final String[] SOUND_CLASSES = {
         "air_conditioner",
         "car_horn",
         "children_playing",
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         "siren",
         "street_music"
     };
+    static final int MAX_PERCENTAGE_BARS = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,64 +71,57 @@ public class MainActivity extends AppCompatActivity {
         tvClassesNames = findViewById(R.id.tvClassesNames);
         tvInfo = findViewById(R.id.tvInfo);
 
-        try {
-            soundClassifierModule = LiteModuleLoader.load(assetFilePath("classifier_20240213.pt"));
-        } catch (IOException e) {
-            Log.e(TAG, "Unable to load model", e);
-        }
+        soundClassifierModule = LiteModuleLoader.loadModuleFromAsset(getAssets(), "classifier_20240213.pt");
 
         setUpFileOpener();
 
-        findViewById(R.id.buttonPredict).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                long start, elapsed;
+        findViewById(R.id.buttonPredict).setOnClickListener(view -> runPrediction());
+    }
 
-                Tensor inputTensor;
-                try {
-                    start = System.currentTimeMillis();
-                    inputTensor = loadAndPrepareWav(filePath);
-                    elapsed = System.currentTimeMillis() - start;
-                } catch (NullPointerException e) {
-                    String infoText = "File not found";
-                    tvInfo.setText(infoText);
-                    return;
-                } catch (IOException e) {
-                    String infoText = "Error reading file:\n";
-                    infoText += e.getMessage();
-                    tvInfo.setText(infoText);
-                    return;
-                } catch (UnsupportedOperationException e) {
-                    String infoText = "Unsupported sound file parameters:\n";
-                    infoText += e.getMessage();
-                    tvInfo.setText(infoText);
-                    return;
-                }
+    public void runPrediction() {
+        long start, elapsed;
 
-                String infoText = "";
-                infoText += "Preprocessing time: " + elapsedTimeFormat(elapsed) + "\n";
+        start = System.currentTimeMillis();
+        Tensor inputTensor;
+        try {
+            inputTensor = loadAndPrepareWav(filePath);
+        } catch (NullPointerException e) {
+            String infoText = "File not found";
+            tvInfo.setText(infoText);
+            return;
+        } catch (IOException e) {
+            String infoText = "Error reading file:\n" + e.getMessage();
+            tvInfo.setText(infoText);
+            return;
+        } catch (UnsupportedOperationException e) {
+            String infoText = "Unsupported sound file parameters:\n" + e.getMessage();
+            tvInfo.setText(infoText);
+            return;
+        }
+        elapsed = System.currentTimeMillis() - start;
 
-                // Get the output from the model
-                start = System.currentTimeMillis();
-                float[] output = soundClassifierModule
-                        .forward(IValue.from(inputTensor))
-                        .toTensor()
-                        .getDataAsFloatArray();
-                elapsed = System.currentTimeMillis() - start;
+        String infoText = "";
+        infoText += "Preprocessing time: " + elapsedTimeFormat(elapsed) + "\n";
 
-                infoText += "Inference time: " + elapsedTimeFormat(elapsed) + "\n";
-                tvInfo.setText(infoText);
+        // Get the output from the model
+        start = System.currentTimeMillis();
+        float[] output = soundClassifierModule
+                .forward(IValue.from(inputTensor))
+                .toTensor()
+                .getDataAsFloatArray();
+        elapsed = System.currentTimeMillis() - start;
 
-                makePrettyOutput(output);
-            }
-        });
+        infoText += "Inference time: " + elapsedTimeFormat(elapsed) + "\n";
+        tvInfo.setText(infoText);
+
+        showResults(output);
     }
 
     protected String elapsedTimeFormat(long milliseconds) {
         return String.format("%d.%d", milliseconds / 1000, milliseconds % 1000);
     }
 
-    protected void makePrettyOutput(float[] predictions) {
+    protected void showResults(float[] predictions) {
         List<String> classesListCopy = Arrays.asList(SOUND_CLASSES);
         ArrayList<String> sortedClasses = new ArrayList<>(classesListCopy);
 
@@ -149,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
 
         String barsText = "";
         for (float prob : predsObject) {
-            barsText += percentageBars(prob, 10);
+            barsText += percentageBars(prob, MAX_PERCENTAGE_BARS);
             barsText += "\n";
         }
         tvPercentageBars.setText(barsText);
@@ -169,37 +164,15 @@ public class MainActivity extends AppCompatActivity {
         return bars;
     }
 
-    // Given the name of the pytorch model, get the path for that model
-    public String assetFilePath(String assetName) throws IOException {
-        File file = new File(this.getFilesDir(), assetName);
-        if (file.exists() && file.length() > 0) {
-            return file.getAbsolutePath();
-        }
-
-        try (InputStream is = this.getAssets().open(assetName)) {
-            try (OutputStream os = new FileOutputStream(file)) {
-                byte[] buffer = new byte[4 * 1024];
-                int read;
-                while ((read = is.read(buffer)) != -1) {
-                    os.write(buffer, 0, read);
-                }
-                os.flush();
-            }
-            return file.getAbsolutePath();
-        }
-    }
-
-    public Tensor loadAndPrepareWav(String filePath) throws  IOException, NullPointerException {
+    protected Tensor loadAndPrepareWav(String filePath) throws  IOException, NullPointerException {
         InputStream fs = new FileInputStream(filePath);
         ArrayList<Float> rawData = WavReader.readAsFloatArray(fs);
-        // TODO: remove hard-coded data
-        ArrayList<Float> prepData = WavReader.normalizeTo01(WavReader.stereoToMono(rawData), (short) 16);
+        ArrayList<Float> prepData = WavReader.normalizeTo01(WavReader.stereoToMono(rawData), BITS_PER_SAMPLE);
 
-        int expectedSize = 384000;
-        int realSize = min(prepData.size(), 384000);
+        int realSize = min(prepData.size(), MODEL_AUDIO_LENGTH);
 
-        float[] blobData = new float[expectedSize];
-        for (int i = 0; i < expectedSize; i++) {
+        float[] blobData = new float[MODEL_AUDIO_LENGTH];
+        for (int i = 0; i < MODEL_AUDIO_LENGTH; i++) {
             if (i < realSize) {
                 blobData[i] = prepData.get(i);
             } else {
@@ -207,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        long[] shape = new long[]{1, 1, expectedSize};
+        long[] shape = new long[]{1, 1, MODEL_AUDIO_LENGTH};
         return Tensor.fromBlob(blobData, shape);
     }
 
@@ -218,25 +191,17 @@ public class MainActivity extends AppCompatActivity {
         properties.root = new File(DialogConfigs.DEFAULT_DIR);
         properties.error_dir = new File(DialogConfigs.DEFAULT_DIR);
         properties.offset = new File(DialogConfigs.DEFAULT_DIR);
-        //If you want to view files of all extensions then pass null to properties.extensions
-        properties.extensions = null;
-        //If you want to view files with specific type of extensions the pass string array to properties.extensions
         properties.extensions = new String[]{"wav"};
         properties.show_hidden_files = false;
 
         fileDialog = new FilePickerDialog(MainActivity.this, properties);
-        fileDialog.setTitle("Select a File");
+        fileDialog.setTitle("Select a WAV file");
 
         fileDialog.setDialogSelectionListener(files -> {
             filePath = files[0];
             tvFilePath.setText(filePath);
         });
 
-        findViewById(R.id.buttonOpen).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                fileDialog.show();
-            }
-        });
+        findViewById(R.id.buttonOpen).setOnClickListener(view -> fileDialog.show());
     }
 }

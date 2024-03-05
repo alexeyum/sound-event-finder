@@ -10,7 +10,9 @@ import java.nio.ByteOrder;
 import java.util.ArrayList;
 
 public final class WavReader {
-    public static ArrayList<Float> readAsFloatArray(InputStream fs) throws IOException, RuntimeException {
+    // Note: this is only a temporary method for POC application,
+    // this should be redesigned later.
+    public static ArrayList<Float> readAsFloatArray(InputStream fs) throws IOException, UnsupportedOperationException {
 
         String chunkID = readString(fs, 4);
         fs.skip(4);
@@ -27,6 +29,7 @@ public final class WavReader {
             throw new IOException("File is not in WAV format");
         }
 
+        // check that file parameters are those that allowed
         if (bitsPerSample != 16) {
             throw new UnsupportedOperationException("Only 16 bps is supported.");
         }
@@ -59,10 +62,12 @@ public final class WavReader {
         }
         int mono_size = stereo.size() / 2;
 
+        // average the channels
         ArrayList<Float> mono = new ArrayList<>();
         for (int i = 0; i < mono_size; i++) {
             mono.add((float) (0.5 * (stereo.get(2 * i) + stereo.get(2 * i + 1))));
         }
+
         return mono;
     }
 
@@ -92,7 +97,7 @@ public final class WavReader {
         return new String(byteArray);
     }
 
-    public static ByteBuffer byteArrayToNumber(byte[] bytes, int numOfBytes, ByteOrder order) {
+    private static ByteBuffer byteArrayToNumber(byte[] bytes, int numOfBytes, ByteOrder order) {
         ByteBuffer buffer = ByteBuffer.allocate(numOfBytes);
         buffer.order(order);
         buffer.put(bytes);
@@ -120,11 +125,12 @@ public final class WavReader {
         return buffer.getInt();
     }
 
-    public static float readFloat(InputStream fs, int bytesPerSample) throws IOException {
+    public static float readFloat(InputStream fs, int bytesPerSample) throws IOException, UnsupportedOperationException {
         byte[] byteArray = new byte[bytesPerSample];
         if (fs.read(byteArray, 0, bytesPerSample) == -1) {
             throw new EOFException();
         }
+
         ByteBuffer buffer = byteArrayToNumber(byteArray, bytesPerSample, LITTLE_ENDIAN);
         if (bytesPerSample == 2) {
             return (float) buffer.getShort();
