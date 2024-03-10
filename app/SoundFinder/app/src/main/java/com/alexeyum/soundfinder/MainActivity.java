@@ -5,6 +5,7 @@ import static java.lang.Math.min;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.developer.filepicker.model.DialogConfigs;
@@ -17,13 +18,15 @@ import org.pytorch.Module;
 import org.pytorch.Tensor;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -79,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void runPrediction() {
-        long start, elapsed;
+        long start;
 
         start = System.currentTimeMillis();
         Tensor inputTensor;
@@ -98,10 +101,7 @@ public class MainActivity extends AppCompatActivity {
             tvInfo.setText(infoText);
             return;
         }
-        elapsed = System.currentTimeMillis() - start;
-
-        String infoText = "";
-        infoText += "Preprocessing time: " + elapsedTimeFormat(elapsed) + "\n";
+        long elapsedPreprocessing = System.currentTimeMillis() - start;
 
         // Get the output from the model
         start = System.currentTimeMillis();
@@ -109,16 +109,20 @@ public class MainActivity extends AppCompatActivity {
                 .forward(IValue.from(inputTensor))
                 .toTensor()
                 .getDataAsFloatArray();
-        elapsed = System.currentTimeMillis() - start;
+        long elapsedInference = System.currentTimeMillis() - start;
 
-        infoText += "Inference time: " + elapsedTimeFormat(elapsed) + "\n";
+        String infoText = String.format(
+                "Preprocessing time: %s\nInference time: %s\n",
+                elapsedTimeFormat(elapsedPreprocessing),
+                elapsedTimeFormat(elapsedInference));
         tvInfo.setText(infoText);
+        Log.i(TAG, "Made prediction\n" + infoText);
 
         showResults(output);
     }
 
     protected String elapsedTimeFormat(long milliseconds) {
-        return String.format("%d.%d", milliseconds / 1000, milliseconds % 1000);
+        return String.format(Locale.getDefault(), "%d.%d", milliseconds / 1000, milliseconds % 1000);
     }
 
     protected void showResults(float[] predictions) {
@@ -126,51 +130,52 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<String> sortedClasses = new ArrayList<>(classesListCopy);
 
         // Note: comparator is in reverse
-        Collections.sort(sortedClasses, (left, right) ->
+        sortedClasses.sort((left, right) ->
                 Float.compare(predictions[classesListCopy.indexOf(right)],
                               predictions[classesListCopy.indexOf(left)]));
 
-        Float[] predsObject = new Float[predictions.length];
+        Float[] predictionsObject = new Float[predictions.length];
         for (int i = 0; i < predictions.length; i++) {
-            predsObject[i] = predictions[i];
+            predictionsObject[i] = predictions[i];
         }
-        Arrays.sort(predsObject, Collections.reverseOrder());
+        Arrays.sort(predictionsObject, Collections.reverseOrder());
 
-        String classesText = "";
+        StringBuilder classesText = new StringBuilder();
         for (String c : sortedClasses) {
-            classesText += c + "\n";
+            classesText.append(c).append("\n");
         }
-        tvClassesNames.setText(classesText);
+        tvClassesNames.setText(classesText.toString());
 
-        String barsText = "";
-        for (float prob : predsObject) {
-            barsText += percentageBars(prob, MAX_PERCENTAGE_BARS);
-            barsText += "\n";
+        StringBuilder barsText = new StringBuilder();
+        for (float prob : predictionsObject) {
+            barsText.append(percentageBars(prob, MAX_PERCENTAGE_BARS)).append("\n");
         }
-        tvPercentageBars.setText(barsText);
+        tvPercentageBars.setText(barsText.toString());
 
-        String valuesText = "";
-        for (float prob : predsObject) {
-            valuesText += String.format("%.2f", prob * 100) + "%\n";
+        StringBuilder valuesText = new StringBuilder();
+        for (float prob : predictionsObject) {
+            valuesText.append(String.format(Locale.getDefault(),"%.2f", prob * 100)).append("%\n");
         }
-        tvPredictionResult.setText(valuesText);
+        tvPredictionResult.setText(valuesText.toString());
     }
 
+    @SuppressWarnings("SameParameterValue") // max_bars parameter always constant, but good to have for future
     protected String percentageBars(float ratio, int max_bars) {
-        String bars = "";
+        StringBuilder bars = new StringBuilder();
         for (int i = 0; i < (int)(ratio * max_bars); i++) {
-            bars += "|";
+            bars.append("|");
         }
-        return bars;
+        return bars.toString();
     }
 
     protected Tensor loadAndPrepareWav(String filePath) throws  IOException, NullPointerException {
-        InputStream fs = new FileInputStream(filePath);
+        InputStream fs = Files.newInputStream(Paths.get(filePath));
         ArrayList<Float> rawData = WavReader.readAsFloatArray(fs);
         ArrayList<Float> prepData = WavReader.normalizeTo01(WavReader.stereoToMono(rawData), BITS_PER_SAMPLE);
 
         int realSize = min(prepData.size(), MODEL_AUDIO_LENGTH);
 
+        // copy to float[] and pad with zeros
         float[] blobData = new float[MODEL_AUDIO_LENGTH];
         for (int i = 0; i < MODEL_AUDIO_LENGTH; i++) {
             if (i < realSize) {

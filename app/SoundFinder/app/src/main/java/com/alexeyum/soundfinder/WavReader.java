@@ -1,7 +1,5 @@
 package com.alexeyum.soundfinder;
 
-import static java.nio.ByteOrder.LITTLE_ENDIAN;
-
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,6 +10,7 @@ import java.util.ArrayList;
 public final class WavReader {
     // Note: this is only a temporary method for POC application,
     // this should be redesigned later.
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     public static ArrayList<Float> readAsFloatArray(InputStream fs) throws IOException, UnsupportedOperationException {
 
         String chunkID = readString(fs, 4);
@@ -34,10 +33,13 @@ public final class WavReader {
             throw new UnsupportedOperationException("Only 16 bps is supported.");
         }
         if (!subChunk2ID.equals("data")) {
-            throw new UnsupportedOperationException("Only 'data' subchunk2 is supported.");
+            throw new UnsupportedOperationException("Only 'data' SubChunk2ID field value is supported.");
         }
         if (sampleRate < 24000 || sampleRate > 96000) {
             throw new UnsupportedOperationException("Only sample rates between 24k and 96k are supported.");
+        }
+        if (numChannels != 2) {
+            throw new UnsupportedOperationException("Only stereo files are supported.");
         }
 
         int bytesPerSample = bitsPerSample / 8;
@@ -97,9 +99,9 @@ public final class WavReader {
         return new String(byteArray);
     }
 
-    private static ByteBuffer byteArrayToNumber(byte[] bytes, int numOfBytes, ByteOrder order) {
+    private static ByteBuffer byteArrayToNumber(byte[] bytes, int numOfBytes) {
         ByteBuffer buffer = ByteBuffer.allocate(numOfBytes);
-        buffer.order(order);
+        buffer.order(ByteOrder.LITTLE_ENDIAN);
         buffer.put(bytes);
         buffer.rewind();
         return buffer;
@@ -111,7 +113,7 @@ public final class WavReader {
         if (fs.read(byteArray, 0, LEN) == -1) {
             throw new EOFException();
         }
-        ByteBuffer buffer = byteArrayToNumber(byteArray, LEN, LITTLE_ENDIAN);
+        ByteBuffer buffer = byteArrayToNumber(byteArray, LEN);
         return buffer.getShort();
     }
 
@@ -121,7 +123,7 @@ public final class WavReader {
         if (fs.read(byteArray, 0, LEN) == -1) {
             throw new EOFException();
         }
-        ByteBuffer buffer = byteArrayToNumber(byteArray, LEN, LITTLE_ENDIAN);
+        ByteBuffer buffer = byteArrayToNumber(byteArray, LEN);
         return buffer.getInt();
     }
 
@@ -131,7 +133,7 @@ public final class WavReader {
             throw new EOFException();
         }
 
-        ByteBuffer buffer = byteArrayToNumber(byteArray, bytesPerSample, LITTLE_ENDIAN);
+        ByteBuffer buffer = byteArrayToNumber(byteArray, bytesPerSample);
         if (bytesPerSample == 2) {
             return (float) buffer.getShort();
         } else {

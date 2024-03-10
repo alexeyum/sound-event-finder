@@ -8,19 +8,21 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.stream.IntStream;
+import java.util.Objects;
 
 public class WavReaderUnitTest {
+    @SuppressWarnings("SameParameterValue") // delta parameter always constant, but good to have for future
     protected void assertArrayListsEqual(ArrayList<Float> expected, ArrayList<Float> actual, double delta) {
         assertEquals(expected.size(), actual.size());
-        for (int i : IntStream.range(0, expected.size()).boxed().toList()) {
+        for (int i = 0; i < expected.size(); i++) {
             assertEquals(expected.get(i), actual.get(i), delta);
         }
     }
 
     @Test
-    public void testReadFunctions() throws IOException {
-        InputStream fs = this.getClass().getClassLoader().getResourceAsStream("100795-3-1-2.wav");
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    public void testReadFunctions() throws IOException, NullPointerException {
+        InputStream fs = Objects.requireNonNull(this.getClass().getClassLoader()).getResourceAsStream("100795-3-1-2.wav");
 
         assertEquals("RIFF", WavReader.readString(fs, 4));
 
@@ -42,8 +44,8 @@ public class WavReaderUnitTest {
     }
 
     @Test
-    public void testReadArray() throws IOException {
-        InputStream fs = this.getClass().getClassLoader().getResourceAsStream("100795-3-1-2.wav");
+    public void testReadArray() throws IOException, NullPointerException {
+        InputStream fs = Objects.requireNonNull(this.getClass().getClassLoader()).getResourceAsStream("100795-3-1-2.wav");
         ArrayList<Float> values = WavReader.readAsFloatArray(fs);
 
         assertEquals(352800, values.size());
