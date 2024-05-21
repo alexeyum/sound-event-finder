@@ -6,9 +6,8 @@ def chunk_audio(waveform, sampling_rate, chunk_length_sec):
     """Split audiofile into chunks of same length without overlap."""
 
     chunk_length = chunk_length_sec * sampling_rate
-    # TODO: do we need numpy() here?
-    # chunks = [c.numpy() for c in torch.split(waveform, chunk_length)]
-    chunks = torch.split(waveform, chunk_length)
+    # Note: c.numpy() is necessary for feature extractor
+    chunks = [c.numpy() for c in torch.split(waveform, chunk_length)]
     return chunks
 
 
@@ -33,7 +32,7 @@ class EventFinder:
     def __init__(self, model_config, chunk_length_sec, probability_threshold):
         self.model_config = model_config
         self.chunk_length_sec = chunk_length_sec
-        self.probability_threshold = probability_thresholds
+        self.probability_threshold = probability_threshold
 
         # NOTE: this is temporary, will implement antology parsing later
         self.EVENT_CLASSES = [
@@ -49,7 +48,7 @@ class EventFinder:
         events = []
         for class_ind in self.EVENT_CLASSES:
             class_name = self.model_config.id2label[class_ind]
-            class_parts = probs[:, class_ind] >= self.probability_threshold
+            class_parts = probabilities[:, class_ind] >= self.probability_threshold
             for begin, end in _continuos_segments(class_parts):
                 begin_sec = begin * self.chunk_length_sec
                 end_sec = end * self.chunk_length_sec
@@ -58,4 +57,4 @@ class EventFinder:
         # sort by the segment start
         events.sort(key=lambda e: e[1])
 
-        return probs, events
+        return events
