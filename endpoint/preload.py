@@ -1,5 +1,8 @@
 from transformers import AutoFeatureExtractor, ASTForAudioClassification
 
 
-extractor = AutoFeatureExtractor.from_pretrained("bookbot/distil-ast-audioset")
-model = ASTForAudioClassification.from_pretrained("bookbot/distil-ast-audioset")
+MODEL_PATH = "MIT/ast-finetuned-audioset-10-10-0.4593"
+
+
+extractor = AutoFeatureExtractor.from_pretrained(MODEL_PATH)
+model = ASTForAudioClassification.from_pretrained(MODEL_PATH)
