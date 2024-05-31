@@ -9,10 +9,14 @@ RUN pip3 install --no-cache-dir \
     runpod
 
 COPY library /workspace/library
+COPY endpoint/preload.py /workspace/.
 COPY endpoint/handler.py /workspace/.
+
+WORKDIR /workspace
+
+RUN python3 preload.py
 
 ENV PYTHONPATH "${PYTHONPATH}:/workspace/library"
 
-WORKDIR /workspace
 
 CMD [ "python", "-u", "handler.py" ]
