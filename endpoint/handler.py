@@ -1,5 +1,6 @@
 from base64 import b64decode
 from io import BytesIO
+import time
 
 import torch
 import torchaudio
@@ -20,9 +21,12 @@ def find_sound_events(job):
     if "base64" not in job_input["audio"]:
         return {"error": "Only base64 format for audio is available for now."}
 
+    DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+    load_start = time.time()
     extractor = AutoFeatureExtractor.from_pretrained("bookbot/distil-ast-audioset")
-    model = ASTForAudioClassification.from_pretrained("bookbot/distil-ast-audioset")
+    model = ASTForAudioClassification.from_pretrained("bookbot/distil-ast-audioset").to(DEVICE)
+    load_time = time.time() - load_start
     chunk_length_sec = 10
     sampling_rate = extractor.sampling_rate
     finder = event_finder.EventFinder(
@@ -37,13 +41,26 @@ def find_sound_events(job):
                                         channels="mono", sampling_rate=sampling_rate)
 
     chunks = event_finder.chunk_audio(waveform, sampling_rate, chunk_length_sec=chunk_length_sec)
-    features = extractor(chunks, sampling_rate, return_tensors="pt")
+
+    extr_start = time.time()
+    features = extractor(chunks, sampling_rate, return_tensors="pt").to(DEVICE)
+    extr_time = time.time() - extr_start
+
+    inf_start = time.time()
     with torch.no_grad():
         probs = torch.sigmoid(model(**features).logits)
+    inf_time = time.time() - inf_start
 
     events = finder(probs)
 
-    return {"events": events}
+    return {
+            "events": events,
+            "time": {
+                "load_models": load_time,
+                "extract_features": extr_time,
+                "inference": inf_time,
+            }
+        }
 
 
 runpod.serverless.start({"handler": find_sound_events})
