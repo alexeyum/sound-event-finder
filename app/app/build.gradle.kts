@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
 }
@@ -5,6 +7,10 @@ plugins {
 android {
     namespace = "com.alexeyum.soundfinder"
     compileSdk = 34
+
+    buildFeatures {
+        buildConfig = true
+    }
 
     defaultConfig {
         applicationId = "com.alexeyum.soundfinder"
@@ -14,6 +20,10 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        val properties = Properties()
+        properties.load(project.rootProject.file("apikey.properties").inputStream())
+        buildConfigField("String", "API_KEY", properties.getProperty("API_KEY"))
     }
 
     buildTypes {
@@ -38,6 +48,6 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
-    implementation("org.pytorch:pytorch_android_lite:1.13.1")
     implementation("io.github.tutorialsandroid:filepicker:9.2.5")
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
 }
