@@ -13,6 +13,7 @@ import com.developer.filepicker.model.DialogConfigs;
 import com.developer.filepicker.model.DialogProperties;
 import com.developer.filepicker.view.FilePickerDialog;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -34,6 +35,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -49,15 +51,11 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
 
     TextView tvFilePath;
-    TextView tvPredictionResult;
-    TextView tvPercentageBars;
-    TextView tvClassesNames;
     TextView tvInfo;
     FilePickerDialog fileDialog;
 
     // file path for processing
     String filePath;
-
 
     static final String API_URL = "https://api.runpod.ai/v2/mu386vlbjedica/runsync";
     public static final MediaType JSON = MediaType.get("application/json");
@@ -68,9 +66,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         tvFilePath = findViewById(R.id.tvFilePath);
-        tvPredictionResult = findViewById(R.id.tvPredictionResult);
-        tvPercentageBars = findViewById(R.id.tvPercentageBars);
-        tvClassesNames = findViewById(R.id.tvClassesNames);
         tvInfo = findViewById(R.id.tvInfo);
 
         setUpFileOpener();
@@ -103,7 +98,9 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        OkHttpClient client = new OkHttpClient();
+        OkHttpClient client = new OkHttpClient.Builder()
+                .readTimeout(300, TimeUnit.SECONDS)
+                .build();
         RequestBody body = RequestBody.create(apiInput, JSON);
         Request request = new Request.Builder()
                 .url(API_URL)
@@ -112,19 +109,15 @@ public class MainActivity extends AppCompatActivity {
                 .post(body)
                 .build();
 
+        tvInfo.setText("Running prediction...");
+        Log.i(TAG, "Starting API call");
+
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 if (response.isSuccessful() && response.body() != null) {
-                    String responseData = response.body().string();
-
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            tvInfo.setText(responseData);
-                        }
-                    });
-
+                    String strFormatted = formatEvents(response.body().string());
+                    runOnUiThread(() -> tvInfo.setText(strFormatted));
                 } else {
                     Log.e(TAG,"API call failed (onResponse)");
                 }
@@ -154,6 +147,32 @@ public class MainActivity extends AppCompatActivity {
 //        showResults(output);
     }
 
+    static protected String formatEvents(String jsonString) {
+        StringBuilder result = new StringBuilder();
+        try {
+            JSONObject json = new JSONObject(jsonString);
+            JSONArray events = json.getJSONObject("output").getJSONArray("events");
+            for (int i = 0; i < events.length(); i++) {
+                JSONArray eventData = events.getJSONArray(i);
+                String eventName = eventData.getString(0);
+                int fromSec = eventData.getInt(1);
+                int toSec = eventData.getInt(2);
+                String fmtEvent = secondsToTime(fromSec) + "-" + secondsToTime(toSec) +
+                                  " - " + eventName + "\n";
+                result.append(fmtEvent);
+            }
+        } catch (JSONException e) {
+            // TODO: better error handling
+            return "Error";
+        }
+
+        return result.toString();
+    }
+
+    static protected String secondsToTime(int seconds) {
+        return String.format(Locale.getDefault(), "%d:%02d", seconds / 60, seconds % 60);
+    }
+
     static protected String readFileAsBase64(String path) throws IOException {
         File file = new File(path);
         int size = (int)file.length();
@@ -173,40 +192,6 @@ public class MainActivity extends AppCompatActivity {
     protected String elapsedTimeFormat(long milliseconds) {
         return String.format(Locale.getDefault(), "%d.%d", milliseconds / 1000, milliseconds % 1000);
     }
-
-//    protected void showResults(float[] predictions) {
-//        List<String> classesListCopy = Arrays.asList(SOUND_CLASSES);
-//        ArrayList<String> sortedClasses = new ArrayList<>(classesListCopy);
-//
-//        // Note: comparator is in reverse
-//        sortedClasses.sort((left, right) ->
-//                Float.compare(predictions[classesListCopy.indexOf(right)],
-//                              predictions[classesListCopy.indexOf(left)]));
-//
-//        Float[] predictionsObject = new Float[predictions.length];
-//        for (int i = 0; i < predictions.length; i++) {
-//            predictionsObject[i] = predictions[i];
-//        }
-//        Arrays.sort(predictionsObject, Collections.reverseOrder());
-//
-//        StringBuilder classesText = new StringBuilder();
-//        for (String c : sortedClasses) {
-//            classesText.append(c).append("\n");
-//        }
-//        tvClassesNames.setText(classesText.toString());
-//
-//        StringBuilder barsText = new StringBuilder();
-//        for (float prob : predictionsObject) {
-//            barsText.append(percentageBars(prob, MAX_PERCENTAGE_BARS)).append("\n");
-//        }
-//        tvPercentageBars.setText(barsText.toString());
-//
-//        StringBuilder valuesText = new StringBuilder();
-//        for (float prob : predictionsObject) {
-//            valuesText.append(String.format(Locale.getDefault(),"%.2f", prob * 100)).append("%\n");
-//        }
-//        tvPredictionResult.setText(valuesText.toString());
-//    }
 
     protected void setUpFileOpener() {
         DialogProperties properties = new DialogProperties();
