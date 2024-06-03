@@ -35,7 +35,7 @@ def _make_features(extractor, waveform, sampling_rate):
     return features, extract_time
 
 
-def _inference(features):
+def _inference(model, features):
     inference_start = time.time()
     with torch.no_grad():
         probs = torch.sigmoid(model(**features).logits)
@@ -65,7 +65,7 @@ def find_sound_events(job):
 
     features, extract_time = _make_features(extractor, waveform, sampling_rate)
 
-    probs, inference_time = _inference(features)
+    probs, inference_time = _inference(model, features)
 
     events = finder(probs)
 
