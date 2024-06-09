@@ -49,16 +49,15 @@ import okhttp3.Response;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
+    static final String API_URL = "https://api.runpod.ai/v2/mu386vlbjedica/runsync";
 
+    // ui elements
     TextView tvFilePath;
     TextView tvInfo;
     FilePickerDialog fileDialog;
 
     // file path for processing
     String filePath;
-
-    static final String API_URL = "https://api.runpod.ai/v2/mu386vlbjedica/runsync";
-    public static final MediaType JSON = MediaType.get("application/json");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,8 +73,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void runPrediction() {
-        long start;
-
         String fileBase64;
         try {
             fileBase64 = readFileAsBase64(filePath);
@@ -101,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
         OkHttpClient client = new OkHttpClient.Builder()
                 .readTimeout(300, TimeUnit.SECONDS)
                 .build();
-        RequestBody body = RequestBody.create(apiInput, JSON);
+        RequestBody body = RequestBody.create(apiInput, MediaType.get("application/json"));
         Request request = new Request.Builder()
                 .url(API_URL)
                 .addHeader("Content-Type", "application/json")
@@ -129,22 +126,6 @@ public class MainActivity extends AppCompatActivity {
                 Log.e(TAG,e.getMessage());
             }
         });
-
-//        start = System.currentTimeMillis();
-//        float[] output = soundClassifierModule
-//                .forward(IValue.from(inputTensor))
-//                .toTensor()
-//                .getDataAsFloatArray();
-//        long elapsedInference = System.currentTimeMillis() - start;
-//
-//        String infoText = String.format(
-//                "Preprocessing time: %s\nInference time: %s\n",
-//                elapsedTimeFormat(elapsedPreprocessing),
-//                elapsedTimeFormat(elapsedInference));
-//        tvInfo.setText(infoText);
-//        Log.i(TAG, "Made prediction\n" + infoText);
-//
-//        showResults(output);
     }
 
     static protected String formatEvents(String jsonString) {
@@ -187,10 +168,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return Base64.encodeToString(bytes, Base64.DEFAULT);
-    }
-
-    protected String elapsedTimeFormat(long milliseconds) {
-        return String.format(Locale.getDefault(), "%d.%d", milliseconds / 1000, milliseconds % 1000);
     }
 
     protected void setUpFileOpener() {
