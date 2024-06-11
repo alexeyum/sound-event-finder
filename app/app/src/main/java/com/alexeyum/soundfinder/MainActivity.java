@@ -3,6 +3,9 @@ package com.alexeyum.soundfinder;
 import static java.lang.Math.min;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
 import android.util.Base64;
@@ -12,6 +15,8 @@ import android.widget.TextView;
 import com.developer.filepicker.model.DialogConfigs;
 import com.developer.filepicker.model.DialogProperties;
 import com.developer.filepicker.view.FilePickerDialog;
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -55,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
     TextView tvFilePath;
     TextView tvInfo;
     FilePickerDialog fileDialog;
+    ViewPagerAdapter pagerAdapter;
 
     // file path for processing
     String filePath;
@@ -65,67 +71,116 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         tvFilePath = findViewById(R.id.tvFilePath);
-        tvInfo = findViewById(R.id.tvInfo);
+        tvInfo = findViewById(R.id.tvStatus);
 
-        setUpFileOpener();
+        ViewPager2 viewPager = findViewById(R.id.pager);
+        pagerAdapter = new ViewPagerAdapter(this);
+        viewPager.setAdapter(pagerAdapter);
+        TabLayout textTabs = findViewById(R.id.textTabs);
+        new TabLayoutMediator(textTabs, viewPager,
+                (tab, position) -> {
+                    if (position == 0) {
+                        tab.setText(R.string.resultsTabName);
+                    } else if (position == 1) {
+                        tab.setText(R.string.infoTabName);
+                    }
+                }
+        ).attach();
+
+
+
+
+        setupFileOpener();
 
         findViewById(R.id.buttonPredict).setOnClickListener(view -> runPrediction());
     }
 
-    public void runPrediction() {
-        String fileBase64;
-        try {
-            fileBase64 = readFileAsBase64(filePath);
-        } catch (IOException e) {
-            // TODO: print error to info field
-            e.printStackTrace();
-            return;
-        }
+    protected void setupFileOpener() {
+        DialogProperties properties = new DialogProperties();
+        properties.selection_mode = DialogConfigs.SINGLE_MODE;
+        properties.selection_type = DialogConfigs.FILE_SELECT;
+        properties.root = new File(DialogConfigs.DEFAULT_DIR);
+        properties.error_dir = new File(DialogConfigs.DEFAULT_DIR);
+        properties.offset = new File(DialogConfigs.DEFAULT_DIR);
+        properties.extensions = new String[]{"mp3"};
+        properties.show_hidden_files = false;
 
-        String apiInput;
-        try {
-            apiInput = new JSONObject()
-                .put("input", new JSONObject()
-                    .put("audio", new JSONObject()
-                        .put("base64", fileBase64)))
-                .toString();
-        } catch (JSONException e) {
-            // TODO: print error to info field
-            e.printStackTrace();
-            return;
-        }
+        fileDialog = new FilePickerDialog(MainActivity.this, properties);
+        fileDialog.setTitle("Select an mp3 file");
 
-        OkHttpClient client = new OkHttpClient.Builder()
-                .readTimeout(300, TimeUnit.SECONDS)
-                .build();
-        RequestBody body = RequestBody.create(apiInput, MediaType.get("application/json"));
-        Request request = new Request.Builder()
-                .url(API_URL)
-                .addHeader("Content-Type", "application/json")
-                .addHeader("Authorization", "Bearer " + BuildConfig.API_KEY)
-                .post(body)
-                .build();
-
-        tvInfo.setText("Running prediction...");
-        Log.i(TAG, "Starting API call");
-
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                if (response.isSuccessful() && response.body() != null) {
-                    String strFormatted = formatEvents(response.body().string());
-                    runOnUiThread(() -> tvInfo.setText(strFormatted));
-                } else {
-                    Log.e(TAG,"API call failed (onResponse)");
-                }
-            }
-
-            @Override
-            public void onFailure(Call call, IOException e) {
-                Log.e(TAG,"API call failed (onFailure)");
-                Log.e(TAG,e.getMessage());
-            }
+        fileDialog.setDialogSelectionListener(files -> {
+            filePath = files[0];
+            tvFilePath.setText(filePath);
         });
+
+        findViewById(R.id.tvFilePath).setOnClickListener(view -> fileDialog.show());
+    }
+
+    public void runPrediction() {
+
+        ResultsFragment resFragment = (ResultsFragment)pagerAdapter.getFragment(0);
+        String resExample =
+                "0:00-0:10 - Music\n" +
+                        "0:00-0:40 - Crow\n" +
+                        "0:40-0:50 - Bird vocalization, bird call, bird song\n" +
+                        "0:50-1:00 - Crow\n" +
+                        "1:00-1:20 - Bird vocalization, bird call, bird song\n" +
+                        "1:20-1:40 - Crow\n";
+        resFragment.updateResultsText(resExample);
+
+//        String fileBase64;
+//        try {
+//            fileBase64 = readFileAsBase64(filePath);
+//        } catch (IOException e) {
+//            // TODO: print error to info field
+//            e.printStackTrace();
+//            return;
+//        }
+//
+//        String apiInput;
+//        try {
+//            apiInput = new JSONObject()
+//                .put("input", new JSONObject()
+//                    .put("audio", new JSONObject()
+//                        .put("base64", fileBase64)))
+//                .toString();
+//        } catch (JSONException e) {
+//            // TODO: print error to info field
+//            e.printStackTrace();
+//            return;
+//        }
+//
+//        OkHttpClient client = new OkHttpClient.Builder()
+//                .readTimeout(300, TimeUnit.SECONDS)
+//                .build();
+//        RequestBody body = RequestBody.create(apiInput, MediaType.get("application/json"));
+//        Request request = new Request.Builder()
+//                .url(API_URL)
+//                .addHeader("Content-Type", "application/json")
+//                .addHeader("Authorization", "Bearer " + BuildConfig.API_KEY)
+//                .post(body)
+//                .build();
+//
+//        tvInfo.setText("Running prediction...");
+//        Log.i(TAG, "Starting API call");
+//
+//        client.newCall(request).enqueue(new Callback() {
+//            @Override
+//            public void onResponse(Call call, Response response) throws IOException {
+//                if (response.isSuccessful() && response.body() != null) {
+//                    String strFormatted = formatEvents(response.body().string());
+//                    runOnUiThread(() -> tvInfo.setText(strFormatted));
+//                } else {
+//                    Log.e(TAG,"API call failed (onResponse)");
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//                Log.e(TAG,"API call failed (onFailure)");
+//                Log.e(TAG,e.getMessage());
+//            }
+//        });
     }
 
     static protected String formatEvents(String jsonString) {
@@ -168,26 +223,5 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return Base64.encodeToString(bytes, Base64.DEFAULT);
-    }
-
-    protected void setUpFileOpener() {
-        DialogProperties properties = new DialogProperties();
-        properties.selection_mode = DialogConfigs.SINGLE_MODE;
-        properties.selection_type = DialogConfigs.FILE_SELECT;
-        properties.root = new File(DialogConfigs.DEFAULT_DIR);
-        properties.error_dir = new File(DialogConfigs.DEFAULT_DIR);
-        properties.offset = new File(DialogConfigs.DEFAULT_DIR);
-        properties.extensions = new String[]{"mp3"};
-        properties.show_hidden_files = false;
-
-        fileDialog = new FilePickerDialog(MainActivity.this, properties);
-        fileDialog.setTitle("Select an mp3 file");
-
-        fileDialog.setDialogSelectionListener(files -> {
-            filePath = files[0];
-            tvFilePath.setText(filePath);
-        });
-
-        findViewById(R.id.buttonOpen).setOnClickListener(view -> fileDialog.show());
     }
 }
