@@ -7,14 +7,17 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import com.developer.filepicker.model.DialogConfigs;
 import com.developer.filepicker.model.DialogProperties;
 import com.developer.filepicker.view.FilePickerDialog;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -73,6 +76,14 @@ public class MainActivity extends AppCompatActivity {
         tvFilePath = findViewById(R.id.tvFilePath);
         tvInfo = findViewById(R.id.tvStatus);
 
+        setupTabs();
+
+        setupFileOpener();
+
+        findViewById(R.id.buttonPredict).setOnClickListener(view -> runPrediction());
+    }
+
+    protected void setupTabs() {
         ViewPager2 viewPager = findViewById(R.id.pager);
         pagerAdapter = new ViewPagerAdapter(this);
         viewPager.setAdapter(pagerAdapter);
@@ -87,12 +98,7 @@ public class MainActivity extends AppCompatActivity {
                 }
         ).attach();
 
-
-
-
-        setupFileOpener();
-
-        findViewById(R.id.buttonPredict).setOnClickListener(view -> runPrediction());
+        viewPager.setOffscreenPageLimit(2);
     }
 
     protected void setupFileOpener() {
@@ -116,8 +122,33 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.tvFilePath).setOnClickListener(view -> fileDialog.show());
     }
 
-    public void runPrediction() {
+    public void updateInfoText(String text) {
+        InfoFragment infoFragment = (InfoFragment) pagerAdapter.getFragment(1);
+        infoFragment.updateInfoText(text);
+    }
 
+    public void displayError(String shortText, String longText) {
+        Snackbar snackbar = Snackbar.make(
+                findViewById(R.id.constraintLayout),
+                shortText,
+                Snackbar.LENGTH_LONG);
+
+        if (longText != null) {
+            updateInfoText(longText);
+
+            snackbar.setAction("Details", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ViewPager2 viewPager = findViewById(R.id.pager);
+                    viewPager.setCurrentItem(1, true);
+                }
+            });
+        }
+
+        snackbar.show();
+    }
+
+    public void runPrediction() {
         ResultsFragment resFragment = (ResultsFragment)pagerAdapter.getFragment(0);
         String resExample =
                 "0:00-0:10 - Music\n" +
@@ -128,14 +159,17 @@ public class MainActivity extends AppCompatActivity {
                         "1:20-1:40 - Crow\n";
         resFragment.updateResultsText(resExample);
 
-//        String fileBase64;
-//        try {
-//            fileBase64 = readFileAsBase64(filePath);
-//        } catch (IOException e) {
-//            // TODO: print error to info field
-//            e.printStackTrace();
-//            return;
-//        }
+        if (filePath == null) {
+            displayError("Error: no file provided", null);
+            return;
+        }
+        String fileBase64;
+        try {
+            fileBase64 = readFileAsBase64(filePath);
+        } catch (IOException e) {
+            displayError("Error: failed to read file", e.toString());
+            return;
+        }
 //
 //        String apiInput;
 //        try {
