@@ -8,15 +8,14 @@ RUN pip3 install --no-cache-dir \
     transformers \
     runpod
 
-COPY library /workspace/library
-COPY endpoint/preload.py /workspace/.
-COPY endpoint/handler.py /workspace/.
-
 WORKDIR /workspace
 
+COPY endpoint/preload.py /workspace/.
 RUN python3 preload.py
 
-ENV PYTHONPATH "${PYTHONPATH}:/workspace/library"
+COPY library /workspace/library
+COPY endpoint/handler.py /workspace/.
 
+ENV PYTHONPATH "${PYTHONPATH}:/workspace/library"
 
 CMD [ "python", "-u", "handler.py" ]

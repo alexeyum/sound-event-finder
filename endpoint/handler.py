@@ -18,8 +18,8 @@ FORMAT = "mp3"
 
 def _load_model():
     load_start = time.time()
-    extractor = AutoFeatureExtractor.from_pretrained(MODEL_PATH)
-    model = ASTForAudioClassification.from_pretrained(MODEL_PATH).to(DEVICE)
+    extractor = AutoFeatureExtractor.from_pretrained(MODEL_PATH, local_files_only=True)
+    model = ASTForAudioClassification.from_pretrained(MODEL_PATH, local_files_only=True).to(DEVICE)
     load_time = time.time() - load_start
 
     return model, extractor, load_time
