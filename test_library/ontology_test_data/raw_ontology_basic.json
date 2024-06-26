@@ -1,0 +1,38 @@
+[
+    {
+        "id": "/m/0a",
+        "name": "Animal sounds",
+        "description": "Sounds produced by animals.",
+        "citation_uri": "",
+        "positive_examples": [],
+        "child_ids": ["/m/0b", "/m/0c"],
+        "restrictions": ["abstract"]
+    },
+    {
+        "id": "/m/0b",
+        "name": "Bird sounds",
+        "description": "Sounds produced by birds.",
+        "citation_uri": "",
+        "positive_examples": [],
+        "child_ids": [],
+        "restrictions": ["blacklist"]
+    },
+    {
+        "id": "/m/0c",
+        "name": "Mammal sounds",
+        "description": "Sounds produced by mammals.",
+        "citation_uri": "",
+        "positive_examples": [],
+        "child_ids": ["/m/0d"],
+        "restrictions": []
+    },
+    {
+        "id": "/m/0d",
+        "name": "Dog barks",
+        "description": "Barking sounds made by dogs.",
+        "citation_uri": "",
+        "positive_examples": [],
+        "child_ids": [],
+        "restrictions": []
+    }
+]

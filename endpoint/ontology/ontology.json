@@ -1,140 +1,213 @@
 {
     "Human sounds": {
         "children": [
-            "Human voice",
-            "Whistling",
-            "Respiratory sounds",
-            "Human locomotion",
             "Digestive",
             "Hands",
             "Heart sounds, heartbeat",
-            "Human group actions"
+            "Human group actions",
+            "Human locomotion",
+            "Human voice",
+            "Respiratory sounds",
+            "Whistling"
+        ],
+        "parents": [
+            "<root>"
         ],
         "abstract": true
     },
     "Human voice": {
         "children": [
-            "Speech",
-            "Shout",
-            "Screaming",
-            "Whispering",
-            "Laughter",
             "Crying, sobbing",
-            "Wail, moan",
+            "Groan",
+            "Grunt",
+            "Humming",
+            "Laughter",
+            "Screaming",
+            "Shout",
             "Sigh",
             "Singing",
-            "Humming",
-            "Groan",
-            "Grunt"
+            "Speech",
+            "Wail, moan",
+            "Whispering"
+        ],
+        "parents": [
+            "Human sounds"
         ],
         "abstract": true
     },
     "Speech": {
         "children": [
-            "Male speech, man speaking",
-            "Female speech, woman speaking",
+            "Babbling",
             "Child speech, kid speaking",
             "Conversation",
+            "Female speech, woman speaking",
+            "Male speech, man speaking",
             "Narration, monologue",
-            "Babbling",
             "Speech synthesizer"
+        ],
+        "parents": [
+            "Human voice"
         ],
         "abstract": false
     },
     "Male speech, man speaking": {
         "children": [],
+        "parents": [
+            "Speech"
+        ],
         "abstract": false
     },
     "Female speech, woman speaking": {
         "children": [],
+        "parents": [
+            "Speech"
+        ],
         "abstract": false
     },
     "Child speech, kid speaking": {
         "children": [],
+        "parents": [
+            "Speech"
+        ],
         "abstract": false
     },
     "Conversation": {
         "children": [],
+        "parents": [
+            "Speech"
+        ],
         "abstract": false
     },
     "Narration, monologue": {
         "children": [],
+        "parents": [
+            "Speech"
+        ],
         "abstract": false
     },
     "Babbling": {
         "children": [],
+        "parents": [
+            "Speech"
+        ],
         "abstract": false
     },
     "Speech synthesizer": {
         "children": [],
+        "parents": [
+            "Speech"
+        ],
         "abstract": false
     },
     "Shout": {
         "children": [
-            "Bellow",
-            "Whoop",
-            "Yell",
             "Battle cry",
-            "Children shouting"
+            "Bellow",
+            "Children shouting",
+            "Whoop",
+            "Yell"
+        ],
+        "parents": [
+            "Human voice"
         ],
         "abstract": false
     },
     "Bellow": {
         "children": [],
+        "parents": [
+            "Shout"
+        ],
         "abstract": false
     },
     "Whoop": {
         "children": [],
+        "parents": [
+            "Shout"
+        ],
         "abstract": false
     },
     "Yell": {
         "children": [],
+        "parents": [
+            "Shout"
+        ],
         "abstract": false
     },
     "Battle cry": {
         "children": [],
+        "parents": [
+            "Shout"
+        ],
         "abstract": false
     },
     "Children shouting": {
         "children": [],
+        "parents": [
+            "Shout",
+            "Human group actions"
+        ],
         "abstract": false
     },
     "Screaming": {
         "children": [],
+        "parents": [
+            "Human voice"
+        ],
         "abstract": false
     },
     "Whispering": {
         "children": [],
+        "parents": [
+            "Human voice"
+        ],
         "abstract": false
     },
     "Laughter": {
         "children": [
             "Baby laughter",
-            "Giggle",
-            "Snicker",
             "Belly laugh",
-            "Chuckle, chortle"
+            "Chuckle, chortle",
+            "Giggle",
+            "Snicker"
+        ],
+        "parents": [
+            "Human voice"
         ],
         "abstract": false
     },
     "Baby laughter": {
         "children": [],
+        "parents": [
+            "Laughter"
+        ],
         "abstract": false
     },
     "Giggle": {
         "children": [],
+        "parents": [
+            "Laughter"
+        ],
         "abstract": false
     },
     "Snicker": {
         "children": [],
+        "parents": [
+            "Laughter"
+        ],
         "abstract": false
     },
     "Belly laugh": {
         "children": [],
+        "parents": [
+            "Laughter"
+        ],
         "abstract": false
     },
     "Chuckle, chortle": {
         "children": [],
+        "parents": [
+            "Laughter"
+        ],
         "abstract": false
     },
     "Crying, sobbing": {
@@ -142,89 +215,148 @@
             "Baby cry, infant cry",
             "Whimper"
         ],
+        "parents": [
+            "Human voice"
+        ],
         "abstract": false
     },
     "Baby cry, infant cry": {
         "children": [],
+        "parents": [
+            "Crying, sobbing"
+        ],
         "abstract": false
     },
     "Whimper": {
         "children": [],
+        "parents": [
+            "Crying, sobbing"
+        ],
         "abstract": false
     },
     "Wail, moan": {
         "children": [],
+        "parents": [
+            "Human voice"
+        ],
         "abstract": false
     },
     "Sigh": {
         "children": [],
+        "parents": [
+            "Human voice"
+        ],
         "abstract": false
     },
     "Singing": {
         "children": [
-            "Choir",
-            "Yodeling",
             "Chant",
-            "Male singing",
-            "Female singing",
             "Child singing",
+            "Choir",
+            "Female singing",
+            "Male singing",
+            "Rapping",
             "Synthetic singing",
-            "Rapping"
+            "Yodeling"
+        ],
+        "parents": [
+            "Human voice"
         ],
         "abstract": false
     },
     "Choir": {
         "children": [],
+        "parents": [
+            "Singing",
+            "Musical instrument"
+        ],
         "abstract": false
     },
     "Yodeling": {
         "children": [],
+        "parents": [
+            "Singing"
+        ],
         "abstract": false
     },
     "Chant": {
         "children": [
             "Mantra"
         ],
+        "parents": [
+            "Singing",
+            "Vocal music"
+        ],
         "abstract": false
     },
     "Mantra": {
         "children": [],
+        "parents": [
+            "Chant"
+        ],
         "abstract": false
     },
     "Male singing": {
         "children": [],
+        "parents": [
+            "Singing"
+        ],
         "abstract": false
     },
     "Female singing": {
         "children": [],
+        "parents": [
+            "Singing"
+        ],
         "abstract": false
     },
     "Child singing": {
         "children": [],
+        "parents": [
+            "Singing"
+        ],
         "abstract": false
     },
     "Synthetic singing": {
         "children": [],
+        "parents": [
+            "Singing"
+        ],
         "abstract": false
     },
     "Rapping": {
         "children": [],
+        "parents": [
+            "Singing"
+        ],
         "abstract": false
     },
     "Humming": {
         "children": [],
+        "parents": [
+            "Human voice"
+        ],
         "abstract": false
     },
     "Groan": {
         "children": [],
+        "parents": [
+            "Human voice"
+        ],
         "abstract": false
     },
     "Grunt": {
         "children": [],
+        "parents": [
+            "Human voice"
+        ],
         "abstract": false
     },
     "Whistling": {
         "children": [],
+        "parents": [
+            "Human sounds"
+        ],
         "abstract": false
     },
     "Respiratory sounds": {
@@ -234,54 +366,87 @@
             "Sneeze",
             "Sniff"
         ],
+        "parents": [
+            "Human sounds"
+        ],
         "abstract": true
     },
     "Breathing": {
         "children": [
-            "Wheeze",
-            "Snoring",
             "Gasp",
             "Pant",
-            "Snort"
+            "Snoring",
+            "Snort",
+            "Wheeze"
+        ],
+        "parents": [
+            "Respiratory sounds"
         ],
         "abstract": false
     },
     "Wheeze": {
         "children": [],
+        "parents": [
+            "Breathing"
+        ],
         "abstract": false
     },
     "Snoring": {
         "children": [],
+        "parents": [
+            "Breathing"
+        ],
         "abstract": false
     },
     "Gasp": {
         "children": [],
+        "parents": [
+            "Breathing"
+        ],
         "abstract": false
     },
     "Pant": {
         "children": [],
+        "parents": [
+            "Breathing"
+        ],
         "abstract": false
     },
     "Snort": {
         "children": [],
+        "parents": [
+            "Breathing"
+        ],
         "abstract": false
     },
     "Cough": {
         "children": [
             "Throat clearing"
         ],
+        "parents": [
+            "Respiratory sounds"
+        ],
         "abstract": false
     },
     "Throat clearing": {
         "children": [],
+        "parents": [
+            "Cough"
+        ],
         "abstract": false
     },
     "Sneeze": {
         "children": [],
+        "parents": [
+            "Respiratory sounds"
+        ],
         "abstract": false
     },
     "Sniff": {
         "children": [],
+        "parents": [
+            "Respiratory sounds"
+        ],
         "abstract": false
     },
     "Human locomotion": {
@@ -290,109 +455,184 @@
             "Shuffle",
             "Walk, footsteps"
         ],
+        "parents": [
+            "Human sounds"
+        ],
         "abstract": true
     },
     "Run": {
         "children": [],
+        "parents": [
+            "Human locomotion"
+        ],
         "abstract": false
     },
     "Shuffle": {
         "children": [],
+        "parents": [
+            "Human locomotion"
+        ],
         "abstract": false
     },
     "Walk, footsteps": {
         "children": [],
+        "parents": [
+            "Human locomotion"
+        ],
         "abstract": false
     },
     "Digestive": {
         "children": [
-            "Chewing, mastication",
             "Biting",
-            "Gargling",
-            "Stomach rumble",
             "Burping, eructation",
+            "Chewing, mastication",
+            "Fart",
+            "Gargling",
             "Hiccup",
-            "Fart"
+            "Stomach rumble"
+        ],
+        "parents": [
+            "Human sounds"
         ],
         "abstract": true
     },
     "Chewing, mastication": {
         "children": [],
+        "parents": [
+            "Digestive"
+        ],
         "abstract": false
     },
     "Biting": {
         "children": [],
+        "parents": [
+            "Digestive"
+        ],
         "abstract": false
     },
     "Gargling": {
         "children": [],
+        "parents": [
+            "Digestive"
+        ],
         "abstract": false
     },
     "Stomach rumble": {
         "children": [],
+        "parents": [
+            "Digestive"
+        ],
         "abstract": false
     },
     "Burping, eructation": {
         "children": [],
+        "parents": [
+            "Digestive"
+        ],
         "abstract": false
     },
     "Hiccup": {
         "children": [],
+        "parents": [
+            "Digestive"
+        ],
         "abstract": false
     },
     "Fart": {
         "children": [],
+        "parents": [
+            "Digestive"
+        ],
         "abstract": false
     },
     "Hands": {
         "children": [
-            "Finger snapping",
-            "Clapping"
+            "Clapping",
+            "Finger snapping"
+        ],
+        "parents": [
+            "Human sounds"
         ],
         "abstract": false
     },
     "Finger snapping": {
         "children": [],
+        "parents": [
+            "Hands"
+        ],
         "abstract": false
     },
     "Clapping": {
         "children": [],
+        "parents": [
+            "Hands",
+            "Human group actions"
+        ],
         "abstract": false
     },
     "Heart sounds, heartbeat": {
         "children": [],
+        "parents": [
+            "Human sounds"
+        ],
         "abstract": false
     },
     "Human group actions": {
         "children": [
-            "Clapping",
-            "Cheering",
             "Applause",
             "Chatter",
-            "Crowd",
+            "Cheering",
             "Children playing",
-            "Children shouting"
+            "Children shouting",
+            "Clapping",
+            "Crowd",
+            "Hubbub, speech noise, speech babble"
+        ],
+        "parents": [
+            "Human sounds"
         ],
         "abstract": true
     },
     "Cheering": {
         "children": [],
+        "parents": [
+            "Human group actions"
+        ],
         "abstract": false
     },
     "Applause": {
         "children": [],
+        "parents": [
+            "Human group actions"
+        ],
         "abstract": false
     },
     "Chatter": {
         "children": [],
+        "parents": [
+            "Human group actions"
+        ],
         "abstract": false
     },
     "Crowd": {
         "children": [],
+        "parents": [
+            "Human group actions"
+        ],
+        "abstract": false
+    },
+    "Hubbub, speech noise, speech babble": {
+        "children": [],
+        "parents": [
+            "Human group actions"
+        ],
         "abstract": false
     },
     "Children playing": {
         "children": [],
+        "parents": [
+            "Human group actions"
+        ],
         "abstract": false
     },
     "Animal": {
@@ -401,84 +641,136 @@
             "Livestock, farm animals, working animals",
             "Wild animals"
         ],
+        "parents": [
+            "<root>"
+        ],
         "abstract": false
     },
     "Domestic animals, pets": {
         "children": [
-            "Dog",
-            "Cat"
+            "Cat",
+            "Dog"
+        ],
+        "parents": [
+            "Animal"
         ],
         "abstract": false
     },
     "Dog": {
         "children": [
             "Bark",
-            "Yip",
-            "Howl",
             "Bow-wow",
             "Growling",
-            "Whimper (dog)"
+            "Howl",
+            "Whimper (dog)",
+            "Yip"
+        ],
+        "parents": [
+            "Domestic animals, pets"
         ],
         "abstract": false
     },
     "Bark": {
         "children": [],
+        "parents": [
+            "Dog"
+        ],
         "abstract": false
     },
     "Yip": {
         "children": [],
+        "parents": [
+            "Dog"
+        ],
         "abstract": false
     },
     "Howl": {
         "children": [],
+        "parents": [
+            "Dog",
+            "Canidae, dogs, wolves"
+        ],
         "abstract": false
     },
     "Bow-wow": {
         "children": [],
+        "parents": [
+            "Dog"
+        ],
         "abstract": false
     },
     "Growling": {
         "children": [],
+        "parents": [
+            "Dog",
+            "Cat",
+            "Roaring cats (lions, tigers)",
+            "Canidae, dogs, wolves"
+        ],
         "abstract": false
     },
     "Whimper (dog)": {
         "children": [],
+        "parents": [
+            "Dog"
+        ],
         "abstract": false
     },
     "Cat": {
         "children": [
-            "Purr",
-            "Meow",
-            "Hiss",
             "Caterwaul",
-            "Growling"
+            "Growling",
+            "Hiss",
+            "Meow",
+            "Purr"
+        ],
+        "parents": [
+            "Domestic animals, pets"
         ],
         "abstract": false
     },
     "Purr": {
         "children": [],
+        "parents": [
+            "Cat"
+        ],
         "abstract": false
     },
     "Meow": {
         "children": [],
+        "parents": [
+            "Cat"
+        ],
         "abstract": false
     },
     "Hiss": {
         "children": [],
+        "parents": [
+            "Cat",
+            "Snake",
+            "Steam",
+            "Onomatopoeia"
+        ],
         "abstract": false
     },
     "Caterwaul": {
         "children": [],
+        "parents": [
+            "Cat"
+        ],
         "abstract": false
     },
     "Livestock, farm animals, working animals": {
         "children": [
-            "Horse",
             "Cattle, bovinae",
-            "Pig",
+            "Fowl",
             "Goat",
-            "Sheep",
-            "Fowl"
+            "Horse",
+            "Pig",
+            "Sheep"
+        ],
+        "parents": [
+            "Animal"
         ],
         "abstract": false
     },
@@ -487,63 +779,103 @@
             "Clip-clop",
             "Neigh, whinny"
         ],
+        "parents": [
+            "Livestock, farm animals, working animals"
+        ],
         "abstract": false
     },
     "Clip-clop": {
         "children": [],
+        "parents": [
+            "Horse",
+            "Clicking"
+        ],
         "abstract": false
     },
     "Neigh, whinny": {
         "children": [],
+        "parents": [
+            "Horse"
+        ],
         "abstract": false
     },
     "Cattle, bovinae": {
         "children": [
-            "Moo",
-            "Cowbell"
+            "Cowbell",
+            "Moo"
+        ],
+        "parents": [
+            "Livestock, farm animals, working animals"
         ],
         "abstract": false
     },
     "Moo": {
         "children": [],
+        "parents": [
+            "Cattle, bovinae"
+        ],
         "abstract": false
     },
     "Cowbell": {
         "children": [],
+        "parents": [
+            "Cattle, bovinae",
+            "Percussion",
+            "Bell"
+        ],
         "abstract": false
     },
     "Pig": {
         "children": [
             "Oink"
         ],
+        "parents": [
+            "Livestock, farm animals, working animals"
+        ],
         "abstract": false
     },
     "Oink": {
         "children": [],
+        "parents": [
+            "Pig"
+        ],
         "abstract": false
     },
     "Goat": {
         "children": [
             "Bleat"
         ],
+        "parents": [
+            "Livestock, farm animals, working animals"
+        ],
         "abstract": false
     },
     "Bleat": {
         "children": [],
+        "parents": [
+            "Goat",
+            "Sheep"
+        ],
         "abstract": false
     },
     "Sheep": {
         "children": [
             "Bleat"
         ],
+        "parents": [
+            "Livestock, farm animals, working animals"
+        ],
         "abstract": false
     },
     "Fowl": {
         "children": [
             "Chicken, rooster",
-            "Turkey",
             "Duck",
-            "Goose"
+            "Goose",
+            "Turkey"
+        ],
+        "parents": [
+            "Livestock, farm animals, working animals"
         ],
         "abstract": false
     },
@@ -552,77 +884,116 @@
             "Cluck",
             "Crowing, cock-a-doodle-doo"
         ],
+        "parents": [
+            "Fowl"
+        ],
         "abstract": false
     },
     "Cluck": {
         "children": [],
+        "parents": [
+            "Chicken, rooster"
+        ],
         "abstract": false
     },
     "Crowing, cock-a-doodle-doo": {
         "children": [],
+        "parents": [
+            "Chicken, rooster"
+        ],
         "abstract": false
     },
     "Turkey": {
         "children": [
             "Gobble"
         ],
+        "parents": [
+            "Fowl"
+        ],
         "abstract": false
     },
     "Gobble": {
         "children": [],
+        "parents": [
+            "Turkey"
+        ],
         "abstract": false
     },
     "Duck": {
         "children": [
             "Quack"
         ],
+        "parents": [
+            "Fowl"
+        ],
         "abstract": false
     },
     "Quack": {
         "children": [],
+        "parents": [
+            "Duck"
+        ],
         "abstract": false
     },
     "Goose": {
         "children": [
             "Honk"
         ],
+        "parents": [
+            "Fowl"
+        ],
         "abstract": false
     },
     "Honk": {
         "children": [],
+        "parents": [
+            "Goose"
+        ],
         "abstract": false
     },
     "Wild animals": {
         "children": [
-            "Roaring cats (lions, tigers)",
             "Bird",
             "Canidae, dogs, wolves",
-            "Rodents, rats, mice",
-            "Insect",
             "Frog",
+            "Insect",
+            "Roaring cats (lions, tigers)",
+            "Rodents, rats, mice",
             "Snake",
             "Whale vocalization"
+        ],
+        "parents": [
+            "Animal"
         ],
         "abstract": false
     },
     "Roaring cats (lions, tigers)": {
         "children": [
-            "Roar",
-            "Growling"
+            "Growling",
+            "Roar"
+        ],
+        "parents": [
+            "Wild animals"
         ],
         "abstract": false
     },
     "Roar": {
         "children": [],
+        "parents": [
+            "Roaring cats (lions, tigers)"
+        ],
         "abstract": false
     },
     "Bird": {
         "children": [
+            "Bird flight, flapping wings",
             "Bird vocalization, bird call, bird song",
-            "Pigeon, dove",
             "Crow",
             "Owl",
-            "Bird flight, flapping wings"
+            "Pigeon, dove"
+        ],
+        "parents": [
+            "Wild animals"
         ],
         "abstract": false
     },
@@ -631,54 +1002,88 @@
             "Chirp, tweet",
             "Squawk"
         ],
+        "parents": [
+            "Bird"
+        ],
         "abstract": false
     },
     "Chirp, tweet": {
         "children": [],
+        "parents": [
+            "Bird vocalization, bird call, bird song",
+            "Brief tone"
+        ],
         "abstract": false
     },
     "Squawk": {
         "children": [],
+        "parents": [
+            "Bird vocalization, bird call, bird song"
+        ],
         "abstract": false
     },
     "Pigeon, dove": {
         "children": [
             "Coo"
         ],
+        "parents": [
+            "Bird"
+        ],
         "abstract": false
     },
     "Coo": {
         "children": [],
+        "parents": [
+            "Pigeon, dove"
+        ],
         "abstract": false
     },
     "Crow": {
         "children": [
             "Caw"
         ],
+        "parents": [
+            "Bird"
+        ],
         "abstract": false
     },
     "Caw": {
         "children": [],
+        "parents": [
+            "Crow"
+        ],
         "abstract": false
     },
     "Owl": {
         "children": [
             "Hoot"
         ],
+        "parents": [
+            "Bird"
+        ],
         "abstract": false
     },
     "Hoot": {
         "children": [],
+        "parents": [
+            "Owl"
+        ],
         "abstract": false
     },
     "Bird flight, flapping wings": {
         "children": [],
+        "parents": [
+            "Bird"
+        ],
         "abstract": false
     },
     "Canidae, dogs, wolves": {
         "children": [
-            "Howl",
-            "Growling"
+            "Growling",
+            "Howl"
+        ],
+        "parents": [
+            "Wild animals"
         ],
         "abstract": false
     },
@@ -686,42 +1091,68 @@
         "children": [
             "Mouse"
         ],
+        "parents": [
+            "Wild animals"
+        ],
         "abstract": false
     },
     "Mouse": {
         "children": [],
+        "parents": [
+            "Rodents, rats, mice"
+        ],
         "abstract": false
     },
     "Insect": {
         "children": [
+            "Bee, wasp, etc.",
             "Cricket",
-            "Mosquito",
             "Fly, housefly",
-            "Bee, wasp, etc."
+            "Mosquito"
+        ],
+        "parents": [
+            "Wild animals"
         ],
         "abstract": false
     },
     "Cricket": {
         "children": [],
+        "parents": [
+            "Insect"
+        ],
         "abstract": false
     },
     "Mosquito": {
         "children": [],
+        "parents": [
+            "Insect"
+        ],
         "abstract": false
     },
     "Fly, housefly": {
         "children": [
             "Buzz"
         ],
+        "parents": [
+            "Insect"
+        ],
         "abstract": false
     },
     "Buzz": {
         "children": [],
+        "parents": [
+            "Fly, housefly",
+            "Bee, wasp, etc.",
+            "Brief tone"
+        ],
         "abstract": false
     },
     "Bee, wasp, etc.": {
         "children": [
             "Buzz"
+        ],
+        "parents": [
+            "Insect"
         ],
         "abstract": false
     },
@@ -729,10 +1160,16 @@
         "children": [
             "Croak"
         ],
+        "parents": [
+            "Wild animals"
+        ],
         "abstract": false
     },
     "Croak": {
         "children": [],
+        "parents": [
+            "Frog"
+        ],
         "abstract": false
     },
     "Snake": {
@@ -740,121 +1177,178 @@
             "Hiss",
             "Rattle"
         ],
+        "parents": [
+            "Wild animals"
+        ],
         "abstract": false
     },
     "Rattle": {
         "children": [],
+        "parents": [
+            "Snake",
+            "Onomatopoeia"
+        ],
         "abstract": false
     },
     "Whale vocalization": {
         "children": [],
+        "parents": [
+            "Wild animals"
+        ],
         "abstract": false
     },
     "Music": {
         "children": [
-            "Musical instrument",
             "Music genre",
-            "Musical concepts",
+            "Music mood",
             "Music role",
-            "Music mood"
+            "Musical instrument"
+        ],
+        "parents": [
+            "<root>"
         ],
         "abstract": false
     },
     "Musical instrument": {
         "children": [
-            "Plucked string instrument",
-            "Keyboard (musical)",
-            "Percussion",
-            "Orchestra",
-            "Brass instrument",
-            "Bowed string instrument",
-            "Wind instrument, woodwind instrument",
-            "Harp",
-            "Choir",
-            "Bell",
-            "Harmonica",
             "Accordion",
             "Bagpipes",
+            "Bell",
+            "Bowed string instrument",
+            "Brass instrument",
+            "Choir",
             "Didgeridoo",
+            "Harmonica",
+            "Harp",
+            "Keyboard (musical)",
+            "Orchestra",
+            "Percussion",
+            "Plucked string instrument",
+            "Scratching (performance technique)",
             "Shofar",
-            "Theremin",
             "Singing bowl",
-            "Scratching (performance technique)"
+            "Theremin",
+            "Wind instrument, woodwind instrument"
+        ],
+        "parents": [
+            "Music"
         ],
         "abstract": false
     },
     "Plucked string instrument": {
         "children": [
-            "Guitar",
             "Banjo",
-            "Sitar",
+            "Guitar",
             "Mandolin",
-            "Zither",
-            "Ukulele"
+            "Sitar",
+            "Ukulele",
+            "Zither"
+        ],
+        "parents": [
+            "Musical instrument"
         ],
         "abstract": false
     },
     "Guitar": {
         "children": [
-            "Electric guitar",
-            "Bass guitar",
             "Acoustic guitar",
+            "Bass guitar",
+            "Electric guitar",
             "Steel guitar, slide guitar",
-            "Tapping (guitar technique)",
-            "Strum"
+            "Strum",
+            "Tapping (guitar technique)"
+        ],
+        "parents": [
+            "Plucked string instrument"
         ],
         "abstract": false
     },
     "Electric guitar": {
         "children": [],
+        "parents": [
+            "Guitar"
+        ],
         "abstract": false
     },
     "Bass guitar": {
         "children": [],
+        "parents": [
+            "Guitar"
+        ],
         "abstract": false
     },
     "Acoustic guitar": {
         "children": [],
+        "parents": [
+            "Guitar"
+        ],
         "abstract": false
     },
     "Steel guitar, slide guitar": {
         "children": [],
+        "parents": [
+            "Guitar"
+        ],
         "abstract": false
     },
     "Tapping (guitar technique)": {
         "children": [],
+        "parents": [
+            "Guitar"
+        ],
         "abstract": false
     },
     "Strum": {
         "children": [],
+        "parents": [
+            "Guitar"
+        ],
         "abstract": false
     },
     "Banjo": {
         "children": [],
+        "parents": [
+            "Plucked string instrument"
+        ],
         "abstract": false
     },
     "Sitar": {
         "children": [],
+        "parents": [
+            "Plucked string instrument"
+        ],
         "abstract": false
     },
     "Mandolin": {
         "children": [],
+        "parents": [
+            "Plucked string instrument"
+        ],
         "abstract": false
     },
     "Zither": {
         "children": [],
+        "parents": [
+            "Plucked string instrument"
+        ],
         "abstract": false
     },
     "Ukulele": {
         "children": [],
+        "parents": [
+            "Plucked string instrument"
+        ],
         "abstract": false
     },
     "Keyboard (musical)": {
         "children": [
-            "Piano",
+            "Harpsichord",
             "Organ",
-            "Synthesizer",
-            "Harpsichord"
+            "Piano",
+            "Synthesizer"
+        ],
+        "parents": [
+            "Musical instrument"
         ],
         "abstract": false
     },
@@ -862,10 +1356,16 @@
         "children": [
             "Electric piano"
         ],
+        "parents": [
+            "Keyboard (musical)"
+        ],
         "abstract": false
     },
     "Electric piano": {
         "children": [],
+        "parents": [
+            "Piano"
+        ],
         "abstract": false
     },
     "Organ": {
@@ -873,42 +1373,63 @@
             "Electronic organ",
             "Hammond organ"
         ],
+        "parents": [
+            "Keyboard (musical)"
+        ],
         "abstract": false
     },
     "Electronic organ": {
         "children": [],
+        "parents": [
+            "Organ"
+        ],
         "abstract": false
     },
     "Hammond organ": {
         "children": [],
+        "parents": [
+            "Organ"
+        ],
         "abstract": false
     },
     "Synthesizer": {
         "children": [
             "Sampler"
         ],
+        "parents": [
+            "Keyboard (musical)"
+        ],
         "abstract": false
     },
     "Sampler": {
         "children": [],
+        "parents": [
+            "Synthesizer"
+        ],
         "abstract": false
     },
     "Harpsichord": {
         "children": [],
+        "parents": [
+            "Keyboard (musical)"
+        ],
         "abstract": false
     },
     "Percussion": {
         "children": [
-            "Drum kit",
-            "Drum",
-            "Cymbal",
             "Cowbell",
-            "Wood block",
-            "Tambourine",
-            "Rattle (instrument)",
+            "Cymbal",
+            "Drum",
+            "Drum kit",
             "Gong",
+            "Mallet percussion",
+            "Rattle (instrument)",
+            "Tambourine",
             "Tubular bells",
-            "Mallet percussion"
+            "Wood block"
+        ],
+        "parents": [
+            "Musical instrument"
         ],
         "abstract": false
     },
@@ -916,500 +1437,801 @@
         "children": [
             "Drum machine"
         ],
+        "parents": [
+            "Percussion"
+        ],
         "abstract": false
     },
     "Drum machine": {
         "children": [],
+        "parents": [
+            "Drum kit"
+        ],
         "abstract": false
     },
     "Drum": {
         "children": [
-            "Snare drum",
             "Bass drum",
-            "Timpani",
-            "Tabla"
+            "Snare drum",
+            "Tabla",
+            "Timpani"
+        ],
+        "parents": [
+            "Percussion"
         ],
         "abstract": false
     },
     "Snare drum": {
         "children": [
-            "Rimshot",
-            "Drum roll"
+            "Drum roll",
+            "Rimshot"
+        ],
+        "parents": [
+            "Drum"
         ],
         "abstract": false
     },
     "Rimshot": {
         "children": [],
+        "parents": [
+            "Snare drum"
+        ],
         "abstract": false
     },
     "Drum roll": {
         "children": [],
+        "parents": [
+            "Snare drum"
+        ],
         "abstract": false
     },
     "Bass drum": {
         "children": [],
+        "parents": [
+            "Drum"
+        ],
         "abstract": false
     },
     "Timpani": {
         "children": [],
+        "parents": [
+            "Drum"
+        ],
         "abstract": false
     },
     "Tabla": {
         "children": [],
+        "parents": [
+            "Drum"
+        ],
         "abstract": false
     },
     "Cymbal": {
         "children": [
             "Hi-hat"
         ],
+        "parents": [
+            "Percussion"
+        ],
         "abstract": false
     },
     "Hi-hat": {
         "children": [],
+        "parents": [
+            "Cymbal"
+        ],
         "abstract": false
     },
     "Wood block": {
         "children": [],
+        "parents": [
+            "Percussion"
+        ],
         "abstract": false
     },
     "Tambourine": {
         "children": [],
+        "parents": [
+            "Percussion"
+        ],
         "abstract": false
     },
     "Rattle (instrument)": {
         "children": [
             "Maraca"
         ],
+        "parents": [
+            "Percussion"
+        ],
         "abstract": false
     },
     "Maraca": {
         "children": [],
+        "parents": [
+            "Rattle (instrument)"
+        ],
         "abstract": false
     },
     "Gong": {
         "children": [],
+        "parents": [
+            "Percussion"
+        ],
         "abstract": false
     },
     "Tubular bells": {
         "children": [],
+        "parents": [
+            "Percussion"
+        ],
         "abstract": false
     },
     "Mallet percussion": {
         "children": [
-            "Marimba, xylophone",
             "Glockenspiel",
-            "Vibraphone",
-            "Steelpan"
+            "Marimba, xylophone",
+            "Steelpan",
+            "Vibraphone"
+        ],
+        "parents": [
+            "Percussion"
         ],
         "abstract": false
     },
     "Marimba, xylophone": {
         "children": [],
+        "parents": [
+            "Mallet percussion"
+        ],
         "abstract": false
     },
     "Glockenspiel": {
         "children": [],
+        "parents": [
+            "Mallet percussion"
+        ],
         "abstract": false
     },
     "Vibraphone": {
         "children": [],
+        "parents": [
+            "Mallet percussion"
+        ],
         "abstract": false
     },
     "Steelpan": {
         "children": [],
+        "parents": [
+            "Mallet percussion"
+        ],
         "abstract": false
     },
     "Orchestra": {
         "children": [],
+        "parents": [
+            "Musical instrument"
+        ],
         "abstract": false
     },
     "Brass instrument": {
         "children": [
             "French horn",
-            "Trumpet",
-            "Trombone"
+            "Trombone",
+            "Trumpet"
+        ],
+        "parents": [
+            "Musical instrument"
         ],
         "abstract": false
     },
     "French horn": {
         "children": [],
+        "parents": [
+            "Brass instrument"
+        ],
         "abstract": false
     },
     "Trumpet": {
         "children": [],
+        "parents": [
+            "Brass instrument"
+        ],
         "abstract": false
     },
     "Trombone": {
         "children": [],
+        "parents": [
+            "Brass instrument"
+        ],
         "abstract": false
     },
     "Bowed string instrument": {
         "children": [
-            "String section",
-            "Violin, fiddle",
             "Cello",
-            "Double bass"
+            "Double bass",
+            "String section",
+            "Violin, fiddle"
+        ],
+        "parents": [
+            "Musical instrument"
         ],
         "abstract": false
     },
     "String section": {
         "children": [],
+        "parents": [
+            "Bowed string instrument"
+        ],
         "abstract": false
     },
     "Violin, fiddle": {
         "children": [
             "Pizzicato"
         ],
+        "parents": [
+            "Bowed string instrument"
+        ],
         "abstract": false
     },
     "Pizzicato": {
         "children": [],
+        "parents": [
+            "Violin, fiddle"
+        ],
         "abstract": false
     },
     "Cello": {
         "children": [],
+        "parents": [
+            "Bowed string instrument"
+        ],
         "abstract": false
     },
     "Double bass": {
         "children": [],
+        "parents": [
+            "Bowed string instrument"
+        ],
         "abstract": false
     },
     "Wind instrument, woodwind instrument": {
         "children": [
+            "Clarinet",
             "Flute",
-            "Saxophone",
-            "Clarinet"
+            "Saxophone"
+        ],
+        "parents": [
+            "Musical instrument"
         ],
         "abstract": false
     },
     "Flute": {
         "children": [],
+        "parents": [
+            "Wind instrument, woodwind instrument"
+        ],
         "abstract": false
     },
     "Saxophone": {
         "children": [],
+        "parents": [
+            "Wind instrument, woodwind instrument"
+        ],
         "abstract": false
     },
     "Clarinet": {
         "children": [],
+        "parents": [
+            "Wind instrument, woodwind instrument"
+        ],
         "abstract": false
     },
     "Harp": {
         "children": [],
+        "parents": [
+            "Musical instrument"
+        ],
         "abstract": false
     },
     "Bell": {
         "children": [
+            "Bicycle bell",
+            "Change ringing (campanology)",
+            "Chime",
             "Church bell",
             "Cowbell",
             "Jingle bell",
-            "Bicycle bell",
-            "Tuning fork",
-            "Chime",
-            "Change ringing (campanology)"
+            "Tuning fork"
+        ],
+        "parents": [
+            "Musical instrument",
+            "Sounds of things"
         ],
         "abstract": false
     },
     "Church bell": {
         "children": [],
+        "parents": [
+            "Bell"
+        ],
         "abstract": false
     },
     "Jingle bell": {
         "children": [],
+        "parents": [
+            "Bell"
+        ],
         "abstract": false
     },
     "Bicycle bell": {
         "children": [],
+        "parents": [
+            "Bell",
+            "Bicycle",
+            "Alarm"
+        ],
         "abstract": false
     },
     "Tuning fork": {
         "children": [],
+        "parents": [
+            "Bell"
+        ],
         "abstract": false
     },
     "Chime": {
         "children": [
             "Wind chime"
         ],
+        "parents": [
+            "Bell"
+        ],
         "abstract": false
     },
     "Wind chime": {
         "children": [],
+        "parents": [
+            "Chime"
+        ],
         "abstract": false
     },
     "Change ringing (campanology)": {
         "children": [],
+        "parents": [
+            "Bell"
+        ],
         "abstract": false
     },
     "Harmonica": {
         "children": [],
+        "parents": [
+            "Musical instrument"
+        ],
         "abstract": false
     },
     "Accordion": {
         "children": [],
+        "parents": [
+            "Musical instrument"
+        ],
         "abstract": false
     },
     "Bagpipes": {
         "children": [],
+        "parents": [
+            "Musical instrument"
+        ],
         "abstract": false
     },
     "Didgeridoo": {
         "children": [],
+        "parents": [
+            "Musical instrument"
+        ],
         "abstract": false
     },
     "Shofar": {
         "children": [],
+        "parents": [
+            "Musical instrument"
+        ],
         "abstract": false
     },
     "Theremin": {
         "children": [],
+        "parents": [
+            "Musical instrument"
+        ],
         "abstract": false
     },
     "Singing bowl": {
         "children": [],
+        "parents": [
+            "Musical instrument"
+        ],
         "abstract": false
     },
     "Scratching (performance technique)": {
         "children": [],
+        "parents": [
+            "Musical instrument"
+        ],
         "abstract": false
     },
     "Music genre": {
         "children": [
-            "Pop music",
-            "Hip hop music",
-            "Rock music",
-            "Rhythm and blues",
-            "Soul music",
-            "Reggae",
-            "Country",
-            "Funk",
-            "Folk music",
-            "Middle Eastern music",
-            "Jazz",
-            "Disco",
-            "Classical music",
-            "Electronic music",
-            "Music of Latin America",
             "Blues",
-            "Music for children",
-            "New-age music",
-            "Vocal music",
-            "Music of Africa",
             "Christian music",
+            "Classical music",
+            "Country",
+            "Disco",
+            "Electronic music",
+            "Folk music",
+            "Funk",
+            "Hip hop music",
+            "Independent music",
+            "Jazz",
+            "Middle Eastern music",
+            "Music for children",
+            "Music of Africa",
             "Music of Asia",
+            "Music of Latin America",
+            "New-age music",
+            "Pop music",
+            "Reggae",
+            "Rhythm and blues",
+            "Rock music",
             "Ska",
+            "Soul music",
             "Traditional music",
-            "Independent music"
+            "Vocal music"
+        ],
+        "parents": [
+            "Music"
         ],
         "abstract": true
     },
     "Pop music": {
         "children": [],
+        "parents": [
+            "Music genre"
+        ],
         "abstract": false
     },
     "Hip hop music": {
         "children": [
             "Beatboxing"
         ],
+        "parents": [
+            "Music genre"
+        ],
         "abstract": false
     },
     "Beatboxing": {
         "children": [],
+        "parents": [
+            "Hip hop music",
+            "Vocal music"
+        ],
         "abstract": false
     },
     "Rock music": {
         "children": [
-            "Heavy metal",
-            "Punk rock",
             "Grunge",
+            "Heavy metal",
             "Progressive rock",
-            "Rock and roll",
-            "Psychedelic rock"
+            "Psychedelic rock",
+            "Punk rock",
+            "Rock and roll"
+        ],
+        "parents": [
+            "Music genre"
         ],
         "abstract": false
     },
     "Heavy metal": {
         "children": [],
+        "parents": [
+            "Rock music"
+        ],
         "abstract": false
     },
     "Punk rock": {
         "children": [],
+        "parents": [
+            "Rock music"
+        ],
         "abstract": false
     },
     "Grunge": {
         "children": [],
+        "parents": [
+            "Rock music"
+        ],
         "abstract": false
     },
     "Progressive rock": {
         "children": [],
+        "parents": [
+            "Rock music"
+        ],
         "abstract": false
     },
     "Rock and roll": {
         "children": [],
+        "parents": [
+            "Rock music"
+        ],
         "abstract": false
     },
     "Psychedelic rock": {
         "children": [],
+        "parents": [
+            "Rock music"
+        ],
         "abstract": false
     },
     "Rhythm and blues": {
         "children": [],
+        "parents": [
+            "Music genre"
+        ],
         "abstract": false
     },
     "Soul music": {
         "children": [],
+        "parents": [
+            "Music genre"
+        ],
         "abstract": false
     },
     "Reggae": {
         "children": [],
+        "parents": [
+            "Music genre"
+        ],
         "abstract": false
     },
     "Country": {
         "children": [
-            "Swing music",
-            "Bluegrass"
+            "Bluegrass",
+            "Swing music"
+        ],
+        "parents": [
+            "Music genre"
         ],
         "abstract": false
     },
     "Swing music": {
         "children": [],
+        "parents": [
+            "Country"
+        ],
         "abstract": false
     },
     "Bluegrass": {
         "children": [],
+        "parents": [
+            "Country"
+        ],
         "abstract": false
     },
     "Funk": {
         "children": [],
+        "parents": [
+            "Music genre"
+        ],
         "abstract": false
     },
     "Folk music": {
         "children": [],
+        "parents": [
+            "Music genre"
+        ],
         "abstract": false
     },
     "Middle Eastern music": {
         "children": [],
+        "parents": [
+            "Music genre"
+        ],
         "abstract": false
     },
     "Jazz": {
         "children": [],
+        "parents": [
+            "Music genre"
+        ],
         "abstract": false
     },
     "Disco": {
         "children": [],
+        "parents": [
+            "Music genre"
+        ],
         "abstract": false
     },
     "Classical music": {
         "children": [
             "Opera"
         ],
+        "parents": [
+            "Music genre"
+        ],
         "abstract": false
     },
     "Opera": {
         "children": [],
+        "parents": [
+            "Classical music"
+        ],
         "abstract": false
     },
     "Electronic music": {
         "children": [
+            "Ambient music",
+            "Drum and bass",
+            "Dubstep",
+            "Electronic dance music",
+            "Electronica",
             "House music",
             "Techno",
-            "Dubstep",
-            "Drum and bass",
-            "Electronica",
-            "Electronic dance music",
-            "Ambient music",
             "Trance music"
+        ],
+        "parents": [
+            "Music genre"
         ],
         "abstract": false
     },
     "House music": {
         "children": [],
+        "parents": [
+            "Electronic music"
+        ],
         "abstract": false
     },
     "Techno": {
         "children": [],
+        "parents": [
+            "Electronic music"
+        ],
         "abstract": false
     },
     "Dubstep": {
         "children": [],
+        "parents": [
+            "Electronic music"
+        ],
         "abstract": false
     },
     "Drum and bass": {
         "children": [],
+        "parents": [
+            "Electronic music"
+        ],
         "abstract": false
     },
     "Electronica": {
         "children": [],
+        "parents": [
+            "Electronic music"
+        ],
         "abstract": false
     },
     "Electronic dance music": {
         "children": [],
+        "parents": [
+            "Electronic music"
+        ],
         "abstract": false
     },
     "Ambient music": {
         "children": [],
+        "parents": [
+            "Electronic music"
+        ],
         "abstract": false
     },
     "Trance music": {
         "children": [],
+        "parents": [
+            "Electronic music"
+        ],
         "abstract": false
     },
     "Music of Latin America": {
         "children": [
-            "Salsa music",
-            "Flamenco"
+            "Flamenco",
+            "Salsa music"
+        ],
+        "parents": [
+            "Music genre"
         ],
         "abstract": false
     },
     "Salsa music": {
         "children": [],
+        "parents": [
+            "Music of Latin America"
+        ],
         "abstract": false
     },
     "Flamenco": {
         "children": [],
+        "parents": [
+            "Music of Latin America"
+        ],
         "abstract": false
     },
     "Blues": {
         "children": [],
+        "parents": [
+            "Music genre"
+        ],
         "abstract": false
     },
     "Music for children": {
         "children": [],
+        "parents": [
+            "Music genre"
+        ],
         "abstract": false
     },
     "New-age music": {
         "children": [],
+        "parents": [
+            "Music genre"
+        ],
         "abstract": false
     },
     "Vocal music": {
         "children": [
             "A capella",
-            "Chant",
-            "Beatboxing"
+            "Beatboxing",
+            "Chant"
+        ],
+        "parents": [
+            "Music genre"
         ],
         "abstract": false
     },
     "A capella": {
         "children": [],
+        "parents": [
+            "Vocal music"
+        ],
         "abstract": false
     },
     "Music of Africa": {
         "children": [
             "Afrobeat"
         ],
+        "parents": [
+            "Music genre"
+        ],
         "abstract": false
     },
     "Afrobeat": {
         "children": [],
+        "parents": [
+            "Music of Africa"
+        ],
         "abstract": false
     },
     "Christian music": {
         "children": [
             "Gospel music"
         ],
+        "parents": [
+            "Music genre"
+        ],
         "abstract": false
     },
     "Gospel music": {
         "children": [],
+        "parents": [
+            "Christian music"
+        ],
         "abstract": false
     },
     "Music of Asia": {
@@ -1417,128 +2239,199 @@
             "Carnatic music",
             "Music of Bollywood"
         ],
+        "parents": [
+            "Music genre"
+        ],
         "abstract": false
     },
     "Carnatic music": {
         "children": [],
+        "parents": [
+            "Music of Asia"
+        ],
         "abstract": false
     },
     "Music of Bollywood": {
         "children": [],
+        "parents": [
+            "Music of Asia"
+        ],
         "abstract": false
     },
     "Ska": {
         "children": [],
+        "parents": [
+            "Music genre"
+        ],
         "abstract": false
     },
     "Traditional music": {
         "children": [],
+        "parents": [
+            "Music genre"
+        ],
         "abstract": false
     },
     "Independent music": {
         "children": [],
+        "parents": [
+            "Music genre"
+        ],
         "abstract": false
-    },
-    "Musical concepts": {
-        "children": [],
-        "abstract": true
     },
     "Music role": {
         "children": [
             "Background music",
-            "Theme music",
-            "Jingle (music)",
-            "Soundtrack music",
-            "Lullaby",
-            "Video game music",
             "Christmas music",
             "Dance music",
+            "Jingle (music)",
+            "Lullaby",
+            "Soundtrack music",
+            "Theme music",
+            "Video game music",
             "Wedding music"
+        ],
+        "parents": [
+            "Music"
         ],
         "abstract": true
     },
     "Background music": {
         "children": [],
+        "parents": [
+            "Music role"
+        ],
         "abstract": false
     },
     "Theme music": {
         "children": [],
+        "parents": [
+            "Music role"
+        ],
         "abstract": false
     },
     "Jingle (music)": {
         "children": [],
+        "parents": [
+            "Music role"
+        ],
         "abstract": false
     },
     "Soundtrack music": {
         "children": [],
+        "parents": [
+            "Music role"
+        ],
         "abstract": false
     },
     "Lullaby": {
         "children": [],
+        "parents": [
+            "Music role"
+        ],
         "abstract": false
     },
     "Video game music": {
         "children": [],
+        "parents": [
+            "Music role"
+        ],
         "abstract": false
     },
     "Christmas music": {
         "children": [],
+        "parents": [
+            "Music role"
+        ],
         "abstract": false
     },
     "Dance music": {
         "children": [],
+        "parents": [
+            "Music role"
+        ],
         "abstract": false
     },
     "Wedding music": {
         "children": [],
+        "parents": [
+            "Music role"
+        ],
         "abstract": false
     },
     "Music mood": {
         "children": [
-            "Happy music",
-            "Funny music",
-            "Sad music",
-            "Tender music",
-            "Exciting music",
             "Angry music",
-            "Scary music"
+            "Exciting music",
+            "Funny music",
+            "Happy music",
+            "Sad music",
+            "Scary music",
+            "Tender music"
+        ],
+        "parents": [
+            "Music"
         ],
         "abstract": true
     },
     "Happy music": {
         "children": [],
+        "parents": [
+            "Music mood"
+        ],
         "abstract": false
     },
     "Funny music": {
         "children": [],
+        "parents": [
+            "Music mood"
+        ],
         "abstract": false
     },
     "Sad music": {
         "children": [],
+        "parents": [
+            "Music mood"
+        ],
         "abstract": false
     },
     "Tender music": {
         "children": [],
+        "parents": [
+            "Music mood"
+        ],
         "abstract": false
     },
     "Exciting music": {
         "children": [],
+        "parents": [
+            "Music mood"
+        ],
         "abstract": false
     },
     "Angry music": {
         "children": [],
+        "parents": [
+            "Music mood"
+        ],
         "abstract": false
     },
     "Scary music": {
         "children": [],
+        "parents": [
+            "Music mood"
+        ],
         "abstract": false
     },
     "Natural sounds": {
         "children": [
-            "Wind",
+            "Fire",
             "Thunderstorm",
             "Water",
-            "Fire"
+            "Wind"
+        ],
+        "parents": [
+            "<root>"
         ],
         "abstract": true
     },
@@ -1547,163 +2440,243 @@
             "Rustling leaves",
             "Wind noise (microphone)"
         ],
+        "parents": [
+            "Natural sounds"
+        ],
         "abstract": false
     },
     "Rustling leaves": {
         "children": [],
+        "parents": [
+            "Wind"
+        ],
         "abstract": false
     },
     "Wind noise (microphone)": {
         "children": [],
+        "parents": [
+            "Wind",
+            "Microphone"
+        ],
         "abstract": false
     },
     "Thunderstorm": {
         "children": [
             "Thunder"
         ],
+        "parents": [
+            "Natural sounds"
+        ],
         "abstract": false
     },
     "Thunder": {
         "children": [],
+        "parents": [
+            "Thunderstorm"
+        ],
         "abstract": false
     },
     "Water": {
         "children": [
-            "Rain",
-            "Stream",
-            "Waterfall",
+            "Gurgling",
             "Ocean",
+            "Rain",
             "Steam",
-            "Gurgling"
+            "Stream",
+            "Waterfall"
+        ],
+        "parents": [
+            "Natural sounds"
         ],
         "abstract": false
     },
     "Rain": {
         "children": [
-            "Raindrop",
-            "Rain on surface"
+            "Rain on surface",
+            "Raindrop"
+        ],
+        "parents": [
+            "Water"
         ],
         "abstract": false
     },
     "Raindrop": {
         "children": [],
+        "parents": [
+            "Rain"
+        ],
         "abstract": false
     },
     "Rain on surface": {
         "children": [],
+        "parents": [
+            "Rain"
+        ],
         "abstract": false
     },
     "Stream": {
         "children": [],
+        "parents": [
+            "Water"
+        ],
         "abstract": false
     },
     "Waterfall": {
         "children": [],
+        "parents": [
+            "Water"
+        ],
         "abstract": false
     },
     "Ocean": {
         "children": [
             "Waves, surf"
         ],
+        "parents": [
+            "Water"
+        ],
         "abstract": false
     },
     "Waves, surf": {
         "children": [],
+        "parents": [
+            "Ocean"
+        ],
         "abstract": false
     },
     "Steam": {
         "children": [
             "Hiss"
         ],
+        "parents": [
+            "Water"
+        ],
         "abstract": false
     },
     "Gurgling": {
         "children": [],
+        "parents": [
+            "Water"
+        ],
         "abstract": false
     },
     "Fire": {
         "children": [
             "Crackle"
         ],
+        "parents": [
+            "Natural sounds"
+        ],
         "abstract": false
     },
     "Crackle": {
         "children": [],
+        "parents": [
+            "Fire",
+            "Onomatopoeia"
+        ],
         "abstract": false
     },
     "Sounds of things": {
         "children": [
-            "Vehicle",
-            "Engine",
-            "Domestic sounds, home sounds",
-            "Bell",
             "Alarm",
-            "Mechanisms",
-            "Tools",
+            "Bell",
+            "Domestic sounds, home sounds",
+            "Engine",
             "Explosion",
-            "Wood",
             "Glass",
             "Liquid",
+            "Mechanisms",
             "Miscellaneous sources",
-            "Specific impact sounds"
+            "Specific impact sounds",
+            "Tools",
+            "Vehicle",
+            "Wood"
+        ],
+        "parents": [
+            "<root>"
         ],
         "abstract": true
     },
     "Vehicle": {
         "children": [
+            "Aircraft",
             "Boat, Water vehicle",
             "Motor vehicle (road)",
-            "Rail transport",
-            "Aircraft",
-            "Non-motorized land vehicle"
+            "Non-motorized land vehicle",
+            "Rail transport"
+        ],
+        "parents": [
+            "Sounds of things"
         ],
         "abstract": false
     },
     "Boat, Water vehicle": {
         "children": [
-            "Sailboat, sailing ship",
-            "Rowboat, canoe, kayak",
             "Motorboat, speedboat",
+            "Rowboat, canoe, kayak",
+            "Sailboat, sailing ship",
             "Ship"
+        ],
+        "parents": [
+            "Vehicle"
         ],
         "abstract": false
     },
     "Sailboat, sailing ship": {
         "children": [],
+        "parents": [
+            "Boat, Water vehicle"
+        ],
         "abstract": false
     },
     "Rowboat, canoe, kayak": {
         "children": [],
+        "parents": [
+            "Boat, Water vehicle"
+        ],
         "abstract": false
     },
     "Motorboat, speedboat": {
         "children": [],
+        "parents": [
+            "Boat, Water vehicle"
+        ],
         "abstract": false
     },
     "Ship": {
         "children": [],
+        "parents": [
+            "Boat, Water vehicle"
+        ],
         "abstract": false
     },
     "Motor vehicle (road)": {
         "children": [
-            "Car",
-            "Truck",
             "Bus",
+            "Car",
             "Emergency vehicle",
             "Motorcycle",
-            "Traffic noise, roadway noise"
+            "Traffic noise, roadway noise",
+            "Truck"
+        ],
+        "parents": [
+            "Vehicle"
         ],
         "abstract": false
     },
     "Car": {
         "children": [
-            "Vehicle horn, car horn, honking",
             "Car alarm",
+            "Car passing by",
             "Power windows, electric windows",
+            "Race car, auto racing",
             "Skidding",
             "Tire squeal",
-            "Car passing by",
-            "Race car, auto racing"
+            "Vehicle horn, car horn, honking"
+        ],
+        "parents": [
+            "Motor vehicle (road)"
         ],
         "abstract": false
     },
@@ -1711,134 +2684,224 @@
         "children": [
             "Toot"
         ],
+        "parents": [
+            "Car",
+            "Alarm"
+        ],
         "abstract": false
     },
     "Toot": {
         "children": [],
+        "parents": [
+            "Vehicle horn, car horn, honking"
+        ],
         "abstract": false
     },
     "Car alarm": {
         "children": [],
+        "parents": [
+            "Car",
+            "Alarm"
+        ],
         "abstract": false
     },
     "Power windows, electric windows": {
         "children": [],
+        "parents": [
+            "Car"
+        ],
         "abstract": false
     },
     "Skidding": {
         "children": [],
+        "parents": [
+            "Car"
+        ],
         "abstract": false
     },
     "Tire squeal": {
         "children": [],
+        "parents": [
+            "Car"
+        ],
         "abstract": false
     },
     "Car passing by": {
         "children": [],
+        "parents": [
+            "Car"
+        ],
         "abstract": false
     },
     "Race car, auto racing": {
         "children": [],
+        "parents": [
+            "Car"
+        ],
         "abstract": false
     },
     "Truck": {
         "children": [
             "Air brake",
             "Air horn, truck horn",
-            "Reversing beeps",
-            "Ice cream truck, ice cream van"
+            "Ice cream truck, ice cream van",
+            "Reversing beeps"
+        ],
+        "parents": [
+            "Motor vehicle (road)"
         ],
         "abstract": false
     },
     "Air brake": {
         "children": [],
+        "parents": [
+            "Truck"
+        ],
         "abstract": false
     },
     "Air horn, truck horn": {
         "children": [],
+        "parents": [
+            "Truck",
+            "Alarm"
+        ],
         "abstract": false
     },
     "Reversing beeps": {
         "children": [],
+        "parents": [
+            "Truck"
+        ],
         "abstract": false
     },
     "Ice cream truck, ice cream van": {
         "children": [],
+        "parents": [
+            "Truck"
+        ],
         "abstract": false
     },
     "Bus": {
         "children": [],
+        "parents": [
+            "Motor vehicle (road)"
+        ],
         "abstract": false
     },
     "Emergency vehicle": {
         "children": [
-            "Police car (siren)",
             "Ambulance (siren)",
-            "Fire engine, fire truck (siren)"
+            "Fire engine, fire truck (siren)",
+            "Police car (siren)"
+        ],
+        "parents": [
+            "Motor vehicle (road)"
         ],
         "abstract": false
     },
     "Police car (siren)": {
         "children": [],
+        "parents": [
+            "Emergency vehicle",
+            "Siren"
+        ],
         "abstract": false
     },
     "Ambulance (siren)": {
         "children": [],
+        "parents": [
+            "Emergency vehicle",
+            "Siren"
+        ],
         "abstract": false
     },
     "Fire engine, fire truck (siren)": {
         "children": [],
+        "parents": [
+            "Emergency vehicle",
+            "Siren"
+        ],
         "abstract": false
     },
     "Motorcycle": {
         "children": [],
+        "parents": [
+            "Motor vehicle (road)"
+        ],
         "abstract": false
     },
     "Traffic noise, roadway noise": {
         "children": [],
+        "parents": [
+            "Motor vehicle (road)"
+        ],
         "abstract": false
     },
     "Rail transport": {
         "children": [
-            "Train",
             "Railroad car, train wagon",
-            "Train wheels squealing",
-            "Subway, metro, underground"
+            "Subway, metro, underground",
+            "Train",
+            "Train wheels squealing"
+        ],
+        "parents": [
+            "Vehicle"
         ],
         "abstract": false
     },
     "Train": {
         "children": [
-            "Train whistle",
-            "Train horn"
+            "Train horn",
+            "Train whistle"
+        ],
+        "parents": [
+            "Rail transport"
         ],
         "abstract": false
     },
     "Train whistle": {
         "children": [],
+        "parents": [
+            "Train"
+        ],
         "abstract": false
     },
     "Train horn": {
         "children": [],
+        "parents": [
+            "Train"
+        ],
         "abstract": false
     },
     "Railroad car, train wagon": {
         "children": [],
+        "parents": [
+            "Rail transport"
+        ],
         "abstract": false
     },
     "Train wheels squealing": {
         "children": [],
+        "parents": [
+            "Rail transport"
+        ],
         "abstract": false
     },
     "Subway, metro, underground": {
         "children": [],
+        "parents": [
+            "Rail transport"
+        ],
         "abstract": false
     },
     "Aircraft": {
         "children": [
             "Aircraft engine",
-            "Helicopter",
-            "Fixed-wing aircraft, airplane"
+            "Fixed-wing aircraft, airplane",
+            "Helicopter"
+        ],
+        "parents": [
+            "Vehicle"
         ],
         "abstract": false
     },
@@ -1847,22 +2910,38 @@
             "Jet engine",
             "Propeller, airscrew"
         ],
+        "parents": [
+            "Aircraft"
+        ],
         "abstract": false
     },
     "Jet engine": {
         "children": [],
+        "parents": [
+            "Aircraft engine",
+            "Engine"
+        ],
         "abstract": false
     },
     "Propeller, airscrew": {
         "children": [],
+        "parents": [
+            "Aircraft engine"
+        ],
         "abstract": false
     },
     "Helicopter": {
         "children": [],
+        "parents": [
+            "Aircraft"
+        ],
         "abstract": false
     },
     "Fixed-wing aircraft, airplane": {
         "children": [],
+        "parents": [
+            "Aircraft"
+        ],
         "abstract": false
     },
     "Non-motorized land vehicle": {
@@ -1870,107 +2949,153 @@
             "Bicycle",
             "Skateboard"
         ],
+        "parents": [
+            "Vehicle"
+        ],
         "abstract": true
     },
     "Bicycle": {
         "children": [
             "Bicycle bell"
         ],
+        "parents": [
+            "Non-motorized land vehicle"
+        ],
         "abstract": false
     },
     "Skateboard": {
         "children": [],
+        "parents": [
+            "Non-motorized land vehicle"
+        ],
         "abstract": false
     },
     "Engine": {
         "children": [
-            "Light engine (high frequency)",
-            "Medium engine (mid frequency)",
-            "Heavy engine (low frequency)",
-            "Jet engine",
+            "Accelerating, revving, vroom",
             "Engine starting",
+            "Heavy engine (low frequency)",
             "Idling",
-            "Accelerating, revving, vroom"
+            "Jet engine",
+            "Light engine (high frequency)",
+            "Medium engine (mid frequency)"
+        ],
+        "parents": [
+            "Sounds of things"
         ],
         "abstract": false
     },
     "Light engine (high frequency)": {
         "children": [
+            "Chainsaw",
             "Dental drill, dentist's drill",
-            "Lawn mower",
-            "Chainsaw"
+            "Lawn mower"
+        ],
+        "parents": [
+            "Engine"
         ],
         "abstract": false
     },
     "Dental drill, dentist's drill": {
         "children": [],
+        "parents": [
+            "Light engine (high frequency)",
+            "Drill"
+        ],
         "abstract": false
     },
     "Lawn mower": {
         "children": [],
+        "parents": [
+            "Light engine (high frequency)"
+        ],
         "abstract": false
     },
     "Chainsaw": {
         "children": [],
+        "parents": [
+            "Light engine (high frequency)"
+        ],
         "abstract": false
     },
     "Medium engine (mid frequency)": {
         "children": [],
+        "parents": [
+            "Engine"
+        ],
         "abstract": false
     },
     "Heavy engine (low frequency)": {
         "children": [],
+        "parents": [
+            "Engine"
+        ],
         "abstract": false
     },
     "Engine starting": {
         "children": [],
+        "parents": [
+            "Engine"
+        ],
         "abstract": false
     },
     "Idling": {
         "children": [],
+        "parents": [
+            "Engine"
+        ],
         "abstract": false
     },
     "Accelerating, revving, vroom": {
         "children": [],
+        "parents": [
+            "Engine"
+        ],
         "abstract": false
     },
     "Domestic sounds, home sounds": {
         "children": [
-            "Door",
-            "Cupboard open or close",
-            "Drawer open or close",
-            "Dishes, pots, and pans",
-            "Cutlery, silverware",
-            "Chopping (food)",
-            "Frying (food)",
-            "Microwave oven",
-            "Blender",
-            "Water tap, faucet",
-            "Sink (filling or washing)",
             "Bathtub (filling or washing)",
+            "Blender",
+            "Chopping (food)",
+            "Coin (dropping)",
+            "Cupboard open or close",
+            "Cutlery, silverware",
+            "Dishes, pots, and pans",
+            "Door",
+            "Drawer open or close",
+            "Electric shaver, electric razor",
+            "Frying (food)",
             "Hair dryer",
+            "Keys jangling",
+            "Microwave oven",
+            "Scissors",
+            "Shuffling cards",
+            "Sink (filling or washing)",
             "Toilet flush",
             "Toothbrush",
-            "Vacuum cleaner",
-            "Zipper (clothing)",
-            "Keys jangling",
-            "Coin (dropping)",
-            "Scissors",
-            "Electric shaver, electric razor",
-            "Shuffling cards",
             "Typing",
-            "Writing"
+            "Vacuum cleaner",
+            "Water tap, faucet",
+            "Writing",
+            "Zipper (clothing)"
+        ],
+        "parents": [
+            "Sounds of things"
         ],
         "abstract": true
     },
     "Door": {
         "children": [
             "Doorbell",
-            "Sliding door",
-            "Slam",
             "Knock",
-            "Tap",
-            "Squeak"
+            "Slam",
+            "Sliding door",
+            "Squeak",
+            "Tap"
+        ],
+        "parents": [
+            "Domestic sounds, home sounds"
         ],
         "abstract": false
     },
@@ -1978,249 +3103,406 @@
         "children": [
             "Ding-dong"
         ],
+        "parents": [
+            "Door",
+            "Alarm"
+        ],
         "abstract": false
     },
     "Ding-dong": {
         "children": [],
+        "parents": [
+            "Doorbell"
+        ],
         "abstract": false
     },
     "Sliding door": {
         "children": [],
+        "parents": [
+            "Door"
+        ],
         "abstract": false
     },
     "Slam": {
         "children": [],
+        "parents": [
+            "Door"
+        ],
         "abstract": false
     },
     "Knock": {
         "children": [],
+        "parents": [
+            "Door",
+            "Generic impact sounds"
+        ],
         "abstract": false
     },
     "Tap": {
         "children": [],
+        "parents": [
+            "Door",
+            "Generic impact sounds"
+        ],
         "abstract": false
     },
     "Squeak": {
         "children": [],
+        "parents": [
+            "Door",
+            "Brief tone"
+        ],
         "abstract": false
     },
     "Cupboard open or close": {
         "children": [],
+        "parents": [
+            "Domestic sounds, home sounds"
+        ],
         "abstract": false
     },
     "Drawer open or close": {
         "children": [],
+        "parents": [
+            "Domestic sounds, home sounds"
+        ],
         "abstract": false
     },
     "Dishes, pots, and pans": {
         "children": [],
+        "parents": [
+            "Domestic sounds, home sounds"
+        ],
         "abstract": false
     },
     "Cutlery, silverware": {
         "children": [],
+        "parents": [
+            "Domestic sounds, home sounds"
+        ],
         "abstract": false
     },
     "Chopping (food)": {
         "children": [],
+        "parents": [
+            "Domestic sounds, home sounds"
+        ],
         "abstract": false
     },
     "Frying (food)": {
         "children": [],
+        "parents": [
+            "Domestic sounds, home sounds"
+        ],
         "abstract": false
     },
     "Microwave oven": {
         "children": [],
+        "parents": [
+            "Domestic sounds, home sounds"
+        ],
         "abstract": false
     },
     "Blender": {
         "children": [],
+        "parents": [
+            "Domestic sounds, home sounds"
+        ],
         "abstract": false
     },
     "Water tap, faucet": {
         "children": [],
+        "parents": [
+            "Domestic sounds, home sounds"
+        ],
         "abstract": false
     },
     "Sink (filling or washing)": {
         "children": [],
+        "parents": [
+            "Domestic sounds, home sounds"
+        ],
         "abstract": false
     },
     "Bathtub (filling or washing)": {
         "children": [],
+        "parents": [
+            "Domestic sounds, home sounds"
+        ],
         "abstract": false
     },
     "Hair dryer": {
         "children": [],
+        "parents": [
+            "Domestic sounds, home sounds"
+        ],
         "abstract": false
     },
     "Toilet flush": {
         "children": [],
+        "parents": [
+            "Domestic sounds, home sounds"
+        ],
         "abstract": false
     },
     "Toothbrush": {
         "children": [
             "Electric toothbrush"
         ],
+        "parents": [
+            "Domestic sounds, home sounds"
+        ],
         "abstract": false
     },
     "Electric toothbrush": {
         "children": [],
+        "parents": [
+            "Toothbrush"
+        ],
         "abstract": false
     },
     "Vacuum cleaner": {
         "children": [],
+        "parents": [
+            "Domestic sounds, home sounds"
+        ],
         "abstract": false
     },
     "Zipper (clothing)": {
         "children": [],
+        "parents": [
+            "Domestic sounds, home sounds"
+        ],
         "abstract": false
     },
     "Keys jangling": {
         "children": [],
+        "parents": [
+            "Domestic sounds, home sounds"
+        ],
         "abstract": false
     },
     "Coin (dropping)": {
         "children": [],
+        "parents": [
+            "Domestic sounds, home sounds"
+        ],
         "abstract": false
     },
     "Scissors": {
         "children": [],
+        "parents": [
+            "Domestic sounds, home sounds"
+        ],
         "abstract": false
     },
     "Electric shaver, electric razor": {
         "children": [],
+        "parents": [
+            "Domestic sounds, home sounds"
+        ],
         "abstract": false
     },
     "Shuffling cards": {
         "children": [],
+        "parents": [
+            "Domestic sounds, home sounds"
+        ],
         "abstract": false
     },
     "Typing": {
         "children": [
-            "Typewriter",
-            "Computer keyboard"
+            "Computer keyboard",
+            "Typewriter"
+        ],
+        "parents": [
+            "Domestic sounds, home sounds"
         ],
         "abstract": false
     },
     "Typewriter": {
         "children": [],
+        "parents": [
+            "Typing"
+        ],
         "abstract": false
     },
     "Computer keyboard": {
         "children": [],
+        "parents": [
+            "Typing"
+        ],
         "abstract": false
     },
     "Writing": {
         "children": [],
+        "parents": [
+            "Domestic sounds, home sounds"
+        ],
         "abstract": false
     },
     "Alarm": {
         "children": [
-            "Telephone",
-            "Alarm clock",
-            "Siren",
-            "Doorbell",
-            "Buzzer",
-            "Smoke detector, smoke alarm",
-            "Fire alarm",
-            "Car alarm",
-            "Vehicle horn, car horn, honking",
-            "Bicycle bell",
             "Air horn, truck horn",
+            "Alarm clock",
+            "Bicycle bell",
+            "Buzzer",
+            "Car alarm",
+            "Doorbell",
+            "Fire alarm",
             "Foghorn",
+            "Siren",
+            "Smoke detector, smoke alarm",
+            "Telephone",
+            "Vehicle horn, car horn, honking",
             "Whistle"
+        ],
+        "parents": [
+            "Sounds of things"
         ],
         "abstract": false
     },
     "Telephone": {
         "children": [
-            "Telephone bell ringing",
-            "Ringtone",
-            "Telephone dialing, DTMF",
+            "Busy signal",
             "Dial tone",
-            "Busy signal"
+            "Ringtone",
+            "Telephone bell ringing",
+            "Telephone dialing, DTMF"
+        ],
+        "parents": [
+            "Alarm"
         ],
         "abstract": false
     },
     "Telephone bell ringing": {
         "children": [],
+        "parents": [
+            "Telephone"
+        ],
         "abstract": false
     },
     "Ringtone": {
         "children": [],
+        "parents": [
+            "Telephone"
+        ],
         "abstract": false
     },
     "Telephone dialing, DTMF": {
         "children": [],
+        "parents": [
+            "Telephone"
+        ],
         "abstract": false
     },
     "Dial tone": {
         "children": [],
+        "parents": [
+            "Telephone"
+        ],
         "abstract": false
     },
     "Busy signal": {
         "children": [],
+        "parents": [
+            "Telephone"
+        ],
         "abstract": false
     },
     "Alarm clock": {
         "children": [],
+        "parents": [
+            "Alarm"
+        ],
         "abstract": false
     },
     "Siren": {
         "children": [
-            "Police car (siren)",
             "Ambulance (siren)",
+            "Civil defense siren",
             "Fire engine, fire truck (siren)",
-            "Civil defense siren"
+            "Police car (siren)"
+        ],
+        "parents": [
+            "Alarm"
         ],
         "abstract": false
     },
     "Civil defense siren": {
         "children": [],
+        "parents": [
+            "Siren"
+        ],
         "abstract": false
     },
     "Buzzer": {
         "children": [],
+        "parents": [
+            "Alarm"
+        ],
         "abstract": false
     },
     "Smoke detector, smoke alarm": {
         "children": [],
+        "parents": [
+            "Alarm"
+        ],
         "abstract": false
     },
     "Fire alarm": {
         "children": [],
+        "parents": [
+            "Alarm"
+        ],
         "abstract": false
     },
     "Foghorn": {
         "children": [],
+        "parents": [
+            "Alarm"
+        ],
         "abstract": false
     },
     "Whistle": {
         "children": [
             "Steam whistle"
         ],
+        "parents": [
+            "Alarm"
+        ],
         "abstract": false
     },
     "Steam whistle": {
         "children": [],
+        "parents": [
+            "Whistle"
+        ],
         "abstract": false
     },
     "Mechanisms": {
         "children": [
-            "Ratchet, pawl",
+            "Air conditioning",
+            "Camera",
+            "Cash register",
             "Clock",
             "Gears",
-            "Pulleys",
-            "Sewing machine",
             "Mechanical fan",
-            "Air conditioning",
-            "Cash register",
             "Printer",
-            "Camera"
+            "Pulleys",
+            "Ratchet, pawl",
+            "Sewing machine"
+        ],
+        "parents": [
+            "Sounds of things"
         ],
         "abstract": false
     },
     "Ratchet, pawl": {
         "children": [],
+        "parents": [
+            "Mechanisms"
+        ],
         "abstract": false
     },
     "Clock": {
@@ -2228,88 +3510,146 @@
             "Tick",
             "Tick-tock"
         ],
+        "parents": [
+            "Mechanisms"
+        ],
         "abstract": false
     },
     "Tick": {
         "children": [],
+        "parents": [
+            "Clock",
+            "Clicking"
+        ],
         "abstract": false
     },
     "Tick-tock": {
         "children": [],
+        "parents": [
+            "Clock"
+        ],
         "abstract": false
     },
     "Gears": {
         "children": [],
+        "parents": [
+            "Mechanisms"
+        ],
         "abstract": false
     },
     "Pulleys": {
         "children": [],
+        "parents": [
+            "Mechanisms"
+        ],
         "abstract": false
     },
     "Sewing machine": {
         "children": [],
+        "parents": [
+            "Mechanisms"
+        ],
         "abstract": false
     },
     "Mechanical fan": {
         "children": [],
+        "parents": [
+            "Mechanisms"
+        ],
         "abstract": false
     },
     "Air conditioning": {
         "children": [],
+        "parents": [
+            "Mechanisms"
+        ],
         "abstract": false
     },
     "Cash register": {
         "children": [],
+        "parents": [
+            "Mechanisms"
+        ],
         "abstract": false
     },
     "Printer": {
         "children": [],
+        "parents": [
+            "Mechanisms"
+        ],
         "abstract": false
     },
     "Camera": {
         "children": [
             "Single-lens reflex camera"
         ],
+        "parents": [
+            "Mechanisms"
+        ],
         "abstract": false
     },
     "Single-lens reflex camera": {
         "children": [],
+        "parents": [
+            "Camera"
+        ],
         "abstract": false
     },
     "Tools": {
         "children": [
+            "Filing (rasp)",
             "Hammer",
             "Jackhammer",
-            "Sawing",
-            "Filing (rasp)",
+            "Power tool",
             "Sanding",
-            "Power tool"
+            "Sawing"
+        ],
+        "parents": [
+            "Sounds of things"
         ],
         "abstract": false
     },
     "Hammer": {
         "children": [],
+        "parents": [
+            "Tools"
+        ],
         "abstract": false
     },
     "Jackhammer": {
         "children": [],
+        "parents": [
+            "Tools"
+        ],
         "abstract": false
     },
     "Sawing": {
         "children": [],
+        "parents": [
+            "Tools"
+        ],
         "abstract": false
     },
     "Filing (rasp)": {
         "children": [],
+        "parents": [
+            "Tools"
+        ],
         "abstract": false
     },
     "Sanding": {
         "children": [],
+        "parents": [
+            "Tools"
+        ],
         "abstract": false
     },
     "Power tool": {
         "children": [
             "Drill"
+        ],
+        "parents": [
+            "Tools"
         ],
         "abstract": false
     },
@@ -2317,78 +3657,124 @@
         "children": [
             "Dental drill, dentist's drill"
         ],
+        "parents": [
+            "Power tool"
+        ],
         "abstract": false
     },
     "Explosion": {
         "children": [
-            "Gunshot, gunfire",
-            "Fireworks",
+            "Boom",
             "Burst, pop",
             "Eruption",
-            "Boom"
+            "Fireworks",
+            "Gunshot, gunfire"
+        ],
+        "parents": [
+            "Sounds of things"
         ],
         "abstract": false
     },
     "Gunshot, gunfire": {
         "children": [
-            "Machine gun",
             "Artillery fire",
-            "Cap gun"
+            "Cap gun",
+            "Machine gun"
+        ],
+        "parents": [
+            "Explosion"
         ],
         "abstract": false
     },
     "Machine gun": {
         "children": [],
+        "parents": [
+            "Gunshot, gunfire"
+        ],
         "abstract": false
     },
     "Artillery fire": {
         "children": [],
+        "parents": [
+            "Gunshot, gunfire"
+        ],
         "abstract": false
     },
     "Cap gun": {
         "children": [],
+        "parents": [
+            "Gunshot, gunfire"
+        ],
         "abstract": false
     },
     "Fireworks": {
         "children": [
             "Firecracker"
         ],
+        "parents": [
+            "Explosion"
+        ],
         "abstract": false
     },
     "Firecracker": {
         "children": [],
+        "parents": [
+            "Fireworks"
+        ],
         "abstract": false
     },
     "Burst, pop": {
         "children": [],
+        "parents": [
+            "Explosion"
+        ],
         "abstract": false
     },
     "Eruption": {
         "children": [],
+        "parents": [
+            "Explosion"
+        ],
         "abstract": false
     },
     "Boom": {
         "children": [],
+        "parents": [
+            "Explosion"
+        ],
         "abstract": false
     },
     "Wood": {
         "children": [
             "Chop",
-            "Splinter",
-            "Crack"
+            "Crack",
+            "Splinter"
+        ],
+        "parents": [
+            "Sounds of things"
         ],
         "abstract": false
     },
     "Chop": {
         "children": [],
+        "parents": [
+            "Wood"
+        ],
         "abstract": false
     },
     "Splinter": {
         "children": [],
+        "parents": [
+            "Wood"
+        ],
         "abstract": false
     },
     "Crack": {
         "children": [],
+        "parents": [
+            "Wood",
+            "Onomatopoeia"
+        ],
         "abstract": false
     },
     "Glass": {
@@ -2396,27 +3782,39 @@
             "Chink, clink",
             "Shatter"
         ],
+        "parents": [
+            "Sounds of things"
+        ],
         "abstract": false
     },
     "Chink, clink": {
         "children": [],
+        "parents": [
+            "Glass"
+        ],
         "abstract": false
     },
     "Shatter": {
         "children": [],
+        "parents": [
+            "Glass"
+        ],
         "abstract": false
     },
     "Liquid": {
         "children": [
-            "Splash, splatter",
-            "Squish",
+            "Boiling",
             "Drip",
-            "Pour",
             "Fill (with liquid)",
-            "Spray",
+            "Pour",
             "Pump (liquid)",
-            "Stir",
-            "Boiling"
+            "Splash, splatter",
+            "Spray",
+            "Squish",
+            "Stir"
+        ],
+        "parents": [
+            "Sounds of things"
         ],
         "abstract": false
     },
@@ -2424,92 +3822,152 @@
         "children": [
             "Slosh"
         ],
+        "parents": [
+            "Liquid"
+        ],
         "abstract": false
     },
     "Slosh": {
         "children": [],
+        "parents": [
+            "Splash, splatter"
+        ],
         "abstract": false
     },
     "Squish": {
         "children": [],
+        "parents": [
+            "Liquid",
+            "Onomatopoeia"
+        ],
         "abstract": false
     },
     "Drip": {
         "children": [],
+        "parents": [
+            "Liquid"
+        ],
         "abstract": false
     },
     "Pour": {
         "children": [
-            "Trickle, dribble",
-            "Gush"
+            "Gush",
+            "Trickle, dribble"
+        ],
+        "parents": [
+            "Liquid"
         ],
         "abstract": false
     },
     "Trickle, dribble": {
         "children": [],
+        "parents": [
+            "Pour"
+        ],
         "abstract": false
     },
     "Gush": {
         "children": [],
+        "parents": [
+            "Pour"
+        ],
         "abstract": false
     },
     "Fill (with liquid)": {
         "children": [],
+        "parents": [
+            "Liquid"
+        ],
         "abstract": false
     },
     "Spray": {
         "children": [],
+        "parents": [
+            "Liquid"
+        ],
         "abstract": false
     },
     "Pump (liquid)": {
         "children": [],
+        "parents": [
+            "Liquid"
+        ],
         "abstract": false
     },
     "Stir": {
         "children": [],
+        "parents": [
+            "Liquid"
+        ],
         "abstract": false
     },
     "Boiling": {
         "children": [],
+        "parents": [
+            "Liquid"
+        ],
         "abstract": false
     },
     "Miscellaneous sources": {
         "children": [
-            "Sonar",
             "Arrow",
+            "Sonar",
             "Sound equipment"
+        ],
+        "parents": [
+            "Sounds of things"
         ],
         "abstract": true
     },
     "Sonar": {
         "children": [],
+        "parents": [
+            "Miscellaneous sources"
+        ],
         "abstract": false
     },
     "Arrow": {
         "children": [
-            "Whoosh, swoosh, swish",
-            "Thump, thud"
+            "Thump, thud",
+            "Whoosh, swoosh, swish"
+        ],
+        "parents": [
+            "Miscellaneous sources"
         ],
         "abstract": false
     },
     "Whoosh, swoosh, swish": {
         "children": [],
+        "parents": [
+            "Arrow",
+            "Onomatopoeia"
+        ],
         "abstract": false
     },
     "Thump, thud": {
         "children": [
             "Thunk"
         ],
+        "parents": [
+            "Arrow",
+            "Generic impact sounds"
+        ],
         "abstract": false
     },
     "Thunk": {
         "children": [],
+        "parents": [
+            "Thump, thud"
+        ],
         "abstract": false
     },
     "Sound equipment": {
         "children": [
-            "Microphone",
-            "Effects unit"
+            "Effects unit",
+            "Microphone"
+        ],
+        "parents": [
+            "Miscellaneous sources"
         ],
         "abstract": true
     },
@@ -2517,249 +3975,384 @@
         "children": [
             "Wind noise (microphone)"
         ],
+        "parents": [
+            "Sound equipment"
+        ],
         "abstract": true
     },
     "Effects unit": {
         "children": [
             "Chorus effect"
         ],
+        "parents": [
+            "Sound equipment"
+        ],
         "abstract": false
     },
     "Chorus effect": {
         "children": [],
+        "parents": [
+            "Effects unit"
+        ],
         "abstract": false
     },
     "Specific impact sounds": {
         "children": [
             "Basketball bounce"
         ],
+        "parents": [
+            "Sounds of things"
+        ],
         "abstract": true
     },
     "Basketball bounce": {
         "children": [],
+        "parents": [
+            "Specific impact sounds"
+        ],
         "abstract": false
     },
     "Source-ambiguous sounds": {
         "children": [
-            "Generic impact sounds",
-            "Surface contact",
             "Deformable shell",
+            "Generic impact sounds",
             "Onomatopoeia",
+            "Other sourceless",
             "Silence",
-            "Other sourceless"
+            "Surface contact"
+        ],
+        "parents": [
+            "<root>"
         ],
         "abstract": true
     },
     "Generic impact sounds": {
         "children": [
             "Bang",
-            "Slap, smack",
-            "Whack, thwack",
-            "Smash, crash",
-            "Breaking",
             "Bouncing",
+            "Breaking",
+            "Flap",
             "Knock",
+            "Slap, smack",
+            "Smash, crash",
             "Tap",
             "Thump, thud",
-            "Whip",
-            "Flap"
+            "Whack, thwack",
+            "Whip"
+        ],
+        "parents": [
+            "Source-ambiguous sounds"
         ],
         "abstract": true
     },
     "Bang": {
         "children": [],
+        "parents": [
+            "Generic impact sounds"
+        ],
         "abstract": false
     },
     "Slap, smack": {
         "children": [],
+        "parents": [
+            "Generic impact sounds"
+        ],
         "abstract": false
     },
     "Whack, thwack": {
         "children": [],
+        "parents": [
+            "Generic impact sounds"
+        ],
         "abstract": false
     },
     "Smash, crash": {
         "children": [],
+        "parents": [
+            "Generic impact sounds"
+        ],
         "abstract": false
     },
     "Breaking": {
         "children": [],
+        "parents": [
+            "Generic impact sounds"
+        ],
         "abstract": false
     },
     "Bouncing": {
         "children": [],
+        "parents": [
+            "Generic impact sounds"
+        ],
         "abstract": false
     },
     "Whip": {
         "children": [],
+        "parents": [
+            "Generic impact sounds"
+        ],
         "abstract": false
     },
     "Flap": {
         "children": [],
+        "parents": [
+            "Generic impact sounds"
+        ],
         "abstract": false
     },
     "Surface contact": {
         "children": [
-            "Scratch",
+            "Rub",
             "Scrape",
-            "Rub"
+            "Scratch"
+        ],
+        "parents": [
+            "Source-ambiguous sounds"
         ],
         "abstract": true
     },
     "Scratch": {
         "children": [],
+        "parents": [
+            "Surface contact"
+        ],
         "abstract": false
     },
     "Scrape": {
         "children": [],
+        "parents": [
+            "Surface contact"
+        ],
         "abstract": false
     },
     "Rub": {
         "children": [],
+        "parents": [
+            "Surface contact"
+        ],
         "abstract": false
     },
     "Deformable shell": {
         "children": [
-            "Crushing",
             "Crumpling, crinkling",
+            "Crushing",
             "Tearing"
+        ],
+        "parents": [
+            "Source-ambiguous sounds"
         ],
         "abstract": true
     },
     "Crushing": {
         "children": [],
+        "parents": [
+            "Deformable shell"
+        ],
         "abstract": false
     },
     "Crumpling, crinkling": {
         "children": [],
+        "parents": [
+            "Deformable shell"
+        ],
         "abstract": false
     },
     "Tearing": {
         "children": [],
+        "parents": [
+            "Deformable shell"
+        ],
         "abstract": false
     },
     "Onomatopoeia": {
         "children": [
-            "Brief tone",
-            "Hiss",
-            "Creak",
-            "Rattle",
-            "Whoosh, swoosh, swish",
-            "Rustle",
-            "Whir",
-            "Sizzle",
-            "Clicking",
-            "Rumble",
-            "Plop",
-            "Jingle, tinkle",
-            "Hum",
-            "Squish",
-            "Zing",
             "Boing",
+            "Brief tone",
+            "Clicking",
+            "Crack",
             "Crackle",
+            "Creak",
             "Crunch",
-            "Crack"
+            "Hiss",
+            "Hum",
+            "Jingle, tinkle",
+            "Plop",
+            "Rattle",
+            "Rumble",
+            "Rustle",
+            "Sizzle",
+            "Squish",
+            "Whir",
+            "Whoosh, swoosh, swish",
+            "Zing"
+        ],
+        "parents": [
+            "Source-ambiguous sounds"
         ],
         "abstract": true
     },
     "Brief tone": {
         "children": [
             "Beep, bleep",
-            "Ping",
-            "Ding",
-            "Clang",
-            "Chirp, tweet",
             "Buzz",
+            "Chirp, tweet",
+            "Clang",
+            "Ding",
+            "Ping",
             "Squeak",
             "Squeal"
+        ],
+        "parents": [
+            "Onomatopoeia"
         ],
         "abstract": true
     },
     "Beep, bleep": {
         "children": [],
+        "parents": [
+            "Brief tone"
+        ],
         "abstract": false
     },
     "Ping": {
         "children": [],
+        "parents": [
+            "Brief tone"
+        ],
         "abstract": false
     },
     "Ding": {
         "children": [],
+        "parents": [
+            "Brief tone"
+        ],
         "abstract": false
     },
     "Clang": {
         "children": [],
+        "parents": [
+            "Brief tone"
+        ],
         "abstract": false
     },
     "Squeal": {
         "children": [],
+        "parents": [
+            "Brief tone"
+        ],
         "abstract": false
     },
     "Creak": {
         "children": [],
+        "parents": [
+            "Onomatopoeia"
+        ],
         "abstract": false
     },
     "Rustle": {
         "children": [],
+        "parents": [
+            "Onomatopoeia"
+        ],
         "abstract": false
     },
     "Whir": {
         "children": [],
+        "parents": [
+            "Onomatopoeia"
+        ],
         "abstract": false
     },
     "Sizzle": {
         "children": [],
+        "parents": [
+            "Onomatopoeia"
+        ],
         "abstract": false
     },
     "Clicking": {
         "children": [
-            "Tick",
+            "Clickety-clack",
             "Clip-clop",
-            "Clickety-clack"
+            "Tick"
+        ],
+        "parents": [
+            "Onomatopoeia"
         ],
         "abstract": false
     },
     "Clickety-clack": {
         "children": [],
+        "parents": [
+            "Clicking"
+        ],
         "abstract": false
     },
     "Rumble": {
         "children": [],
+        "parents": [
+            "Onomatopoeia"
+        ],
         "abstract": false
     },
     "Plop": {
         "children": [],
+        "parents": [
+            "Onomatopoeia"
+        ],
         "abstract": false
     },
     "Jingle, tinkle": {
         "children": [],
+        "parents": [
+            "Onomatopoeia"
+        ],
         "abstract": false
     },
     "Hum": {
         "children": [],
+        "parents": [
+            "Onomatopoeia"
+        ],
         "abstract": false
     },
     "Zing": {
         "children": [],
+        "parents": [
+            "Onomatopoeia"
+        ],
         "abstract": false
     },
     "Boing": {
         "children": [],
+        "parents": [
+            "Onomatopoeia"
+        ],
         "abstract": false
     },
     "Crunch": {
         "children": [],
+        "parents": [
+            "Onomatopoeia"
+        ],
         "abstract": false
     },
     "Silence": {
         "children": [],
+        "parents": [
+            "Source-ambiguous sounds"
+        ],
         "abstract": false
     },
     "Other sourceless": {
         "children": [
+            "Pulse",
             "Sine wave",
-            "Sound effect",
-            "Pulse"
+            "Sound effect"
+        ],
+        "parents": [
+            "Source-ambiguous sounds"
         ],
         "abstract": true
     },
@@ -2767,29 +4360,42 @@
         "children": [
             "Chirp tone"
         ],
+        "parents": [
+            "Other sourceless"
+        ],
         "abstract": false
     },
     "Chirp tone": {
         "children": [],
+        "parents": [
+            "Sine wave"
+        ],
         "abstract": false
     },
     "Sound effect": {
         "children": [],
+        "parents": [
+            "Other sourceless"
+        ],
         "abstract": false
     },
     "Pulse": {
         "children": [],
+        "parents": [
+            "Other sourceless"
+        ],
         "abstract": false
     },
     "<root>": {
         "children": [
-            "Source-ambiguous sounds",
-            "Natural sounds",
-            "Music",
             "Sounds of things",
+            "Music",
             "Human sounds",
+            "Natural sounds",
+            "Source-ambiguous sounds",
             "Animal"
         ],
+        "parents": [],
         "abstract": true
     }
 }

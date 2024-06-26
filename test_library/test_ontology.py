@@ -1,197 +1,187 @@
 import pytest
+import json
+from io import StringIO
+from textwrap import dedent
 
 from ontology import *
 
 
-# Fake input data
-ontology_data = [
-    {
-        "id": "/m/0a",
-        "name": "Animal sounds",
-        "description": "Sounds produced by animals.",
-        "citation_uri": "",
-        "positive_examples": [],
-        "child_ids": ["/m/0b", "/m/0c"],
-        "restrictions": ["abstract"]
-    },
-    {
-        "id": "/m/0b",
-        "name": "Bird sounds",
-        "description": "Sounds produced by birds.",
-        "citation_uri": "",
-        "positive_examples": [],
-        "child_ids": [],
-        "restrictions": ["blacklist"]
-    },
-    {
-        "id": "/m/0c",
-        "name": "Mammal sounds",
-        "description": "Sounds produced by mammals.",
-        "citation_uri": "",
-        "positive_examples": [],
-        "child_ids": ["/m/0d"],
-        "restrictions": []
-    },
-    {
-        "id": "/m/0d",
-        "name": "Dog barks",
-        "description": "Barking sounds made by dogs.",
-        "citation_uri": "",
-        "positive_examples": [],
-        "child_ids": [],
-        "restrictions": []
-    }
-]
+@pytest.fixture
+def raw_ontology_basic():
+    with open('ontology_test_data/raw_ontology_basic.json', 'r') as f:
+        return json.load(f)
 
-# Fake model classes
-model_classes = ["Animal sounds", "Dog barks"]
+@pytest.fixture
+def built_ontology_basic():
+    with open('ontology_test_data/built_ontology_basic.json', 'r') as f:
+        return json.load(f)
 
-def test_basic_functionality():
-    expected_output = {
-        '<root>': {
-            'children': ['Animal sounds'],
-            'abstract': True,
-            'blacklist': False,
-            'not_in_model': True,
-        },
-        'Animal sounds': {
-            'children': ['Bird sounds', 'Mammal sounds'],
-            'abstract': True,
-            'blacklist': False,
-            'not_in_model': False,
-        },
-        'Bird sounds': {
-            'children': [],
-            'abstract': False,
-            'blacklist': True,
-            'not_in_model': True,
-        },
-        'Mammal sounds': {
-            'children': ['Dog barks'],
-            'abstract': False,
-            'blacklist': False,
-            'not_in_model': True,
-        },
-        'Dog barks': {
-            'children': [],
-            'abstract': False,
-            'blacklist': False,
-            'not_in_model': False,
-        }
-    }
-    result = build_ontology_tree(ontology_data, model_classes)
-    assert result == expected_output
-
-def test_complex_tree_structure():
-    complex_ontology_data = [
-        {
-            "id": "/m/0a",
-            "name": "Vehicle sounds",
-            "description": "Sounds produced by vehicles.",
-            "citation_uri": "",
-            "positive_examples": [],
-            "child_ids": ["/m/0b", "/m/0c"],
-            "restrictions": ["abstract"]
-        },
-        {
-            "id": "/m/0b",
-            "name": "Car sounds",
-            "description": "Sounds produced by cars.",
-            "citation_uri": "",
-            "positive_examples": [],
-            "child_ids": [],
-            "restrictions": []
-        },
-        {
-            "id": "/m/0c",
-            "name": "Bike sounds",
-            "description": "Sounds produced by bikes.",
-            "citation_uri": "",
-            "positive_examples": [],
-            "child_ids": ["/m/0d"],
-            "restrictions": []
-        },
-        {
-            "id": "/m/0d",
-            "name": "Motorcycle sounds",
-            "description": "Sounds produced by motorcycles.",
-            "citation_uri": "",
-            "positive_examples": [],
-            "child_ids": [],
-            "restrictions": []
-        }
-    ]
-    result = build_ontology_tree(complex_ontology_data, model_classes)
-    assert result['Vehicle sounds']['children'] == ['Car sounds', 'Bike sounds']
-
-def test_empty_ontology_list():
-    result = build_ontology_tree([], model_classes)
-    expected_output = {
-        '<root>': {
-            'children': [],
-            'abstract': True,
-            'blacklist': False,
-            'not_in_model': True,
-        }
-    }
-    assert result == expected_output
+@pytest.fixture
+def model_classes_basic():
+    return ["Bird sounds", "Mammal sounds"]
 
 
 @pytest.fixture
-def ontology_tree():
-    return build_ontology_tree(ontology_data, model_classes)
+def raw_ontology_complex():
+    with open('ontology_test_data/raw_ontology_complex.json', 'r') as f:
+        return json.load(f)
 
-def test_remove_leaf_node(ontology_tree):
-    remove_node_subtree(ontology_tree, "Mammal sounds", "Dog barks")
-    assert "Dog barks" not in ontology_tree
-    assert "Dog barks" not in ontology_tree["Mammal sounds"]["children"]
+@pytest.fixture
+def built_ontology_complex():
+    with open('ontology_test_data/built_ontology_complex.json', 'r') as f:
+        return json.load(f)
 
-def test_remove_node_with_children(ontology_tree):
-    remove_node_subtree(ontology_tree, "Animal sounds", "Mammal sounds")
-    assert "Mammal sounds" not in ontology_tree
-    assert "Mammal sounds" not in ontology_tree["Animal sounds"]["children"]
-    assert "Dog barks" not in ontology_tree
-
-def test_remove_root_child(ontology_tree):
-    remove_node_subtree(ontology_tree, ROOT_NAME, "Animal sounds")
-    assert "Animal sounds" not in ontology_tree
-    assert "Animal sounds" not in ontology_tree[ROOT_NAME]["children"]
-    assert "Bird sounds" not in ontology_tree
-    assert "Mammal sounds" not in ontology_tree
-    assert "Dog barks" not in ontology_tree
-
-def test_remove_non_existent_node(ontology_tree):
-    with pytest.raises(KeyError):
-        remove_node_subtree(ontology_tree, "Animal sounds", "Non-existent sound")
+@pytest.fixture
+def model_classes_complex():
+    return ["Horn", "Engine", "Gears", "Building", "Tools"]
 
 
-def test_remove_by_property_not_in_model(ontology_tree):
-    remove_by_property(ontology_tree, 'not_in_model', True)
-    assert 'Animal sounds' in ontology_tree
-    assert 'Bird sounds' not in ontology_tree
-    assert 'Mammal sounds' not in ontology_tree
-    assert 'Dog barks' not in ontology_tree   # child of dropped
+def test_ontology_basic(raw_ontology_basic, built_ontology_basic, model_classes_basic):
+    nodes = build_ontology_graph(raw_ontology_basic, model_classes_basic, sort_names=True)
+    assert nodes == built_ontology_basic
 
-def test_remove_by_property_blacklist(ontology_tree):
-    remove_by_property(ontology_tree, 'blacklist', True)
-    assert 'Bird sounds' not in ontology_tree
-    assert 'Animal sounds' in ontology_tree
-    assert 'Mammal sounds' in ontology_tree
-    assert 'Dog barks' in ontology_tree
+def test_ontology_complex(raw_ontology_complex, built_ontology_complex, model_classes_complex):
+    nodes = build_ontology_graph(raw_ontology_complex, model_classes_complex, sort_names=True)
+    assert nodes == built_ontology_complex
 
-def test_remove_by_property_with_different_value(ontology_tree):
-    # Test a scenario where property_value is False
-    remove_by_property(ontology_tree, 'abstract', False)
-    assert 'Animal sounds' in ontology_tree
-    assert 'Bird sounds' not in ontology_tree
-    assert 'Mammal sounds' not in ontology_tree
-    assert 'Dog barks' not in ontology_tree
+def test_ontology_empty():
+    result = build_ontology_graph([], [])
+    expected_output = {
+        '<root>': {
+            'children': [],
+            'parents': [],
+            'abstract': True,
+            'blacklist': False,
+            'in_model': False,
+        }
+    }
+    assert result == expected_output
 
 
-def test_drop_property(ontology_tree):
-    drop_property(ontology_tree, 'abstract')
-    for node in ontology_tree.values():
-        assert 'abstract' not in node
+def test_remove_link_basic_1(built_ontology_basic):
+    nodes = built_ontology_basic
+    remove_link(nodes, "Animal sounds", "Mammal sounds")
+    assert "Mammal sounds" not in nodes
+    assert "Dog barks" not in nodes
+    assert "Mammal sounds" not in nodes["Animal sounds"]['children']
+
+def test_remove_link_basic_2(built_ontology_basic):
+    nodes = built_ontology_basic
+    remove_link(nodes, ROOT_NAME, "Animal sounds")
+    assert "Animal sounds" not in nodes
+    assert "Mammal sounds" not in nodes
+    assert "Bird sounds" not in nodes
+    assert "Dog barks" not in nodes
+    assert not nodes[ROOT_NAME]['children']
+
+def test_remove_link_multiple_parents(built_ontology_complex):
+    nodes = built_ontology_complex
+    remove_link(nodes, "Car sounds", "Tires")
+    assert "Tires" in nodes
+    assert "Tires" not in nodes["Car sounds"]["children"]
+
+def test_remove_link_complex(built_ontology_complex):
+    nodes = built_ontology_complex
+    remove_link(nodes, "Industrial sounds", "Mechanisms")
+    assert "Mechanisms" not in nodes
+    assert "Pulleys" not in nodes
+    assert "Gears" in nodes
+    assert "Mechanisms" not in nodes["Gears"]['parents']
+    assert "Mechanisms" not in nodes["Industrial sounds"]['children']
+
+def test_remove_node_basic_1(built_ontology_basic):
+    nodes = built_ontology_basic
+    remove_node(nodes, "Mammal sounds")
+    assert "Mammal sounds" not in nodes
+    assert "Dog barks" not in nodes
+    assert "Mammal sounds" not in nodes["Animal sounds"]['children']
+
+def test_remove_node_basic_2(built_ontology_basic):
+    nodes = built_ontology_basic
+    remove_node(nodes, "Bird sounds")
+    assert "Bird sounds" not in nodes
+    assert "Bird sounds" not in nodes["Animal sounds"]['children']
+
+def test_remove_node_multiple_parents(built_ontology_complex):
+    nodes = built_ontology_complex
+    remove_node(nodes, "Gears")
+    assert "Gears" not in nodes
+    assert "Gears" not in nodes["Bicycle"]["children"]
+    assert "Gears" not in nodes["Mechanisms"]["children"]
+
+def test_remove_node_complex(built_ontology_complex):
+    nodes = built_ontology_complex
+    remove_node(nodes, "Bicycle")
+    assert "Bicycle" not in nodes
+    assert "Gears" in nodes
+    assert "Tires" in nodes
+    assert "Bicycle" not in nodes["Gears"]['parents']
+    assert "Bicycle" not in nodes["Tires"]['parents']
+    assert "Bicycle" not in nodes["Vehicle sounds"]['children']
+
+def test_remove_node_root(built_ontology_complex):
+    nodes = built_ontology_complex
+    with pytest.raises(ValueError):
+        remove_node(nodes, ROOT_NAME)
+
+
+def test_print_as_tree_basic(built_ontology_basic):
+    output = StringIO()
+    print_as_tree(built_ontology_basic, output)
+    expected = dedent("""
+        Animal sounds (abstract)
+        - Bird sounds
+        - Mammal sounds
+        - - Dog barks
+    """).lstrip()
+    assert output.getvalue() == expected
+
+def test_print_as_tree_complex(built_ontology_complex):
+    output = StringIO()
+    print_as_tree(built_ontology_complex, output)
+    expected = dedent("""
+        Industrial sounds (abstract)
+        - Building
+        - - Tools
+        - Mechanisms (abstract)
+        - - Gears (multiple parents)
+        - - Pulleys
+        Vehicle sounds (abstract)
+        - Bicycle
+        - - Gears (multiple parents)
+        - - Tires (multiple parents)
+        - Car sounds (abstract)
+        - - Engine
+        - - Horn
+        - - Tires (multiple parents)
+    """).lstrip()
+    assert output.getvalue() == expected
+
+def test_drop_property_existing_property():
+    nodes = {
+        'A': {'children': ['B'], 'parents': [], 'abstract': False, 'blacklist': False, 'in_model': True},
+        'B': {'children': [], 'parents': ['A'], 'abstract': False, 'blacklist': True, 'in_model': True}
+    }
+    drop_property(nodes, 'blacklist')
+    
+    assert 'blacklist' not in nodes['A']
+    assert 'blacklist' not in nodes['B']
+    assert 'children' in nodes['A']
+    assert 'in_model' in nodes['B']
+
+def test_drop_property_non_existent_property():
+    nodes = {
+        'A': {'children': ['B'], 'parents': [], 'abstract': False, 'blacklist': False, 'in_model': True},
+        'B': {'children': [], 'parents': ['A'], 'abstract': False, 'blacklist': True, 'in_model': True}
+    }
+    drop_property(nodes, 'non_existent_property')
+    
+    assert 'children' in nodes['A']
+    assert 'blacklist' in nodes['B']
+    assert 'non_existent_property' not in nodes['A']
+    assert 'non_existent_property' not in nodes['B']
+    assert 'in_model' in nodes['A']
+    assert 'abstract' in nodes['B']
 
 
 if __name__ == '__main__':
