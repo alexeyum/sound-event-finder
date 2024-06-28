@@ -191,3 +191,25 @@ def drop_property(nodes, property_name):
     for name, node in nodes.items():
         if property_name in node:
             del node[property_name]
+
+
+def get_all_ancestors(nodes, name):
+
+    """Yields all ancestors of a given node in the ontology graph.
+
+    Generates all ancestor nodes of a specified node by recursively
+    traversing up the graph through parent nodes.
+
+    Args:
+        nodes (dict): A dictionary representing the ontology graph. Each key is
+            a node name, and its value is a dictionary of node properties,
+            including 'parents', which is a list of parent node names.
+        name (str): The name of the node for which to find all ancestors.
+
+    Yields:
+        str: The name of each ancestor node.
+    """
+
+    for parent in nodes[name]['parents']:
+        yield parent
+        yield from get_all_ancestors(nodes, parent)

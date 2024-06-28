@@ -184,5 +184,26 @@ def test_drop_property_non_existent_property():
     assert 'abstract' in nodes['B']
 
 
+def test_get_all_ancestors_basic_single(built_ontology_basic):
+    result = set(get_all_ancestors(built_ontology_basic, 'Bird sounds'))
+    assert result == {'Animal sounds', '<root>'}
+
+def test_get_all_ancestors_basic_multiple(built_ontology_basic):
+    result = set(get_all_ancestors(built_ontology_basic, 'Dog barks'))
+    assert result == {'Mammal sounds', 'Animal sounds', '<root>'}
+
+def test_get_all_ancestors_complex_single(built_ontology_complex):
+    result = set(get_all_ancestors(built_ontology_complex, 'Horn'))
+    assert result == {'Car sounds', 'Vehicle sounds', '<root>'}
+
+def test_get_all_ancestors_complex_multiple_parents(built_ontology_complex):
+    result = set(get_all_ancestors(built_ontology_complex, 'Tires'))
+    assert result == {'Bicycle', 'Vehicle sounds', '<root>', 'Car sounds'}
+
+def test_get_all_ancestors_complex_no_parents(built_ontology_complex):
+    result = set(get_all_ancestors(built_ontology_complex, '<root>'))
+    assert result == set()
+
+
 if __name__ == '__main__':
     pytest.main()
