@@ -1,4 +1,4 @@
-import time
+import json
 
 import torch
 import torchaudio
@@ -6,79 +6,120 @@ from transformers import AutoFeatureExtractor, ASTForAudioClassification
 import runpod
 
 import event_finder
-import preprocess
+import utils
 
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-CHUNK_LENGTH_SEC = 10
-PROBABILITY_THRESHOLD = 0.2
 MODEL_PATH = "MIT/ast-finetuned-audioset-10-10-0.4593"
-FORMAT = "mp3"
+ONTOLOGY_PATH = "ontology.json"
+
+DEFAULT_CHUNK_LENGTH_SEC = 10
+DEFAULT_PROBABILITY_THRESHOLD = 0.2
 
 
-def _load_model():
-    load_start = time.time()
+def make_config(job_input):
+
+    """Create a configuration dictionary based on job input."""
+
+    return {
+        "chunk_length_sec": job_input.get("chunk_length_sec", 
+                                          DEFAULT_CHUNK_LENGTH_SEC),
+        "probability_threshold": job_input.get("probability_threshold", 
+                                               DEFAULT_PROBABILITY_THRESHOLD),
+    }
+
+
+def process_audio_input(job_input, config):
+
+    """Process the audio input from the job input."""
+
+    if "audio" not in job_input:
+        raise ValueError("No audio found.")
+    if "base64" not in job_input["audio"]:
+        raise ValueError("Only base64 encoding for audio is supported for now.")
+    if "format" not in job_input["audio"]:
+        raise ValueError("Audio format not specified.")
+    if job_input["audio"]["format"] != "mp3":
+        raise ValueError("Only mp3 format for audio is supported for now.")
+
+    waveform_raw, source_sampling_rate = utils.load_audio_from_base64(
+        job_input["audio"]["base64"], 
+        format=job_input["audio"]["format"])
+
+    waveform = utils.convert_audio(waveform_raw, source_sampling_rate,
+                                   channels="mono", sampling_rate=config["sampling_rate"])
+
+    return waveform
+
+
+def load_model():    
+    """Load the model and feature extractor."""
     extractor = AutoFeatureExtractor.from_pretrained(MODEL_PATH, local_files_only=True)
     model = ASTForAudioClassification.from_pretrained(MODEL_PATH, local_files_only=True).to(DEVICE)
-    load_time = time.time() - load_start
-
-    return model, extractor, load_time
+    return model, extractor
 
 
-def _make_features(extractor, waveform, sampling_rate):
-    chunks = event_finder.chunk_audio(waveform, sampling_rate, chunk_length_sec=CHUNK_LENGTH_SEC)
+def find_events(config, probabilities):
 
-    extract_start = time.time()
-    features = extractor(chunks, sampling_rate, return_tensors="pt").to(DEVICE)
-    extract_time = time.time() - extract_start
+    """Create and return an EventFinder instance."""
 
-    return features, extract_time
+    with open(ONTOLOGY_PATH, "r") as f:
+        events_graph = json.load(f)
+
+    finder = event_finder.EventFinder(
+        config["model_config"].id2label,
+        events_graph,
+        chunk_length_sec=config["chunk_length_sec"],
+        probability_threshold=config["probability_threshold"])
+
+    return finder.find(probabilities)
 
 
-def _inference(model, features):
-    inference_start = time.time()
+def make_features(extractor, waveform, config):
+    """Extract features from the audio waveform."""
+    chunks = utils.chunk_audio(waveform, config["sampling_rate"], 
+                               chunk_length_sec=config["chunk_length_sec"])
+    features = extractor(chunks, config["sampling_rate"], return_tensors="pt").to(DEVICE)
+    return features
+
+
+def inference(model, features):
+    """Perform inference on the extracted features."""
     with torch.no_grad():
         probs = torch.sigmoid(model(**features).logits)
-    inference_time = time.time() - inference_start
-    return probs, inference_time
+    return probs
 
 
 def find_sound_events(job):
-    job_input = job["input"]
-    if "audio" not in job_input:
-        return {"error": "No audio found."}
-    if "base64" not in job_input["audio"]:
-        return {"error": "Only base64 format for audio is available for now."}
+    try:
+        timing_manager = utils.TimingManager()
 
-    model, extractor, load_time = _load_model()
-    sampling_rate = extractor.sampling_rate
+        with timing_manager.timer("load_model"):
+            model, extractor = load_model()
 
-    finder = event_finder.EventFinder(
-        model.config,
-        chunk_length_sec=CHUNK_LENGTH_SEC,
-        probability_threshold=PROBABILITY_THRESHOLD)
+        config = make_config(job["input"])
+        config["sampling_rate"] = extractor.sampling_rate
+        config["model_config"] = model.config
 
-    waveform_raw, source_sampling_rate = preprocess.load_audio_from_base64(
-        job_input["audio"]["base64"], format=FORMAT)
-    waveform = preprocess.convert_audio(waveform_raw, source_sampling_rate,
-                                        channels="mono", sampling_rate=sampling_rate)
+        waveform = process_audio_input(job["input"], config)
 
-    features, extract_time = _make_features(extractor, waveform, sampling_rate)
+        with timing_manager.timer("extract_features"):
+            features = make_features(extractor, waveform, config)
 
-    probs, inference_time = _inference(model, features)
+        with timing_manager.timer("inference"):
+            probs = inference(model, features)
 
-    events = finder(probs)
+        with timing_manager.timer("find_events"):
+            events = find_events(config, probs)
 
-    result = {
-            "events": events,
-            "time": {
-                "load_model": load_time,
-                "extract_features": extract_time,
-                "inference": inference_time,
-            }
-        }
-    return result
+        result = {"events": events,
+                  "time": timing_manager.get_timing_dict()}
+        return result
 
+    except ValueError as e:
+        return {"error": str(e)}
+    except Exception as e:
+        return {"error": f"An unexpected error occurred: {str(e)}"}
 
 if __name__ == "__main__":
     runpod.serverless.start({"handler": find_sound_events})

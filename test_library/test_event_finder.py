@@ -2,7 +2,7 @@ import pytest
 import numpy as np
 import json
 
-from events import *
+from event_finder import *
 
 
 def test_group_indexes_single_range():

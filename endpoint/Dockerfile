@@ -15,6 +15,7 @@ RUN python3 preload.py
 
 COPY library /workspace/library
 COPY endpoint/handler.py /workspace/.
+COPY endpoint/ontology.json /workspace/.
 
 ENV PYTHONPATH "${PYTHONPATH}:/workspace/library"
 
