@@ -4388,12 +4388,12 @@
     },
     "<root>": {
         "children": [
-            "Sounds of things",
-            "Music",
-            "Human sounds",
             "Natural sounds",
+            "Animal",
+            "Sounds of things",
             "Source-ambiguous sounds",
-            "Animal"
+            "Human sounds",
+            "Music"
         ],
         "parents": [],
         "abstract": true

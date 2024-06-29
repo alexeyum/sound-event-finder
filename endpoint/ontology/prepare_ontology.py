@@ -63,7 +63,7 @@ def main():
     _remove_non_model(nodes)
 
 
-    with open('ontology.json', 'w') as f:
+    with open('../ontology.json', 'w') as f:
         json.dump(nodes, f, indent=4)
 
     with open('ontology_tree.txt', 'w') as f:

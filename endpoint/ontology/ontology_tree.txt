@@ -1,3 +1,93 @@
+Natural sounds (abstract)
+- Fire
+- - Crackle (multiple parents)
+- Thunderstorm
+- - Thunder
+- Water
+- - Gurgling
+- - Ocean
+- - - Waves, surf
+- - Rain
+- - - Rain on surface
+- - - Raindrop
+- - Steam
+- - - Hiss (multiple parents)
+- - Stream
+- - Waterfall
+- Wind
+- - Rustling leaves
+- - Wind noise (microphone) (multiple parents)
+Animal
+- Domestic animals, pets
+- - Cat
+- - - Caterwaul
+- - - Growling (multiple parents)
+- - - Hiss (multiple parents)
+- - - Meow
+- - - Purr
+- - Dog
+- - - Bark
+- - - Bow-wow
+- - - Growling (multiple parents)
+- - - Howl (multiple parents)
+- - - Whimper (dog)
+- - - Yip
+- Livestock, farm animals, working animals
+- - Cattle, bovinae
+- - - Cowbell (multiple parents)
+- - - Moo
+- - Fowl
+- - - Chicken, rooster
+- - - - Cluck
+- - - - Crowing, cock-a-doodle-doo
+- - - Duck
+- - - - Quack
+- - - Goose
+- - - - Honk
+- - - Turkey
+- - - - Gobble
+- - Goat
+- - - Bleat (multiple parents)
+- - Horse
+- - - Clip-clop (multiple parents)
+- - - Neigh, whinny
+- - Pig
+- - - Oink
+- - Sheep
+- - - Bleat (multiple parents)
+- Wild animals
+- - Bird
+- - - Bird flight, flapping wings
+- - - Bird vocalization, bird call, bird song
+- - - - Chirp, tweet (multiple parents)
+- - - - Squawk
+- - - Crow
+- - - - Caw
+- - - Owl
+- - - - Hoot
+- - - Pigeon, dove
+- - - - Coo
+- - Canidae, dogs, wolves
+- - - Growling (multiple parents)
+- - - Howl (multiple parents)
+- - Frog
+- - - Croak
+- - Insect
+- - - Bee, wasp, etc.
+- - - - Buzz (multiple parents)
+- - - Cricket
+- - - Fly, housefly
+- - - - Buzz (multiple parents)
+- - - Mosquito
+- - Roaring cats (lions, tigers)
+- - - Growling (multiple parents)
+- - - Roar
+- - Rodents, rats, mice
+- - - Mouse
+- - Snake
+- - - Hiss (multiple parents)
+- - - Rattle (multiple parents)
+- - Whale vocalization
 Sounds of things (abstract)
 - Alarm
 - - Air horn, truck horn (multiple parents)
@@ -191,6 +281,144 @@ Sounds of things (abstract)
 - - Chop
 - - Crack (multiple parents)
 - - Splinter
+Source-ambiguous sounds (abstract)
+- Deformable shell (abstract)
+- - Crumpling, crinkling
+- - Crushing
+- - Tearing
+- Generic impact sounds (abstract)
+- - Bang
+- - Bouncing
+- - Breaking
+- - Flap
+- - Knock (multiple parents)
+- - Slap, smack
+- - Smash, crash
+- - Tap (multiple parents)
+- - Thump, thud (multiple parents)
+- - - Thunk
+- - Whack, thwack
+- - Whip
+- Onomatopoeia (abstract)
+- - Boing
+- - Brief tone (abstract)
+- - - Beep, bleep
+- - - Buzz (multiple parents)
+- - - Chirp, tweet (multiple parents)
+- - - Clang
+- - - Ding
+- - - Ping
+- - - Squeak (multiple parents)
+- - - Squeal
+- - Clicking
+- - - Clickety-clack
+- - - Clip-clop (multiple parents)
+- - - Tick (multiple parents)
+- - Crack (multiple parents)
+- - Crackle (multiple parents)
+- - Creak
+- - Crunch
+- - Hiss (multiple parents)
+- - Hum
+- - Jingle, tinkle
+- - Plop
+- - Rattle (multiple parents)
+- - Rumble
+- - Rustle
+- - Sizzle
+- - Squish (multiple parents)
+- - Whir
+- - Whoosh, swoosh, swish (multiple parents)
+- - Zing
+- Other sourceless (abstract)
+- - Pulse
+- - Sine wave
+- - - Chirp tone
+- - Sound effect
+- Silence
+- Surface contact (abstract)
+- - Rub
+- - Scrape
+- - Scratch
+Human sounds (abstract)
+- Digestive (abstract)
+- - Biting
+- - Burping, eructation
+- - Chewing, mastication
+- - Fart
+- - Gargling
+- - Hiccup
+- - Stomach rumble
+- Hands
+- - Clapping (multiple parents)
+- - Finger snapping
+- Heart sounds, heartbeat
+- Human group actions (abstract)
+- - Applause
+- - Chatter
+- - Cheering
+- - Children playing
+- - Children shouting (multiple parents)
+- - Clapping (multiple parents)
+- - Crowd
+- - Hubbub, speech noise, speech babble
+- Human locomotion (abstract)
+- - Run
+- - Shuffle
+- - Walk, footsteps
+- Human voice (abstract)
+- - Crying, sobbing
+- - - Baby cry, infant cry
+- - - Whimper
+- - Groan
+- - Grunt
+- - Humming
+- - Laughter
+- - - Baby laughter
+- - - Belly laugh
+- - - Chuckle, chortle
+- - - Giggle
+- - - Snicker
+- - Screaming
+- - Shout
+- - - Battle cry
+- - - Bellow
+- - - Children shouting (multiple parents)
+- - - Whoop
+- - - Yell
+- - Sigh
+- - Singing
+- - - Chant (multiple parents)
+- - - - Mantra
+- - - Child singing
+- - - Choir (multiple parents)
+- - - Female singing
+- - - Male singing
+- - - Rapping
+- - - Synthetic singing
+- - - Yodeling
+- - Speech
+- - - Babbling
+- - - Child speech, kid speaking
+- - - Conversation
+- - - Female speech, woman speaking
+- - - Male speech, man speaking
+- - - Narration, monologue
+- - - Speech synthesizer
+- - Wail, moan
+- - Whispering
+- Respiratory sounds (abstract)
+- - Breathing
+- - - Gasp
+- - - Pant
+- - - Snoring
+- - - Snort
+- - - Wheeze
+- - Cough
+- - - Throat clearing
+- - Sneeze
+- - Sniff
+- Whistling
 Music
 - Music genre (abstract)
 - - Blues
@@ -345,231 +573,3 @@ Music
 - - - Clarinet
 - - - Flute
 - - - Saxophone
-Human sounds (abstract)
-- Digestive (abstract)
-- - Biting
-- - Burping, eructation
-- - Chewing, mastication
-- - Fart
-- - Gargling
-- - Hiccup
-- - Stomach rumble
-- Hands
-- - Clapping (multiple parents)
-- - Finger snapping
-- Heart sounds, heartbeat
-- Human group actions (abstract)
-- - Applause
-- - Chatter
-- - Cheering
-- - Children playing
-- - Children shouting (multiple parents)
-- - Clapping (multiple parents)
-- - Crowd
-- - Hubbub, speech noise, speech babble
-- Human locomotion (abstract)
-- - Run
-- - Shuffle
-- - Walk, footsteps
-- Human voice (abstract)
-- - Crying, sobbing
-- - - Baby cry, infant cry
-- - - Whimper
-- - Groan
-- - Grunt
-- - Humming
-- - Laughter
-- - - Baby laughter
-- - - Belly laugh
-- - - Chuckle, chortle
-- - - Giggle
-- - - Snicker
-- - Screaming
-- - Shout
-- - - Battle cry
-- - - Bellow
-- - - Children shouting (multiple parents)
-- - - Whoop
-- - - Yell
-- - Sigh
-- - Singing
-- - - Chant (multiple parents)
-- - - - Mantra
-- - - Child singing
-- - - Choir (multiple parents)
-- - - Female singing
-- - - Male singing
-- - - Rapping
-- - - Synthetic singing
-- - - Yodeling
-- - Speech
-- - - Babbling
-- - - Child speech, kid speaking
-- - - Conversation
-- - - Female speech, woman speaking
-- - - Male speech, man speaking
-- - - Narration, monologue
-- - - Speech synthesizer
-- - Wail, moan
-- - Whispering
-- Respiratory sounds (abstract)
-- - Breathing
-- - - Gasp
-- - - Pant
-- - - Snoring
-- - - Snort
-- - - Wheeze
-- - Cough
-- - - Throat clearing
-- - Sneeze
-- - Sniff
-- Whistling
-Natural sounds (abstract)
-- Fire
-- - Crackle (multiple parents)
-- Thunderstorm
-- - Thunder
-- Water
-- - Gurgling
-- - Ocean
-- - - Waves, surf
-- - Rain
-- - - Rain on surface
-- - - Raindrop
-- - Steam
-- - - Hiss (multiple parents)
-- - Stream
-- - Waterfall
-- Wind
-- - Rustling leaves
-- - Wind noise (microphone) (multiple parents)
-Source-ambiguous sounds (abstract)
-- Deformable shell (abstract)
-- - Crumpling, crinkling
-- - Crushing
-- - Tearing
-- Generic impact sounds (abstract)
-- - Bang
-- - Bouncing
-- - Breaking
-- - Flap
-- - Knock (multiple parents)
-- - Slap, smack
-- - Smash, crash
-- - Tap (multiple parents)
-- - Thump, thud (multiple parents)
-- - - Thunk
-- - Whack, thwack
-- - Whip
-- Onomatopoeia (abstract)
-- - Boing
-- - Brief tone (abstract)
-- - - Beep, bleep
-- - - Buzz (multiple parents)
-- - - Chirp, tweet (multiple parents)
-- - - Clang
-- - - Ding
-- - - Ping
-- - - Squeak (multiple parents)
-- - - Squeal
-- - Clicking
-- - - Clickety-clack
-- - - Clip-clop (multiple parents)
-- - - Tick (multiple parents)
-- - Crack (multiple parents)
-- - Crackle (multiple parents)
-- - Creak
-- - Crunch
-- - Hiss (multiple parents)
-- - Hum
-- - Jingle, tinkle
-- - Plop
-- - Rattle (multiple parents)
-- - Rumble
-- - Rustle
-- - Sizzle
-- - Squish (multiple parents)
-- - Whir
-- - Whoosh, swoosh, swish (multiple parents)
-- - Zing
-- Other sourceless (abstract)
-- - Pulse
-- - Sine wave
-- - - Chirp tone
-- - Sound effect
-- Silence
-- Surface contact (abstract)
-- - Rub
-- - Scrape
-- - Scratch
-Animal
-- Domestic animals, pets
-- - Cat
-- - - Caterwaul
-- - - Growling (multiple parents)
-- - - Hiss (multiple parents)
-- - - Meow
-- - - Purr
-- - Dog
-- - - Bark
-- - - Bow-wow
-- - - Growling (multiple parents)
-- - - Howl (multiple parents)
-- - - Whimper (dog)
-- - - Yip
-- Livestock, farm animals, working animals
-- - Cattle, bovinae
-- - - Cowbell (multiple parents)
-- - - Moo
-- - Fowl
-- - - Chicken, rooster
-- - - - Cluck
-- - - - Crowing, cock-a-doodle-doo
-- - - Duck
-- - - - Quack
-- - - Goose
-- - - - Honk
-- - - Turkey
-- - - - Gobble
-- - Goat
-- - - Bleat (multiple parents)
-- - Horse
-- - - Clip-clop (multiple parents)
-- - - Neigh, whinny
-- - Pig
-- - - Oink
-- - Sheep
-- - - Bleat (multiple parents)
-- Wild animals
-- - Bird
-- - - Bird flight, flapping wings
-- - - Bird vocalization, bird call, bird song
-- - - - Chirp, tweet (multiple parents)
-- - - - Squawk
-- - - Crow
-- - - - Caw
-- - - Owl
-- - - - Hoot
-- - - Pigeon, dove
-- - - - Coo
-- - Canidae, dogs, wolves
-- - - Growling (multiple parents)
-- - - Howl (multiple parents)
-- - Frog
-- - - Croak
-- - Insect
-- - - Bee, wasp, etc.
-- - - - Buzz (multiple parents)
-- - - Cricket
-- - - Fly, housefly
-- - - - Buzz (multiple parents)
-- - - Mosquito
-- - Roaring cats (lions, tigers)
-- - - Growling (multiple parents)
-- - - Roar
-- - Rodents, rats, mice
-- - - Mouse
-- - Snake
-- - - Hiss (multiple parents)
-- - - Rattle (multiple parents)
-- - Whale vocalization
