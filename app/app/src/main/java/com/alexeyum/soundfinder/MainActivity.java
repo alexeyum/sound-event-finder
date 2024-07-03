@@ -159,6 +159,7 @@ public class MainActivity extends AppCompatActivity {
             apiInput = new JSONObject()
                 .put("input", new JSONObject()
                     .put("audio", new JSONObject()
+                        .put("format", "mp3")
                         .put("base64", fileBase64)))
                 .toString();
         } catch (JSONException e) {
@@ -279,6 +280,10 @@ public class MainActivity extends AppCompatActivity {
             result.append(String.format(Locale.getDefault(),
                     "Inference: %.3f s.\n",
                     jsonTime.getDouble("inference")));
+
+            result.append(String.format(Locale.getDefault(),
+                    "Finding events: %.3f s.\n",
+                    jsonTime.getDouble("find_events")));
 
 
         } catch (JSONException e) {
