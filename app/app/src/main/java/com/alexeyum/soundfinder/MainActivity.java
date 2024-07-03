@@ -1,7 +1,5 @@
 package com.alexeyum.soundfinder;
 
-import static java.lang.Math.min;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
@@ -9,7 +7,6 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
 
 import com.developer.filepicker.model.DialogConfigs;
@@ -118,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setStatus(String text) {
-        tvStatus.setText("Status: " + text);
+        tvStatus.setText(getString(R.string.status, text));
     }
 
     public void displayError(String shortText, String longText) {
@@ -137,53 +134,52 @@ public class MainActivity extends AppCompatActivity {
         snackbar.show();
     }
 
-    public void runPrediction() {
-        setResultsText("");
-        setInfoText("");
-
-        String fileBase64;
-        if (filePath == null) {
-            displayError(
-                "Error: no file provided",
-                "Select a file before running a prediction");
-        }
-        try {
-            fileBase64 = readFileAsBase64(filePath);
-        } catch (IOException e) {
-            displayError("Error: failed to read file", e.toString());
-            return;
-        }
-
-        String apiInput;
-        try {
-            apiInput = new JSONObject()
-                .put("input", new JSONObject()
+    private Request buildApiRequest(String fileBase64) throws JSONException {
+        String apiInput = new JSONObject()
+            .put("input", new JSONObject()
                     .put("audio", new JSONObject()
-                        .put("format", "mp3")
-                        .put("base64", fileBase64)))
-                .toString();
-        } catch (JSONException e) {
-            displayError("Error: failed to build JSON", e.toString());
-            return;
-        }
+                            .put("format", "mp3")
+                            .put("base64", fileBase64)))
+            .toString();
 
-        OkHttpClient client = new OkHttpClient.Builder()
-                .readTimeout(300, TimeUnit.SECONDS)
-                .build();
         RequestBody body = RequestBody.create(apiInput, MediaType.get("application/json"));
-        Request request = new Request.Builder()
+        return new Request.Builder()
                 .url(API_URL)
                 .addHeader("Content-Type", "application/json")
                 .addHeader("Authorization", "Bearer " + BuildConfig.API_KEY)
                 .post(body)
                 .build();
+    }
 
-        Log.i(TAG, "Starting API request");
+    public void runPrediction() {
+        setResultsText("");
+        setInfoText("");
 
-        client.newCall(request).enqueue(new APICallHandler());
+        if (filePath == null) {
+            displayError(
+                "Error: no file provided",
+                "Select a file before running a prediction");
+            return;
+        }
 
-        Log.i(TAG, "API request sent");
-        setStatus("running prediction");
+        try {
+            String fileBase64 = readFileAsBase64(filePath);
+
+            OkHttpClient client = new OkHttpClient.Builder()
+                    .readTimeout(300, TimeUnit.SECONDS)
+                    .build();
+            Request request = buildApiRequest(fileBase64);
+
+            Log.i(TAG, "Sending API request");
+            client.newCall(request).enqueue(new APICallHandler());
+
+            setStatus("running prediction");
+
+        } catch (IOException e) {
+            displayError("Error: failed to read file", e.toString());
+        } catch (JSONException e) {
+            displayError("Error: failed to build JSON", e.toString());
+        }
     }
 
     protected class APICallHandler implements Callback {
@@ -197,20 +193,25 @@ public class MainActivity extends AppCompatActivity {
                     throw new IOException("Response body is null");
                 }
                 responseStr = response.body().string();
+
+                JSONObject json = new JSONObject(responseStr);
+                String strEvents = ApiResultFormatter.formatEvents(json);
+                runOnUiThread(() -> setResultsText(strEvents));
+                String strInfo = ApiResultFormatter.formatExecutionInfo(json);
+                runOnUiThread(() -> setInfoText(strInfo));
             } catch (IOException e) {
                 String errorDescription =
                         "Response message: " + response.message() + "\n" +
-                                "Exception message: " + e.getMessage();
+                        "Exception message: " + e.getMessage();
                 displayError("Failed to run prediction", errorDescription);
                 runOnUiThread(() -> setStatus("failed"));
-                return;
+            } catch (JSONException e) {
+                String errorDescription =
+                        "Response message: " + response.message() + "\n" +
+                        "Exception message: " + e.getMessage();
+                displayError("Failed to parse results", errorDescription);
+                runOnUiThread(() -> setStatus("failed"));
             }
-
-            // TODO: fix duplicate json parsing?
-            String strEvents = formatEvents(responseStr);
-            runOnUiThread(() -> setResultsText(strEvents));
-            String strInfo = formatInfo(responseStr);
-            runOnUiThread(() -> setInfoText(strInfo));
 
             runOnUiThread(() -> setStatus("finished"));
         }
@@ -227,86 +228,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    static protected String formatEvents(String jsonString) {
-        StringBuilder result = new StringBuilder();
-        try {
-            JSONObject json = new JSONObject(jsonString);
-            JSONArray events = json.getJSONObject("output").getJSONArray("events");
-            for (int i = 0; i < events.length(); i++) {
-                JSONArray eventData = events.getJSONArray(i);
-                String eventName = eventData.getString(0);
-                int fromSec = eventData.getInt(1);
-                int toSec = eventData.getInt(2);
-                String fmtEvent = secondsToTime(fromSec) + "-" + secondsToTime(toSec) +
-                                  " - " + eventName + "\n";
-                result.append(fmtEvent);
-            }
-        } catch (JSONException e) {
-            // TODO: better error handling?
-            return "Error: malformed response JSON\n" + e.getMessage();
-        }
-
-        return result.toString();
-    }
-
-    static protected String secondsToTime(int seconds) {
-        return String.format(Locale.getDefault(), "%d:%02d", seconds / 60, seconds % 60);
-    }
-
-    static protected String formatInfo(String jsonString) {
-        StringBuilder result = new StringBuilder();
-        try {
-            JSONObject json = new JSONObject(jsonString);
-
-
-            result.append(String.format(Locale.getDefault(),
-                    "Delay: %.3f s.\n",
-                    json.getDouble("delayTime") / 1000));
-
-            result.append(String.format(Locale.getDefault(),
-                    "Execution: %.3f s.\n",
-                    json.getDouble("executionTime") / 1000));
-
-            JSONObject jsonTime = json.getJSONObject("output").getJSONObject("time");
-
-            result.append(String.format(Locale.getDefault(),
-                    "Model loading: %.3f s.\n",
-                    jsonTime.getDouble("load_model")));
-
-            result.append(String.format(Locale.getDefault(),
-                    "Feature extraction: %.3f s.\n",
-                    jsonTime.getDouble("extract_features")));
-
-            result.append(String.format(Locale.getDefault(),
-                    "Inference: %.3f s.\n",
-                    jsonTime.getDouble("inference")));
-
-            result.append(String.format(Locale.getDefault(),
-                    "Finding events: %.3f s.\n",
-                    jsonTime.getDouble("find_events")));
-
-
-        } catch (JSONException e) {
-            // TODO: better error handling?
-            return "Error: malformed response JSON\n" + e.getMessage();
-        }
-
-        return result.toString();
-    }
-
-    static protected String readFileAsBase64(String path) throws IOException {
+    public static String readFileAsBase64(String path) throws IOException {
         File file = new File(path);
-        int size = (int)file.length();
-
-        byte[] bytes = new byte[size];
-        BufferedInputStream buf = new BufferedInputStream(Files.newInputStream(file.toPath()));
-        int bytes_read = buf.read(bytes, 0, bytes.length);
-        buf.close();
-
-        if (bytes_read < bytes.length) {
-            throw new IOException("Failed to read full file");
-        }
-
+        byte[] bytes = Files.readAllBytes(file.toPath());
         return Base64.encodeToString(bytes, Base64.DEFAULT);
     }
 }

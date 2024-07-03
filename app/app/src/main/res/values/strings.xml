@@ -1,8 +1,6 @@
 <resources>
     <string name="app_name">SoundFinder</string>
-    <string name="classesNames">air_conditioner\ncar_horn\nchildren_playing\ndog_bark\ndrilling\nengine_idling\ngun_shot\njackhammer\nsiren\nstreet_music</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="resultsTabName">Results</string>
     <string name="infoTabName">Info</string>
+    <string name="status">"Status: %1$s"</string>
 </resources>
