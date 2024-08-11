@@ -196,21 +196,25 @@ public class MainActivity extends AppCompatActivity {
                 runOnUiThread(() -> setResultsText(strEvents));
                 String strInfo = ApiResultFormatter.formatExecutionInfo(json);
                 runOnUiThread(() -> setInfoText(strInfo));
+                runOnUiThread(() -> setStatus("finished"));
             } catch (IOException e) {
                 String errorDescription =
                         "Response message: " + response.message() + "\n" +
                         "Exception message: " + e.getMessage();
-                displayError("Failed to run prediction", errorDescription);
-                runOnUiThread(() -> setStatus("failed"));
+
+                runOnUiThread(() -> {
+                    displayError("Failed to run prediction", errorDescription);
+                    setStatus("failed");
+                });
             } catch (JSONException e) {
                 String errorDescription =
                         "Response message: " + response.message() + "\n" +
                         "Exception message: " + e.getMessage();
-                displayError("Failed to parse results", errorDescription);
-                runOnUiThread(() -> setStatus("failed"));
+                runOnUiThread(() -> {
+                    displayError("Failed to parse results", errorDescription);
+                    setStatus("failed");
+                });
             }
-
-            runOnUiThread(() -> setStatus("finished"));
         }
 
         @Override
