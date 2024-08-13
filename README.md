@@ -9,50 +9,47 @@ intervals for each sound event, and allow overlapping intervals for different ev
 
 ## Features
 
-TODO: ??
-
-- AI
-- API
-- ???
+- **Predictions using AI:** sound classificiation using [Audio Spectogram Transformer](https://huggingface.co/MIT/ast-finetuned-audioset-10-10-0.4593) model trained on [AudioSet](https://research.google.com/audioset/) data
+- **API for core functionality:** all main features accessible through a RESTful API endpoint
+- **Android app:** user-friendly interface for API as a mobile application
 
 
 ## Demo
 
-
-
 https://github.com/user-attachments/assets/dd58a630-3c2a-43dd-9a9f-858ea18b1c2d
 
 
+## Tech Stack
 
-## Tech Stack / Built With / ...
+- **HuggingFace transformers** for sound classification
+- **Python** and **PyTorch** for backend sound processing
+- **Docker** and [**runpod**](rundpod.io) for creating API endpoint
+- **Java** and **gradle** for mobile app
+- **pytest** and **junit** for testing
 
-TODO
 
-
-## Installation / Usage
-
-TODO
-
-## API Reference
-
-TODO
-
-## Testing
+## Usage
 
 TODO
+
+### Repository Structure
+
+### API
+
+### Mobile App
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Contact Information
-
-TODO
 
 ## Acknowledgements
 
-TODO
+This project uses several open source components, please see [Credits.md](Credits.md) file for details.
 
 ## Future Work
 
-TODO
+Here are some plans for the future versions:
+
+- Analyse sound during its recording, send notifications depending on specific sound events
+- ...
