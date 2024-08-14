@@ -1,0 +1,575 @@
+Natural sounds (abstract)
+- Fire
+- - Crackle (multiple parents)
+- Thunderstorm
+- - Thunder
+- Water
+- - Gurgling
+- - Ocean
+- - - Waves, surf
+- - Rain
+- - - Rain on surface
+- - - Raindrop
+- - Steam
+- - - Hiss (multiple parents)
+- - Stream
+- - Waterfall
+- Wind
+- - Rustling leaves
+- - Wind noise (microphone) (multiple parents)
+Animal
+- Domestic animals, pets
+- - Cat
+- - - Caterwaul
+- - - Growling (multiple parents)
+- - - Hiss (multiple parents)
+- - - Meow
+- - - Purr
+- - Dog
+- - - Bark
+- - - Bow-wow
+- - - Growling (multiple parents)
+- - - Howl (multiple parents)
+- - - Whimper (dog)
+- - - Yip
+- Livestock, farm animals, working animals
+- - Cattle, bovinae
+- - - Cowbell (multiple parents)
+- - - Moo
+- - Fowl
+- - - Chicken, rooster
+- - - - Cluck
+- - - - Crowing, cock-a-doodle-doo
+- - - Duck
+- - - - Quack
+- - - Goose
+- - - - Honk
+- - - Turkey
+- - - - Gobble
+- - Goat
+- - - Bleat (multiple parents)
+- - Horse
+- - - Clip-clop (multiple parents)
+- - - Neigh, whinny
+- - Pig
+- - - Oink
+- - Sheep
+- - - Bleat (multiple parents)
+- Wild animals
+- - Bird
+- - - Bird flight, flapping wings
+- - - Bird vocalization, bird call, bird song
+- - - - Chirp, tweet (multiple parents)
+- - - - Squawk
+- - - Crow
+- - - - Caw
+- - - Owl
+- - - - Hoot
+- - - Pigeon, dove
+- - - - Coo
+- - Canidae, dogs, wolves
+- - - Growling (multiple parents)
+- - - Howl (multiple parents)
+- - Frog
+- - - Croak
+- - Insect
+- - - Bee, wasp, etc.
+- - - - Buzz (multiple parents)
+- - - Cricket
+- - - Fly, housefly
+- - - - Buzz (multiple parents)
+- - - Mosquito
+- - Roaring cats (lions, tigers)
+- - - Growling (multiple parents)
+- - - Roar
+- - Rodents, rats, mice
+- - - Mouse
+- - Snake
+- - - Hiss (multiple parents)
+- - - Rattle (multiple parents)
+- - Whale vocalization
+Sounds of things (abstract)
+- Alarm
+- - Air horn, truck horn (multiple parents)
+- - Alarm clock
+- - Bicycle bell (multiple parents)
+- - Buzzer
+- - Car alarm (multiple parents)
+- - Doorbell (multiple parents)
+- - - Ding-dong
+- - Fire alarm
+- - Foghorn
+- - Siren
+- - - Ambulance (siren) (multiple parents)
+- - - Civil defense siren
+- - - Fire engine, fire truck (siren) (multiple parents)
+- - - Police car (siren) (multiple parents)
+- - Smoke detector, smoke alarm
+- - Telephone
+- - - Busy signal
+- - - Dial tone
+- - - Ringtone
+- - - Telephone bell ringing
+- - - Telephone dialing, DTMF
+- - Vehicle horn, car horn, honking (multiple parents)
+- - - Toot
+- - Whistle
+- - - Steam whistle
+- Bell (multiple parents)
+- - Bicycle bell (multiple parents)
+- - Change ringing (campanology)
+- - Chime
+- - - Wind chime
+- - Church bell
+- - Cowbell (multiple parents)
+- - Jingle bell
+- - Tuning fork
+- Domestic sounds, home sounds (abstract)
+- - Bathtub (filling or washing)
+- - Blender
+- - Chopping (food)
+- - Coin (dropping)
+- - Cupboard open or close
+- - Cutlery, silverware
+- - Dishes, pots, and pans
+- - Door
+- - - Doorbell (multiple parents)
+- - - - Ding-dong
+- - - Knock (multiple parents)
+- - - Slam
+- - - Sliding door
+- - - Squeak (multiple parents)
+- - - Tap (multiple parents)
+- - Drawer open or close
+- - Electric shaver, electric razor
+- - Frying (food)
+- - Hair dryer
+- - Keys jangling
+- - Microwave oven
+- - Scissors
+- - Shuffling cards
+- - Sink (filling or washing)
+- - Toilet flush
+- - Toothbrush
+- - - Electric toothbrush
+- - Typing
+- - - Computer keyboard
+- - - Typewriter
+- - Vacuum cleaner
+- - Water tap, faucet
+- - Writing
+- - Zipper (clothing)
+- Engine
+- - Accelerating, revving, vroom
+- - Engine starting
+- - Heavy engine (low frequency)
+- - Idling
+- - Jet engine (multiple parents)
+- - Light engine (high frequency)
+- - - Chainsaw
+- - - Dental drill, dentist's drill (multiple parents)
+- - - Lawn mower
+- - Medium engine (mid frequency)
+- Explosion
+- - Boom
+- - Burst, pop
+- - Eruption
+- - Fireworks
+- - - Firecracker
+- - Gunshot, gunfire
+- - - Artillery fire
+- - - Cap gun
+- - - Machine gun
+- Glass
+- - Chink, clink
+- - Shatter
+- Liquid
+- - Boiling
+- - Drip
+- - Fill (with liquid)
+- - Pour
+- - - Gush
+- - - Trickle, dribble
+- - Pump (liquid)
+- - Splash, splatter
+- - - Slosh
+- - Spray
+- - Squish (multiple parents)
+- - Stir
+- Mechanisms
+- - Air conditioning
+- - Camera
+- - - Single-lens reflex camera
+- - Cash register
+- - Clock
+- - - Tick (multiple parents)
+- - - Tick-tock
+- - Gears
+- - Mechanical fan
+- - Printer
+- - Pulleys
+- - Ratchet, pawl
+- - Sewing machine
+- Miscellaneous sources (abstract)
+- - Arrow
+- - - Thump, thud (multiple parents)
+- - - - Thunk
+- - - Whoosh, swoosh, swish (multiple parents)
+- - Sonar
+- - Sound equipment (abstract)
+- - - Effects unit
+- - - - Chorus effect
+- - - Microphone (abstract)
+- - - - Wind noise (microphone) (multiple parents)
+- Specific impact sounds (abstract)
+- - Basketball bounce
+- Tools
+- - Filing (rasp)
+- - Hammer
+- - Jackhammer
+- - Power tool
+- - - Drill
+- - - - Dental drill, dentist's drill (multiple parents)
+- - Sanding
+- - Sawing
+- Vehicle
+- - Aircraft
+- - - Aircraft engine
+- - - - Jet engine (multiple parents)
+- - - - Propeller, airscrew
+- - - Fixed-wing aircraft, airplane
+- - - Helicopter
+- - Boat, Water vehicle
+- - - Motorboat, speedboat
+- - - Rowboat, canoe, kayak
+- - - Sailboat, sailing ship
+- - - Ship
+- - Motor vehicle (road)
+- - - Bus
+- - - Car
+- - - - Car alarm (multiple parents)
+- - - - Car passing by
+- - - - Power windows, electric windows
+- - - - Race car, auto racing
+- - - - Skidding
+- - - - Tire squeal
+- - - - Vehicle horn, car horn, honking (multiple parents)
+- - - - - Toot
+- - - Emergency vehicle
+- - - - Ambulance (siren) (multiple parents)
+- - - - Fire engine, fire truck (siren) (multiple parents)
+- - - - Police car (siren) (multiple parents)
+- - - Motorcycle
+- - - Traffic noise, roadway noise
+- - - Truck
+- - - - Air brake
+- - - - Air horn, truck horn (multiple parents)
+- - - - Ice cream truck, ice cream van
+- - - - Reversing beeps
+- - Non-motorized land vehicle (abstract)
+- - - Bicycle
+- - - - Bicycle bell (multiple parents)
+- - - Skateboard
+- - Rail transport
+- - - Railroad car, train wagon
+- - - Subway, metro, underground
+- - - Train
+- - - - Train horn
+- - - - Train whistle
+- - - Train wheels squealing
+- Wood
+- - Chop
+- - Crack (multiple parents)
+- - Splinter
+Source-ambiguous sounds (abstract)
+- Deformable shell (abstract)
+- - Crumpling, crinkling
+- - Crushing
+- - Tearing
+- Generic impact sounds (abstract)
+- - Bang
+- - Bouncing
+- - Breaking
+- - Flap
+- - Knock (multiple parents)
+- - Slap, smack
+- - Smash, crash
+- - Tap (multiple parents)
+- - Thump, thud (multiple parents)
+- - - Thunk
+- - Whack, thwack
+- - Whip
+- Onomatopoeia (abstract)
+- - Boing
+- - Brief tone (abstract)
+- - - Beep, bleep
+- - - Buzz (multiple parents)
+- - - Chirp, tweet (multiple parents)
+- - - Clang
+- - - Ding
+- - - Ping
+- - - Squeak (multiple parents)
+- - - Squeal
+- - Clicking
+- - - Clickety-clack
+- - - Clip-clop (multiple parents)
+- - - Tick (multiple parents)
+- - Crack (multiple parents)
+- - Crackle (multiple parents)
+- - Creak
+- - Crunch
+- - Hiss (multiple parents)
+- - Hum
+- - Jingle, tinkle
+- - Plop
+- - Rattle (multiple parents)
+- - Rumble
+- - Rustle
+- - Sizzle
+- - Squish (multiple parents)
+- - Whir
+- - Whoosh, swoosh, swish (multiple parents)
+- - Zing
+- Other sourceless (abstract)
+- - Pulse
+- - Sine wave
+- - - Chirp tone
+- - Sound effect
+- Silence
+- Surface contact (abstract)
+- - Rub
+- - Scrape
+- - Scratch
+Human sounds (abstract)
+- Digestive (abstract)
+- - Biting
+- - Burping, eructation
+- - Chewing, mastication
+- - Fart
+- - Gargling
+- - Hiccup
+- - Stomach rumble
+- Hands
+- - Clapping (multiple parents)
+- - Finger snapping
+- Heart sounds, heartbeat
+- Human group actions (abstract)
+- - Applause
+- - Chatter
+- - Cheering
+- - Children playing
+- - Children shouting (multiple parents)
+- - Clapping (multiple parents)
+- - Crowd
+- - Hubbub, speech noise, speech babble
+- Human locomotion (abstract)
+- - Run
+- - Shuffle
+- - Walk, footsteps
+- Human voice (abstract)
+- - Crying, sobbing
+- - - Baby cry, infant cry
+- - - Whimper
+- - Groan
+- - Grunt
+- - Humming
+- - Laughter
+- - - Baby laughter
+- - - Belly laugh
+- - - Chuckle, chortle
+- - - Giggle
+- - - Snicker
+- - Screaming
+- - Shout
+- - - Battle cry
+- - - Bellow
+- - - Children shouting (multiple parents)
+- - - Whoop
+- - - Yell
+- - Sigh
+- - Singing
+- - - Chant (multiple parents)
+- - - - Mantra
+- - - Child singing
+- - - Choir (multiple parents)
+- - - Female singing
+- - - Male singing
+- - - Rapping
+- - - Synthetic singing
+- - - Yodeling
+- - Speech
+- - - Babbling
+- - - Child speech, kid speaking
+- - - Conversation
+- - - Female speech, woman speaking
+- - - Male speech, man speaking
+- - - Narration, monologue
+- - - Speech synthesizer
+- - Wail, moan
+- - Whispering
+- Respiratory sounds (abstract)
+- - Breathing
+- - - Gasp
+- - - Pant
+- - - Snoring
+- - - Snort
+- - - Wheeze
+- - Cough
+- - - Throat clearing
+- - Sneeze
+- - Sniff
+- Whistling
+Music
+- Music genre (abstract)
+- - Blues
+- - Christian music
+- - - Gospel music
+- - Classical music
+- - - Opera
+- - Country
+- - - Bluegrass
+- - - Swing music
+- - Disco
+- - Electronic music
+- - - Ambient music
+- - - Drum and bass
+- - - Dubstep
+- - - Electronic dance music
+- - - Electronica
+- - - House music
+- - - Techno
+- - - Trance music
+- - Folk music
+- - Funk
+- - Hip hop music
+- - - Beatboxing (multiple parents)
+- - Independent music
+- - Jazz
+- - Middle Eastern music
+- - Music for children
+- - Music of Africa
+- - - Afrobeat
+- - Music of Asia
+- - - Carnatic music
+- - - Music of Bollywood
+- - Music of Latin America
+- - - Flamenco
+- - - Salsa music
+- - New-age music
+- - Pop music
+- - Reggae
+- - Rhythm and blues
+- - Rock music
+- - - Grunge
+- - - Heavy metal
+- - - Progressive rock
+- - - Psychedelic rock
+- - - Punk rock
+- - - Rock and roll
+- - Ska
+- - Soul music
+- - Traditional music
+- - Vocal music
+- - - A capella
+- - - Beatboxing (multiple parents)
+- - - Chant (multiple parents)
+- - - - Mantra
+- Music mood (abstract)
+- - Angry music
+- - Exciting music
+- - Funny music
+- - Happy music
+- - Sad music
+- - Scary music
+- - Tender music
+- Music role (abstract)
+- - Background music
+- - Christmas music
+- - Dance music
+- - Jingle (music)
+- - Lullaby
+- - Soundtrack music
+- - Theme music
+- - Video game music
+- - Wedding music
+- Musical instrument
+- - Accordion
+- - Bagpipes
+- - Bell (multiple parents)
+- - - Bicycle bell (multiple parents)
+- - - Change ringing (campanology)
+- - - Chime
+- - - - Wind chime
+- - - Church bell
+- - - Cowbell (multiple parents)
+- - - Jingle bell
+- - - Tuning fork
+- - Bowed string instrument
+- - - Cello
+- - - Double bass
+- - - String section
+- - - Violin, fiddle
+- - - - Pizzicato
+- - Brass instrument
+- - - French horn
+- - - Trombone
+- - - Trumpet
+- - Choir (multiple parents)
+- - Didgeridoo
+- - Harmonica
+- - Harp
+- - Keyboard (musical)
+- - - Harpsichord
+- - - Organ
+- - - - Electronic organ
+- - - - Hammond organ
+- - - Piano
+- - - - Electric piano
+- - - Synthesizer
+- - - - Sampler
+- - Orchestra
+- - Percussion
+- - - Cowbell (multiple parents)
+- - - Cymbal
+- - - - Hi-hat
+- - - Drum
+- - - - Bass drum
+- - - - Snare drum
+- - - - - Drum roll
+- - - - - Rimshot
+- - - - Tabla
+- - - - Timpani
+- - - Drum kit
+- - - - Drum machine
+- - - Gong
+- - - Mallet percussion
+- - - - Glockenspiel
+- - - - Marimba, xylophone
+- - - - Steelpan
+- - - - Vibraphone
+- - - Rattle (instrument)
+- - - - Maraca
+- - - Tambourine
+- - - Tubular bells
+- - - Wood block
+- - Plucked string instrument
+- - - Banjo
+- - - Guitar
+- - - - Acoustic guitar
+- - - - Bass guitar
+- - - - Electric guitar
+- - - - Steel guitar, slide guitar
+- - - - Strum
+- - - - Tapping (guitar technique)
+- - - Mandolin
+- - - Sitar
+- - - Ukulele
+- - - Zither
+- - Scratching (performance technique)
+- - Shofar
+- - Singing bowl
+- - Theremin
+- - Wind instrument, woodwind instrument
+- - - Clarinet
+- - - Flute
+- - - Saxophone

@@ -1,0 +1,93 @@
+{
+    "<root>": {
+        "children": ["Industrial sounds", "Vehicle sounds"],
+        "parents": [],
+        "abstract": true,
+        "blacklist": false,
+        "in_model": false
+    },
+    "Vehicle sounds": {
+        "children": ["Bicycle", "Car sounds"],
+        "parents": ["<root>"],
+        "abstract": true,
+        "blacklist": false,
+        "in_model": false
+    },
+    "Car sounds": {
+        "children": ["Engine", "Horn", "Tires"],
+        "parents": ["Vehicle sounds"],
+        "abstract": true,
+        "blacklist": false,
+        "in_model": false
+    },
+    "Horn": {
+        "children": [],
+        "parents": ["Car sounds"],
+        "abstract": false,
+        "blacklist": true,
+        "in_model": true
+    },
+    "Engine": {
+        "children": [],
+        "parents": ["Car sounds"],
+        "abstract": false,
+        "blacklist": false,
+        "in_model": true
+    },
+    "Bicycle": {
+        "children": ["Gears", "Tires"],
+        "parents": ["Vehicle sounds"],
+        "abstract": false,
+        "blacklist": false,
+        "in_model": false
+    },
+    "Tires": {
+        "children": [],
+        "parents": ["Bicycle", "Car sounds"],
+        "abstract": false,
+        "blacklist": false,
+        "in_model": false
+    },
+    "Gears": {
+        "children": [],
+        "parents": ["Bicycle", "Mechanisms"],
+        "abstract": false,
+        "blacklist": false,
+        "in_model": true
+    },
+    "Industrial sounds": {
+        "children": ["Building", "Mechanisms"],
+        "parents": ["<root>"],
+        "abstract": true,
+        "blacklist": false,
+        "in_model": false
+    },
+    "Mechanisms": {
+        "children": ["Gears", "Pulleys"],
+        "parents": ["Industrial sounds"],
+        "abstract": true,
+        "blacklist": true,
+        "in_model": false
+    },
+    "Pulleys": {
+        "children": [],
+        "parents": ["Mechanisms"],
+        "abstract": false,
+        "blacklist": true,
+        "in_model": false
+    },
+    "Building": {
+        "children": ["Tools"],
+        "parents": ["Industrial sounds"],
+        "abstract": false,
+        "blacklist": false,
+        "in_model": true
+    },
+    "Tools": {
+        "children": [],
+        "parents": ["Building"],
+        "abstract": false,
+        "blacklist": false,
+        "in_model": true
+    }
+}

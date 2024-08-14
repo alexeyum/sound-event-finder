@@ -1,4 +1,0 @@
-<resources>
-    <string name="app_name">SoundFinder</string>
-    <string name="classesNames">air_conditioner\ncar_horn\nchildren_playing\ndog_bark\ndrilling\nengine_idling\ngun_shot\njackhammer\nsiren\nstreet_music</string>
-</resources>

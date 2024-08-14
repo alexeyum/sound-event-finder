@@ -1,0 +1,37 @@
+{
+    "<root>": {
+        "children": ["Animal sounds"],
+        "parents": [],
+        "abstract": true,
+        "blacklist": false,
+        "in_model": false
+    },
+    "Animal sounds": {
+        "children": ["Bird sounds", "Mammal sounds"],
+        "parents": ["<root>"],
+        "abstract": true,
+        "blacklist": false,
+        "in_model": false
+    },
+    "Bird sounds": {
+        "children": [],
+        "parents": ["Animal sounds"],
+        "abstract": false,
+        "blacklist": true,
+        "in_model": true
+    },
+    "Mammal sounds": {
+        "children": ["Dog barks"],
+        "parents": ["Animal sounds"],
+        "abstract": false,
+        "blacklist": false,
+        "in_model": true
+    },
+    "Dog barks": {
+        "children": [],
+        "parents": ["Mammal sounds"],
+        "abstract": false,
+        "blacklist": false,
+        "in_model": false
+    }
+}

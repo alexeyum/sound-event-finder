@@ -1,0 +1,110 @@
+[
+    {
+        "id": "/m/0a",
+        "name": "Vehicle sounds",
+        "description": "Sounds produced by vehicles.",
+        "citation_uri": "",
+        "positive_examples": [],
+        "child_ids": ["/m/0b", "/m/0f"],
+        "restrictions": ["abstract"]
+    },
+    {
+        "id": "/m/0b",
+        "name": "Car sounds",
+        "description": "Sounds produced by cars.",
+        "citation_uri": "",
+        "positive_examples": [],
+        "child_ids": ["/m/0c", "/m/0d", "/m/0e"],
+        "restrictions": ["abstract"]
+    },
+    {
+        "id": "/m/0c",
+        "name": "Horn",
+        "description": "Sounds of a car horn.",
+        "citation_uri": "",
+        "positive_examples": [],
+        "child_ids": [],
+        "restrictions": ["blacklist"]
+    },
+    {
+        "id": "/m/0d",
+        "name": "Engine",
+        "description": "Sounds of an engine.",
+        "citation_uri": "",
+        "positive_examples": [],
+        "child_ids": [],
+        "restrictions": []
+    },
+    {
+        "id": "/m/0e",
+        "name": "Tires",
+        "description": "Tires screeching.",
+        "citation_uri": "",
+        "positive_examples": [],
+        "child_ids": [],
+        "restrictions": []
+    },
+    {
+        "id": "/m/0f",
+        "name": "Bicycle",
+        "description": "Sounds of a bicycle.",
+        "citation_uri": "",
+        "positive_examples": [],
+        "child_ids": ["/m/0g", "/m/0e"],
+        "restrictions": []
+    },
+    {
+        "id": "/m/0g",
+        "name": "Gears",
+        "description": "Gears clanking.",
+        "citation_uri": "",
+        "positive_examples": [],
+        "child_ids": [],
+        "restrictions": []
+    },
+    {
+        "id": "/m/0h",
+        "name": "Industrial sounds",
+        "description": "Sounds produced in industrial processes.",
+        "citation_uri": "",
+        "positive_examples": [],
+        "child_ids": ["/m/0i", "/m/0k"],
+        "restrictions": ["abstract"]
+    },
+    {
+        "id": "/m/0i",
+        "name": "Mechanisms",
+        "description": "Sounds produced by mechanisms",
+        "citation_uri": "",
+        "positive_examples": [],
+        "child_ids": ["/m/0g", "/m/0j"],
+        "restrictions": ["abstract", "blacklist"]
+    },
+    {
+        "id": "/m/0j",
+        "name": "Pulleys",
+        "description": "Pulleys shooshing.",
+        "citation_uri": "",
+        "positive_examples": [],
+        "child_ids": [],
+        "restrictions": ["blacklist"]
+    },
+    {
+        "id": "/m/0k",
+        "name": "Building",
+        "description": "Sounds produced on building sites.",
+        "citation_uri": "",
+        "positive_examples": [],
+        "child_ids": ["/m/0l"],
+        "restrictions": []
+    },
+    {
+        "id": "/m/0l",
+        "name": "Tools",
+        "description": "Sounds of tools.",
+        "citation_uri": "",
+        "positive_examples": [],
+        "child_ids": [],
+        "restrictions": []
+    }
+]

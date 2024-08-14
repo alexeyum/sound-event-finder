@@ -16,7 +16,7 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
+# lib/   # using this for colab
 lib64/
 parts/
 sdist/
