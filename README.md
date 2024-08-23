@@ -39,18 +39,31 @@ https://github.com/user-attachments/assets/dd58a630-3c2a-43dd-9a9f-858ea18b1c2d
 
 API takes input as a POST request in JSON format with the following structure:
 
+```
+- input:
+    - audio:
+        - format: audio file format (currently only "mp3" is available)
+        - base64: base64-encoded file data
+    - chunk_length_sec: time interval resolution in seconds
+    - probability_threshold: minimum probability for the events to be shown
+```
+
+
+Here is an example input file (`endpoint/test_input.json`):
+
 ```json
 {
     "input": {
         "audio": {
-            "format": "audio file format; currently, only mp3 is available",
-            "base64": "base64-encoded file data"
-        }
+            "format": "mp3",
+            "base64": "/OIxAAAAAAAAAAAAFhpbmcAAAAPAAAAcgAA..."
+        },
+        "chunk_length_sec": 10,
+        "probability_threshold": 0.2
     }
 }
 ```
 
-Also see `endpoint/test_input.json` for an example input file.
 
 ### API Deployment
 
