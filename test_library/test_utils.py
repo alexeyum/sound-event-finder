@@ -75,6 +75,17 @@ def test_chunk_audio_multiple_chunks():
     assert len(chunks) == 2
     assert all(chunk.shape == (48000,) for chunk in chunks)
 
+def test_chunk_length_non_integer():
+    torch.manual_seed(5849123)
+    waveform = torch.rand(15)
+    sampling_rate = 5
+    chunk_length_sec = 1.5
+    chunks = chunk_audio(waveform, sampling_rate, chunk_length_sec)
+    assert len(chunks) == 3
+    assert chunks[0].shape == (7,)
+    assert chunks[1].shape == (7,)
+    assert chunks[2].shape == (1,)
+
 
 if __name__ == '__main__':
     pytest.main()

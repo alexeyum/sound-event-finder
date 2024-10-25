@@ -76,11 +76,33 @@ def find_events(config, probabilities):
 
 
 def make_features(extractor, waveform, config):
+
     """Extract features from the audio waveform."""
+
     chunks = utils.chunk_audio(waveform, config["sampling_rate"], 
                                chunk_length_sec=config["chunk_length_sec"])
+
+    # remove extra small chunks for the extractor
+    chunks = [c for c in chunks if len(c) >= 2]
+
     features = extractor(chunks, config["sampling_rate"], return_tensors="pt").to(DEVICE)
     return features
+
+
+def auto_chunk_length(config, waveform):
+
+    """Automatically set up chunk length if specified in config."""
+
+    MIN_CHUNK_LENGTH_SEC = 1.0
+    MAX_CHUNK_LENGTH_SEC = 10.0
+    CHUNKS_PER_AUDIO = 4.0
+
+    if config["chunk_length_sec"] == 'auto':
+        audio_length_sec = waveform.shape[0] / config["sampling_rate"]
+        chunk_length_sec = audio_length_sec / CHUNKS_PER_AUDIO
+        chunk_length_sec = min(chunk_length_sec, MAX_CHUNK_LENGTH_SEC)
+        chunk_length_sec = max(chunk_length_sec, MIN_CHUNK_LENGTH_SEC)
+        config["chunk_length_sec"] = chunk_length_sec
 
 
 def inference(model, features):
@@ -102,6 +124,8 @@ def find_sound_events(job):
         config["model_config"] = model.config
 
         waveform = process_audio_input(job["input"], config)
+
+        auto_chunk_length(config, waveform)
 
         with timing_manager.timer("extract_features"):
             features = make_features(extractor, waveform, config)

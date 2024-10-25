@@ -44,7 +44,8 @@ API takes input as a POST request in JSON format with the following structure:
     - audio:
         - format: audio file format (currently only "mp3" is available)
         - base64: base64-encoded file data
-    - chunk_length_sec: time interval resolution in seconds
+    - chunk_length_sec: time interval resolution in seconds or "auto" to automatically
+    choose chunk length depending on the audio length
     - probability_threshold: minimum probability for the events to be shown
 ```
 
@@ -58,7 +59,7 @@ Here is an example input file (`endpoint/test_input.json`):
             "format": "mp3",
             "base64": "/OIxAAAAAAAAAAAAFhpbmcAAAAPAAAAcgAA..."
         },
-        "chunk_length_sec": 10,
+        "chunk_length_sec": "auto",
         "probability_threshold": 0.2
     }
 }

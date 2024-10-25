@@ -120,7 +120,7 @@ def chunk_audio(waveform, sampling_rate, chunk_length_sec):
         list: A list of numpy arrays, each representing a chunk of the waveform.
     """
 
-    chunk_length = chunk_length_sec * sampling_rate
+    chunk_length = int(chunk_length_sec * sampling_rate)
     # Note: c.numpy() is necessary for feature extractor
     chunks = [c.numpy() for c in torch.split(waveform, chunk_length)]
     return chunks
