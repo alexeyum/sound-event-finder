@@ -43,7 +43,7 @@ API takes input as a POST request in JSON format with the following structure:
 - input:
     - audio:
         - format: audio file format (currently only "mp3" is available)
-        - base64: base64-encoded file data
+        - base64: base64-encoded file data (maximum size 10 MB)
     - chunk_length_sec: time interval resolution in seconds or "auto" to automatically
     choose chunk length depending on the audio length
     - probability_threshold: minimum probability for the events to be shown
@@ -119,5 +119,4 @@ Here are some ideas and plans for the future versions:
 
 - Analyse sound during recording, send notifications depending on specific sound events
 - Add event filtering options in mobile app
-- Allow configuring the event finder in the API (model, chunk size, etc.)
 - Support other audio formats in the API (e.g. WAV) and binary files instead of base64-encoded files
