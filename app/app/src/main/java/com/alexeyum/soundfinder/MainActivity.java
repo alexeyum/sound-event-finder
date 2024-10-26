@@ -136,7 +136,8 @@ public class MainActivity extends AppCompatActivity {
             .put("input", new JSONObject()
                     .put("audio", new JSONObject()
                             .put("format", "mp3")
-                            .put("base64", fileBase64)))
+                            .put("base64", fileBase64))
+                    .put("chunk_length_sec", "auto"))
             .toString();
 
         RequestBody body = RequestBody.create(apiInput, MediaType.get("application/json"));
